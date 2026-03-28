@@ -6,3 +6,4 @@
 06_rename-include-to-AM-CPPFLAGS.patch
 07_update-udev-rules-syntax.patch
 08_disable_GIMP_plugin.patch
+09_allow_implicit_function_in_GCC14
