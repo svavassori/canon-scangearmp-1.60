@@ -37,7 +37,7 @@ dpkg-buildpackage
 
 ```bash
 xauth list (to show magic cookie)
-docker run --rm -it --privileged -v $(pwd):/debs -v /dev/bus/usb:/dev/bus/usb -v /tmp/.X11-unix/:/tmp.X11-unix -e DISPLAY=$DISPLAY --net=host debian:12.5 bash
+docker run --rm -it --privileged -v $(pwd):/debs -v /dev/bus/usb:/dev/bus/usb -v /tmp/.X11-unix/:/tmp.X11-unix -e DISPLAY=$DISPLAY --net=host debian:13.6 bash
 apt-get update
 apt-get install xauth
 xauth add <magic-cookie>
