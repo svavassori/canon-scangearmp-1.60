@@ -1,0 +1,160 @@
+--- a/scangearmp/src/callbacks.c
++++ b/scangearmp/src/callbacks.c
+@@ -50,7 +50,15 @@
+ 
+ #include "progress_bar.h"
+ #include "coloradjust.h"
++#include "coloradjust_bc.h"
++#include "coloradjust_fr.h"
++#include "coloradjust_hg.h"
++#include "coloradjust_mc.h"
++#include "coloradjust_tc.h"
+ #include "child_dialog.h"
++#include "scanfile.h"
++#include "scanstdlg.h"
++#include "w1.h"
+ 
+ #ifdef	__GIMP_PLUGIN_ENABLE__
+ 	#include "scangimp.h"
+--- a/scangearmp/src/coloradjust.c
++++ b/scangearmp/src/coloradjust.c
+@@ -31,6 +31,8 @@
+ #include "coloradjust.h"
+ #undef	_CNMS_CA_GLOBALS_
+ 
++#include "com_gtk.h"
++
+ /* #define __COLOR_ADJUST_DEBUG__ */
+ 
+ #include "prev_main.h"
+--- a/scangearmp/src/coloradjust.h
++++ b/scangearmp/src/coloradjust.h
+@@ -374,6 +374,9 @@ CNMSVoid CnmsColAdjAllDataReset(
+ CNMSVoid CnmsColAdjResetComplete(
+ 						CNMSVoid									);
+ 
++CNMSVoid CnmsColAdjClose(
++						CNMSVoid									);
++
+ CNMSInt32 CnmsColAdjSetHistogram(
+ 						CNMSUInt32			type,
+ 						CNMSUInt32			masterSrc[],
+--- a/scangearmp/src/file_control.c
++++ b/scangearmp/src/file_control.c
+@@ -32,6 +32,7 @@
+ #endif
+ 
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <string.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+--- a/scangearmp/src/main.c
++++ b/scangearmp/src/main.c
+@@ -50,6 +50,7 @@
+ #include "preference.h"
+ #include "save_dialog.h"
+ #include "child_dialog.h"
++#include "progress_bar.h"
+ 
+ #include "errors.h"
+ 
+--- a/scangearmp/src/prev_main.c
++++ b/scangearmp/src/prev_main.c
+@@ -46,6 +46,10 @@
+ #include "cnmsability.h"
+ #include "w1.h"
+ 
++#include "scanmain.h"
++#include "com_gtk.h"
++#include "coloradjust_hg.h"
++
+ #include "errors.h"
+ 
+ #define	PREVIEW_OUT_COLOR_R			(64)
+--- a/scangearmp/src/save_dialog.c
++++ b/scangearmp/src/save_dialog.c
+@@ -53,6 +53,8 @@
+ #include "file_control.h"
+ #include "cnmsstrings.h"
+ 
++#include "scanfile.h"
++
+ #include "errors.h"
+ 
+ //#define	__CNMS_DEBUG_SAVE_DIALOG__
+--- a/scangearmp/src/scanfile.c
++++ b/scangearmp/src/scanfile.c
+@@ -44,6 +44,8 @@
+ #include "progress_bar.h"
+ #include "raw2pdf.h"
+ #include "scanmsg.h"
++#include "scanstdlg.h"
++#include "scanmain.h"
+ 
+ #define GRAY2MONO_BK		(0)
+ #define GRAY2MONO_GRAY		(1)
+--- a/scangearmp/src/scanflow.c
++++ b/scangearmp/src/scanflow.c
+@@ -54,6 +54,7 @@
+ #include "file_control.h"
+ #include "child_dialog.h"
+ #include "com_gtk.h"
++#include "w1.h"
+ 
+ #include "errors.h"
+ 
+--- a/scangearmp/src/scanmain.h
++++ b/scangearmp/src/scanmain.h
+@@ -51,8 +51,11 @@ CNMSInt32 CnmsScanGetRealMinMaxSize( CNMSInt32 source, CNMSInt32 *lpMin, CNMSInt
+ 
+ CNMSInt32 CnmsScanGetMinMaxScale( CNMSInt32 res, CNMSInt32 *lpMinMax );
+ 
+-CNMSInt32 CnmsScanChageStatus( CNMSInt32 ActionMode, CNMSFd dstFd, LPCNMS_ROOT root, CNMSUIReturn *lpRtn );
++CNMSInt32 CnmsScanChangeStatus( CNMSInt32 ActionMode, CNMSFd dstFd, LPCNMS_ROOT root, CNMSUIReturn *lpRtn );
+ CNMSVoid CnmsScanCancel( CNMSVoid );
++CNMSVoid CnmsAllScanDataDispose( LPCNMS_ROOT root );
++
++CNMSInt32 CnmsGetDeviceIndexSelectedLatest( CNMSVoid );
+ 
+ CNMSInt32 CnmsGetScanSourceAbility( CNMSInt32 uiMediaType );
+ 
+--- a/scangearmp/src/scanstdlg.h
++++ b/scangearmp/src/scanstdlg.h
+@@ -32,5 +32,6 @@
+ 
+ 
+ CNMSInt32 ShowErrorDialog( CNMSVoid );
++void error_dialog_ok_del_clicked();
+ 
+ #endif	/* _SCANSTDLG_H_ */
+--- a/scangearmp/src/w1.h
++++ b/scangearmp/src/w1.h
+@@ -156,6 +156,7 @@ CNMSInt32 W1_ChangeCombo( GtkComboBox *combobox, CNMSInt32 objectID );
+ CNMSInt32 W1_ChangeComboSub( CNMSInt32 objectID, CNMSInt32 value, CNMSInt32 clipKey );
+ 
+ CNMSInt32 W1_ResetSize( CNMSVoid );
++CNMSInt32 W1_SetModal( CNMSBool flag );
+ 
+ CNMSInt32 W1_Preview( CNMSVoid );
+ CNMSInt32 W1_PreviewCancel( CNMSVoid );
+@@ -203,6 +204,7 @@ CNMSInt32 W1Ui_SetComboDefVal( GtkWidget *combobox, CNMSInt32 obj );
+ 
+ CNMSInt32 W1Ui_InitUIFormat( CNMSVoid );
+ CNMSInt32 W1Ui_SwitchPlatenAndADF( CNMSInt32 object, CNMSInt32 currentGp, CNMSInt32 changedGp );
++CNMSInt32 W1Ui_SwitchSelectModelFromDevnum( CNMSInt32 devnum );
+ 
+ 
+ #endif	/* _W1_H_ */
+--- a/scangearmp/src/w1_main.c
++++ b/scangearmp/src/w1_main.c
+@@ -65,6 +65,9 @@
+ #include "scanflow.h"
+ #include "cnmsnetwork.h"
+ 
++#include "coloradjust.h"
++#include "scanstdlg.h"
++
+ static CNMSBool	ui_flag = CNMS_FALSE;
+ static CNMSBool	swPaA_flag = CNMS_FALSE;
+ 
