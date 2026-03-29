@@ -8,7 +8,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
             debhelper-compat \
     && apt-get install --yes --no-install-recommends \
             libcanberra-gtk3-module \
-            libgtk2.0-dev \
+            libgtk-3-dev \
             libsane-dev \
             libtool \
             libusb-dev \
