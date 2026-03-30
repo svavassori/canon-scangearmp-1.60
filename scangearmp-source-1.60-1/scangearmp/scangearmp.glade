@@ -23,7 +23,8 @@
   <signal name="delete_event" handler="on_main_window_delete_event" last_modification_time="Fri, 08 May 2009 02:47:12 GMT"/>
 
   <child>
-    <widget class="GtkHBox" id="hbox3">
+    <widget class="GtkBox" id="hbox3">
+      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -43,7 +44,8 @@
 	      <property name="shadow_type">GTK_SHADOW_ETCHED_OUT</property>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox40">
+		<widget class="GtkBox" id="hbox40">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="border_width">4</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
@@ -1384,7 +1386,8 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox42">
+			    <widget class="GtkBox" id="hbox42">
+			      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">2</property>
@@ -1501,7 +1504,8 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox41">
+			    <widget class="GtkBox" id="hbox41">
+			      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">2</property>
@@ -1690,7 +1694,8 @@
 			  <property name="column_spacing">2</property>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox43">
+			    <widget class="GtkBox" id="hbox43">
+			      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">2</property>
@@ -1743,7 +1748,8 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox44">
+			    <widget class="GtkBox" id="hbox44">
+			      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">2</property>
@@ -1854,7 +1860,8 @@
 			  </child>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox45">
+			    <widget class="GtkBox" id="hbox45">
+			      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">2</property>
@@ -2272,7 +2279,8 @@
 		      <property name="spacing">3</property>
 
 		      <child>
-			<widget class="GtkHBox" id="hbox26">
+			<widget class="GtkBox" id="hbox26">
+			  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
 			  <property name="spacing">0</property>
@@ -2300,7 +2308,8 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkHBox" id="hbox28">
+			<widget class="GtkBox" id="hbox28">
+			  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			  <property name="height_request">40</property>
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
@@ -2519,7 +2528,8 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox111">
+	    <widget class="GtkBox" id="hbox111">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">5</property>
@@ -2676,7 +2686,8 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkHBox" id="hbox112">
+		    <widget class="GtkBox" id="hbox112">
+		      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		      <property name="visible">True</property>
 		      <property name="homogeneous">False</property>
 		      <property name="spacing">0</property>
@@ -2820,7 +2831,8 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox30">
+		<widget class="GtkBox" id="hbox30">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">2</property>
@@ -2872,7 +2884,8 @@
 			  <property name="right_padding">0</property>
 
 			  <child>
-			    <widget class="GtkHBox" id="hbox107">
+			    <widget class="GtkBox" id="hbox107">
+			      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			      <property name="visible">True</property>
 			      <property name="homogeneous">False</property>
 			      <property name="spacing">2</property>
@@ -3203,7 +3216,8 @@
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox114">
+	<widget class="GtkBox" id="hbox114">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -3350,7 +3364,8 @@
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox34">
+	<widget class="GtkBox" id="hbox34">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -3405,7 +3420,8 @@
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox35">
+	<widget class="GtkBox" id="hbox35">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -3501,7 +3517,8 @@
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox36">
+	<widget class="GtkBox" id="hbox36">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -3610,7 +3627,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox38">
+	<widget class="GtkBox" id="hbox38">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -3733,7 +3751,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox67">
+	<widget class="GtkBox" id="hbox67">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -3894,7 +3913,8 @@ Are you sure to overwrite it?</property>
 	  <property name="spacing">0</property>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox69">
+	    <widget class="GtkBox" id="hbox69">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -3955,7 +3975,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox70">
+	    <widget class="GtkBox" id="hbox70">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -4018,7 +4039,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox71">
+	    <widget class="GtkBox" id="hbox71">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -4068,7 +4090,8 @@ Are you sure to overwrite it?</property>
 	  <property name="spacing">0</property>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox72">
+	    <widget class="GtkBox" id="hbox72">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -4129,7 +4152,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox73">
+	    <widget class="GtkBox" id="hbox73">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -4192,7 +4216,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox74">
+	    <widget class="GtkBox" id="hbox74">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -4304,7 +4329,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox75">
+	<widget class="GtkBox" id="hbox75">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -4612,20 +4638,23 @@ Are you sure to overwrite it?</property>
 	  <property name="spacing">0</property>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox77">
+	    <widget class="GtkBox" id="hbox77">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="height_request">25</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox78">
+		<widget class="GtkBox" id="hbox78">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">True</property>
 		  <property name="spacing">0</property>
 
 		  <child>
-		    <widget class="GtkHBox" id="hbox79">
+		    <widget class="GtkBox" id="hbox79">
+		      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		      <property name="visible">True</property>
 		      <property name="homogeneous">False</property>
 		      <property name="spacing">0</property>
@@ -4691,7 +4720,8 @@ Are you sure to overwrite it?</property>
 		  </child>
 
 		  <child>
-		    <widget class="GtkHBox" id="hbox80">
+		    <widget class="GtkBox" id="hbox80">
+		      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		      <property name="visible">True</property>
 		      <property name="homogeneous">False</property>
 		      <property name="spacing">0</property>
@@ -4757,7 +4787,8 @@ Are you sure to overwrite it?</property>
 		  </child>
 
 		  <child>
-		    <widget class="GtkHBox" id="hbox81">
+		    <widget class="GtkBox" id="hbox81">
+		      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		      <property name="visible">True</property>
 		      <property name="homogeneous">False</property>
 		      <property name="spacing">0</property>
@@ -4837,7 +4868,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox82">
+	    <widget class="GtkBox" id="hbox82">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -4906,7 +4938,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox83">
+	    <widget class="GtkBox" id="hbox83">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -4937,7 +4970,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox84">
+	<widget class="GtkBox" id="hbox84">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -4960,7 +4994,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox85">
+	    <widget class="GtkBox" id="hbox85">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -5025,7 +5060,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox86">
+	    <widget class="GtkBox" id="hbox86">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -5090,7 +5126,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox87">
+	    <widget class="GtkBox" id="hbox87">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -5230,7 +5267,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox88">
+	<widget class="GtkBox" id="hbox88">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -5390,7 +5428,8 @@ Are you sure to overwrite it?</property>
 	  <property name="spacing">0</property>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox90">
+	    <widget class="GtkBox" id="hbox90">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -5428,7 +5467,8 @@ Are you sure to overwrite it?</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHBox" id="hbox91">
+	    <widget class="GtkBox" id="hbox91">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -5520,7 +5560,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox92">
+	<widget class="GtkBox" id="hbox92">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -5673,7 +5714,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox94">
+	<widget class="GtkBox" id="hbox94">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -5727,7 +5769,8 @@ High contrast</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox95">
+		<widget class="GtkBox" id="hbox95">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -5792,7 +5835,8 @@ High contrast</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox96">
+		<widget class="GtkBox" id="hbox96">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -5857,7 +5901,8 @@ High contrast</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox97">
+		<widget class="GtkBox" id="hbox97">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -5960,7 +6005,8 @@ High contrast</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox98">
+		<widget class="GtkBox" id="hbox98">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -6025,7 +6071,8 @@ High contrast</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox99">
+		<widget class="GtkBox" id="hbox99">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -6090,7 +6137,8 @@ High contrast</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox100">
+		<widget class="GtkBox" id="hbox100">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -6370,7 +6418,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox102">
+	<widget class="GtkBox" id="hbox102">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -6382,7 +6431,8 @@ High contrast</property>
 	      <property name="spacing">2</property>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox103">
+		<widget class="GtkBox" id="hbox103">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -6441,7 +6491,8 @@ High contrast</property>
 	      </child>
 
 	      <child>
-		<widget class="GtkHBox" id="hbox104">
+		<widget class="GtkBox" id="hbox104">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -6676,7 +6727,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox105">
+	<widget class="GtkBox" id="hbox105">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -6818,7 +6870,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox106">
+	<widget class="GtkBox" id="hbox106">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -7270,7 +7323,8 @@ High contrast</property>
 		  <property name="right_padding">0</property>
 
 		  <child>
-		    <widget class="GtkHBox" id="hbox108">
+		    <widget class="GtkBox" id="hbox108">
+		      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		      <property name="visible">True</property>
 		      <property name="homogeneous">False</property>
 		      <property name="spacing">2</property>
@@ -7488,7 +7542,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox109">
+	<widget class="GtkBox" id="hbox109">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">True</property>
 	  <property name="spacing">0</property>
@@ -7769,7 +7824,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkHBox" id="hbox110">
+	<widget class="GtkBox" id="hbox110">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
