@@ -2303,7 +2303,8 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkHSeparator" id="hseparator1">
+			<widget class="GtkSeparator" id="hseparator1">
+			  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 			  <property name="visible">True</property>
 			</widget>
 			<packing>
@@ -2653,7 +2654,8 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkHSeparator" id="hseparator4">
+		<widget class="GtkSeparator" id="hseparator4">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		</widget>
 		<packing>
@@ -2831,7 +2833,8 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkHSeparator" id="hseparator2">
+		<widget class="GtkSeparator" id="hseparator2">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		</widget>
 		<packing>
@@ -4974,7 +4977,8 @@ Are you sure to overwrite it?</property>
 	      <property name="spacing">0</property>
 
 	      <child>
-		<widget class="GtkHSeparator" id="hseparator3">
+		<widget class="GtkSeparator" id="hseparator3">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="visible">True</property>
 		</widget>
 		<packing>

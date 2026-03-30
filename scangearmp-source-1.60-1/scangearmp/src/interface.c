@@ -784,7 +784,7 @@ create_main_window (void)
   gtk_widget_show (hbox26);
   gtk_box_pack_start (GTK_BOX (vbox13), hbox26, FALSE, FALSE, 0);
 
-  hseparator1 = gtk_hseparator_new ();
+  hseparator1 = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_widget_show (hseparator1);
   gtk_box_pack_start (GTK_BOX (vbox13), hseparator1, FALSE, FALSE, 0);
 
@@ -1164,7 +1164,7 @@ create_preference_window (void)
   gtk_widget_show (preference_scanner_quietmode_check);
   gtk_box_pack_start (GTK_BOX (vbox70), preference_scanner_quietmode_check, FALSE, FALSE, 0);
 
-  hseparator4 = gtk_hseparator_new ();
+  hseparator4 = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_widget_show (hseparator4);
   gtk_box_pack_start (GTK_BOX (vbox70), hseparator4, TRUE, TRUE, 0);
 
@@ -1210,7 +1210,7 @@ create_preference_window (void)
   gtk_radio_button_set_group (GTK_RADIO_BUTTON (preference_color_none_radio), preference_color_recommended_radio_group);
   preference_color_recommended_radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (preference_color_none_radio));
 
-  hseparator2 = gtk_hseparator_new ();
+  hseparator2 = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_widget_show (hseparator2);
   gtk_box_pack_start (GTK_BOX (vbox16), hseparator2, FALSE, FALSE, 0);
 
@@ -2183,7 +2183,7 @@ create_dialog_histogram (void)
   gtk_widget_show (hbox83);
   gtk_box_pack_start (GTK_BOX (vbox43), hbox83, FALSE, FALSE, 0);
 
-  hseparator3 = gtk_hseparator_new ();
+  hseparator3 = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_widget_show (hseparator3);
   gtk_box_pack_start (GTK_BOX (hbox83), hseparator3, TRUE, TRUE, 0);
 
