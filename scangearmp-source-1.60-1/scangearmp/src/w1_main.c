@@ -1269,13 +1269,13 @@ CNMSVoid W1_ModalDialogShowAction(
 
 	if( gtk_widget_get_visible( main_window ) ){
 		gtk_window_set_transient_for( GTK_WINDOW( widget ), GTK_WINDOW( main_window ) );
-		if( GTK_WIDGET_SENSITIVE( main_window ) ){
+		if( gtk_widget_get_sensitive( main_window ) ){
 			gtk_widget_set_sensitive( main_window, FALSE );
 		}
 	}
 	if( gtk_widget_get_visible( select_model_dialog ) ){
 		gtk_window_set_transient_for( GTK_WINDOW( widget ), GTK_WINDOW( select_model_dialog ) );
-		if( GTK_WIDGET_SENSITIVE( select_model_dialog ) ){
+		if( gtk_widget_get_sensitive( select_model_dialog ) ){
 			gtk_widget_set_sensitive( select_model_dialog, FALSE );
 		}
 	}
@@ -1295,13 +1295,13 @@ CNMSVoid W1_ModalDialogHideAction(
 
 	if( gtk_widget_get_visible( main_window ) ){
 		if( main_window_sensitive ) {
-			if( !GTK_WIDGET_SENSITIVE( main_window ) ){
+			if( !gtk_widget_get_sensitive( main_window ) ){
 				gtk_widget_set_sensitive( main_window, TRUE );
 			}
 		}
 	}
 	if( gtk_widget_get_visible( select_model_dialog ) ){
-		if( !GTK_WIDGET_SENSITIVE( select_model_dialog ) ){
+		if( !gtk_widget_get_sensitive( select_model_dialog ) ){
 			gtk_widget_set_sensitive( select_model_dialog, TRUE );
 		}
 	}

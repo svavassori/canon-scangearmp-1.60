@@ -493,7 +493,7 @@ static CNMSInt32 SubInitButtons(
 		switch( lpLink->mode ){
 			case	CNMS_MODE_SELECT:
 			case	CNMS_MODE_ADD:
-				if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
+				if( gtk_widget_get_sensitive( widget ) == 0 ){
 					gtk_widget_set_sensitive( widget, TRUE );
 				}
 				if( gtk_widget_get_visible( widget ) == 0 ){
@@ -501,7 +501,7 @@ static CNMSInt32 SubInitButtons(
 				}
 				break;
 			case	CNMS_MODE_HIDE:
-				if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
+				if( gtk_widget_get_sensitive( widget ) != 0 ){
 					gtk_widget_set_sensitive( widget, FALSE );
 				}
 				if( gtk_widget_get_visible( widget ) == 0 ){
@@ -557,7 +557,7 @@ static CNMSInt32 SubInitETC(
 			switch( lpLink->mode ){
 				case	CNMS_MODE_SELECT:
 				case	CNMS_MODE_ADD:
-					if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
+					if( gtk_widget_get_sensitive( widget ) == 0 ){
 						gtk_widget_set_sensitive( widget, TRUE );
 					}
 					if( gtk_widget_get_visible( widget ) == 0 ){
@@ -565,7 +565,7 @@ static CNMSInt32 SubInitETC(
 					}
 					break;
 				case	CNMS_MODE_HIDE:
-					if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
+					if( gtk_widget_get_sensitive( widget ) != 0 ){
 						gtk_widget_set_sensitive( widget, FALSE );
 					}
 					if( gtk_widget_get_visible( widget ) == 0 ){
@@ -615,7 +615,7 @@ static CNMSInt32 RelocateUI(
 
 		switch( key ){
 			case	CNMS_MODE_ADD:
-				if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
+				if( gtk_widget_get_sensitive( widget ) == 0 ){
 					gtk_widget_set_sensitive( widget, TRUE );
 				}
 				if( gtk_widget_get_visible( widget ) == 0 ){
@@ -623,7 +623,7 @@ static CNMSInt32 RelocateUI(
 				}
 				break;
 			case	CNMS_MODE_HIDE:
-				if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
+				if( gtk_widget_get_sensitive( widget ) != 0 ){
 					gtk_widget_set_sensitive( widget, FALSE );
 				}
 				if( gtk_widget_get_visible( widget ) == 0 ){
@@ -1077,13 +1077,13 @@ static CNMSInt32 SubAspectToggleSet(
 			gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( widget ), CNMS_FALSE );
 			if( rectSizeH == 0 ){
 				/* No rect : not sensitive */
-				if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
+				if( gtk_widget_get_sensitive( widget ) != 0 ){
 					gtk_widget_set_sensitive( widget, FALSE );
 				}
 			}
 			else{
 				/* Rect : sensitive */
-				if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
+				if( gtk_widget_get_sensitive( widget ) == 0 ){
 					gtk_widget_set_sensitive( widget, TRUE );
 				}
 			}
@@ -1093,7 +1093,7 @@ static CNMSInt32 SubAspectToggleSet(
 			/* toggle on */
 			gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( widget ), CNMS_TRUE );
 			/* sensitive */
-			if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
+			if( gtk_widget_get_sensitive( widget ) == 0 ){
 				gtk_widget_set_sensitive( widget, TRUE );
 			}
 			break;
@@ -1103,7 +1103,7 @@ static CNMSInt32 SubAspectToggleSet(
 			/* toggle on */
 			gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( widget ), CNMS_TRUE );
 			/* not sensitive */
-			if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
+			if( gtk_widget_get_sensitive( widget ) != 0 ){
 				gtk_widget_set_sensitive( widget, FALSE );
 			}
 			break;
@@ -1132,7 +1132,7 @@ CNMSInt32 W1Ui_ChangeClearPrevButtonVisible( CNMSVoid )
 	}
 
 	if( lpW1Comp->previewFlag == CNMS_TRUE ){
-		if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
+		if( gtk_widget_get_sensitive( widget ) == 0 ){
 			gtk_widget_set_sensitive( widget, TRUE );
 			gtk_widget_hide( widget );
 			gtk_widget_show( widget );
@@ -1142,7 +1142,7 @@ CNMSInt32 W1Ui_ChangeClearPrevButtonVisible( CNMSVoid )
 		}
 	}
 	else{
-		if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
+		if( gtk_widget_get_sensitive( widget ) != 0 ){
 			gtk_widget_set_sensitive( widget, FALSE );
 		}
 		if( gtk_widget_get_visible( widget ) == 0 ){

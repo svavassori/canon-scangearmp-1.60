@@ -302,18 +302,18 @@ CNMSInt32 Preference_Show(
 		}
 		switch( lpPrefComp->widgetMode[ lpPrefComp->current_color ][ i ] ){
 			case	CNMS_MODE_SELECT:
-				if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
+				if( gtk_widget_get_sensitive( widget ) == 0 ){
 					gtk_widget_set_sensitive( widget, TRUE );
 				}
 				gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON( widget ), TRUE );
 				break;
 			case	CNMS_MODE_ADD:
-				if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
+				if( gtk_widget_get_sensitive( widget ) == 0 ){
 					gtk_widget_set_sensitive( widget, TRUE );
 				}
 				break;
 			case	CNMS_MODE_HIDE:
-				if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
+				if( gtk_widget_get_sensitive( widget ) != 0 ){
 					gtk_widget_set_sensitive( widget, FALSE );
 				}
 				if( gtk_widget_get_visible( widget ) == 0 ){

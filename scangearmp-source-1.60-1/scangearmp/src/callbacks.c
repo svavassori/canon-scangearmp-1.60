@@ -101,7 +101,7 @@ gboolean on_select_model_dialog_delete_event(
 #ifdef	__CNMS_DEBUG_EVENT__
 	DBGMSG( "[[ on_select_model_dialog_delete_event ]]\n" );
 #endif
-	if( GTK_WIDGET_SENSITIVE( select_model_dialog ) ){
+	if( gtk_widget_get_sensitive( select_model_dialog ) ){
 		W1_Close();
 	}
 	
@@ -152,7 +152,7 @@ on_main_window_delete_event            (GtkWidget       *widget,
                                         GdkEvent        *event,
                                         gpointer         user_data)
 {
-	if( GTK_WIDGET_SENSITIVE( main_window ) ){
+	if( gtk_widget_get_sensitive( main_window ) ){
 		W1_Close();
   		return FALSE;
 	}
