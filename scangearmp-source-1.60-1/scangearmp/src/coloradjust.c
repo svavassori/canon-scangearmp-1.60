@@ -1190,7 +1190,7 @@ CNMSVoid CnmsColAdjDrawingAreaExposeEvent(
 	}
 
 	/* Drawing Pixmap	*/
-	gdk_draw_pixmap( widget->window, widget->style->fg_gc[ GTK_WIDGET_STATE( widget ) ],
+	gdk_draw_pixmap( widget->window, widget->style->fg_gc[ gtk_widget_get_state_flags( widget ) ],
 		dlg->pmap, event->area.x, event->area.y, event->area.x, event->area.y, event->area.width, event->area.height );
 		
 	return;
@@ -1402,7 +1402,7 @@ CNMSVoid CnmsColAdjToneCurveDraw(
 			break;
 	}
 
-	gdk_draw_pixmap( dlg->darea->window, dlg->darea->style->fg_gc[GTK_WIDGET_STATE (dlg->darea)],
+	gdk_draw_pixmap( dlg->darea->window, dlg->darea->style->fg_gc[gtk_widget_get_state_flags(dlg->darea)],
 		dlg->pmap, 0, 0, 0, 0, dlg->darea->allocation.width, dlg->darea->allocation.height);
 
 	if( id < CNMS_CA_DIALOG_FR ){
