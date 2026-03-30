@@ -44,7 +44,7 @@ CNMSVoid CnmsBCDialogShow(
 
 	/* Show/UnShow Change */
 	if( keep == CNMS_CA_DIALOG_NON_KEEP ){
-		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_BC, !( GTK_WIDGET_VISIBLE( bc_dlg.widget ) ) );
+		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_BC, !( gtk_widget_get_visible( bc_dlg.widget ) ) );
 	}
 	CnmsColAdjSetChannelItem( &bc_dlg );
 
@@ -93,7 +93,7 @@ CNMSVoid CnmsBCReset(
 	if( fr_dlg.channel != CNMS_CA_GRAY ){
 		bc_dlg.channel = CNMS_CA_MASTER;
 	}
-	if( GTK_WIDGET_VISIBLE( bc_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( bc_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjSetChannelItem( &bc_dlg );
 		CnmsColAdjToneCurveDraw( CNMS_CA_DIALOG_BC );
 	}

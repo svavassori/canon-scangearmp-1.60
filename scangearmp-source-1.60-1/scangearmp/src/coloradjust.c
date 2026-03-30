@@ -391,20 +391,20 @@ CNMSInt32 CnmsColAdjColorModeChanged(
 			case	CNMS_CA_COLORGROUP_GRAY:
 						/* Not MC Dialog Show if the Dialog with showing status is Hiden */
 						if( bc_dlg.show == CNMS_TRUE ){
-							CnmsBCDialogShow( colorAfter, GTK_WIDGET_VISIBLE( bc_dlg.widget ) );
+							CnmsBCDialogShow( colorAfter, gtk_widget_get_visible( bc_dlg.widget ) );
 						}
 						if( hg_dlg.show == CNMS_TRUE ){
-							CnmsHGDialogShow( colorAfter, GTK_WIDGET_VISIBLE( hg_dlg.widget ) );
+							CnmsHGDialogShow( colorAfter, gtk_widget_get_visible( hg_dlg.widget ) );
 						}
 						if( tc_dlg.show == CNMS_TRUE ){
-							CnmsTCDialogShow( colorAfter, GTK_WIDGET_VISIBLE( tc_dlg.widget ) );
+							CnmsTCDialogShow( colorAfter, gtk_widget_get_visible( tc_dlg.widget ) );
 						}
 						if( fr_dlg.show == CNMS_TRUE ){
-							CnmsFRDialogShow( colorAfter, GTK_WIDGET_VISIBLE( fr_dlg.widget ) );
+							CnmsFRDialogShow( colorAfter, gtk_widget_get_visible( fr_dlg.widget ) );
 						}
 
 						/* Dialog Hide and Get showing status if MC dialog is Shown */
-						if( ( mc_dlg.show == CNMS_TRUE ) && ( GTK_WIDGET_VISIBLE( mc_dlg.widget ) == CNMS_TRUE ) ){
+						if( ( mc_dlg.show == CNMS_TRUE ) && ( gtk_widget_get_visible( mc_dlg.widget ) == CNMS_TRUE ) ){
 							CnmsMCDialogShow( colorAfter, CNMS_CA_DIALOG_NON_KEEP );
 							mc_dlg.show = CNMS_TRUE;
 						}
@@ -511,19 +511,19 @@ CNMSVoid CnmsColAdjAllDataReset(
 CNMSVoid CnmsColAdjResetComplete(
 						CNMSVoid									)
 {
-	if( GTK_WIDGET_VISIBLE( bc_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( bc_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_BC, CNMS_FALSE );
 	}
-	if( GTK_WIDGET_VISIBLE( hg_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( hg_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_HG, CNMS_FALSE );
 	}
-	if( GTK_WIDGET_VISIBLE( tc_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( tc_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_TC, CNMS_FALSE );
 	}
-	if( GTK_WIDGET_VISIBLE( fr_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( fr_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_FR, CNMS_FALSE );
 	}
-	if( GTK_WIDGET_VISIBLE( mc_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( mc_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_MC, CNMS_FALSE );
 	}
 
@@ -1268,7 +1268,7 @@ CNMSBool CnmsColAdjChannelItemSet(
 						gtk_combo_box_append_text( GTK_COMBO_BOX( dlg->cbox ), gettext(ca_ch_litem_gray) );
 						break;
 				case CNMS_CA_COLORGROUP_MONO:
-						if( GTK_WIDGET_VISIBLE( dlg->widget ) == CNMS_TRUE )
+						if( gtk_widget_get_visible( dlg->widget ) == CNMS_TRUE )
 							CnmsColAdjDialogShowHide( id, CNMS_FALSE );
 						ret = CNMS_FALSE;
 						break;
@@ -1279,7 +1279,7 @@ CNMSBool CnmsColAdjChannelItemSet(
 			switch( color ){
 				case CNMS_CA_COLORGROUP_COLOR:
 				case CNMS_CA_COLORGROUP_GRAY:
-						if( GTK_WIDGET_VISIBLE( dlg->widget ) == CNMS_TRUE )
+						if( gtk_widget_get_visible( dlg->widget ) == CNMS_TRUE )
 							CnmsColAdjDialogShowHide( id, CNMS_FALSE );
 						ret = CNMS_FALSE;
 						break;
@@ -1324,7 +1324,7 @@ CNMSVoid CnmsColAdjToneCurveDraw(
 		DBGMSG( "[CnmsColAdjToneCurveDraw] Arg Value is Invalid. id[%d]\n", id );
 		return;
 	}
-	if( GTK_WIDGET_VISIBLE( dlg->widget ) != CNMS_TRUE ){
+	if( gtk_widget_get_visible( dlg->widget ) != CNMS_TRUE ){
 		return;
 	}
 	if( ( dlg->fhist > 0 ) && ( ca_info.reloadhist == CNMS_FALSE ) ){
@@ -1468,15 +1468,15 @@ CNMSVoid CnmsColAdjGetPreviewStatus(
 CNMSVoid CnmsColAdjUpDateHistogram(
 						CNMSVoid									)
 {
-	if( GTK_WIDGET_VISIBLE( hg_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( hg_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjToneCurveDraw( CNMS_CA_DIALOG_HG );
 		CnmsHGPreviewChangedAfter();
 	}
-	if( GTK_WIDGET_VISIBLE( fr_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( fr_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjCurveCalcFR();
 		CnmsColAdjToneCurveDraw( CNMS_CA_DIALOG_FR );
 	}
-	if( GTK_WIDGET_VISIBLE( mc_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( mc_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjToneCurveDraw( CNMS_CA_DIALOG_MC );
 	}
 

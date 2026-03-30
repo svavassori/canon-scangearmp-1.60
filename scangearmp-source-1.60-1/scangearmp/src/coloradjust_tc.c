@@ -41,7 +41,7 @@ CNMSVoid CnmsTCDialogShow(
 
 	/* Show/UnShow Change */
 	if( keep == CNMS_CA_DIALOG_NON_KEEP ){
-		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_TC, !( GTK_WIDGET_VISIBLE( tc_dlg.widget ) ) );
+		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_TC, !( gtk_widget_get_visible( tc_dlg.widget ) ) );
 	}
 	CnmsColAdjSetChannelItem( &tc_dlg );
 	gtk_combo_box_set_active( GTK_COMBO_BOX( tc_combobox_tone_select ), tc[tc_dlg.channel].tc_num );
@@ -91,7 +91,7 @@ CNMSVoid CnmsTCReset(
 	if( tc_dlg.channel != CNMS_CA_GRAY ){
 		tc_dlg.channel = CNMS_CA_MASTER;
 	}
-	if( GTK_WIDGET_VISIBLE( tc_dlg.widget ) != 0 ){
+	if( gtk_widget_get_visible( tc_dlg.widget ) != 0 ){
 		CnmsColAdjSetChannelItem( &tc_dlg );
 		gtk_combo_box_set_active( GTK_COMBO_BOX( tc_combobox_tone_select ), CNMS_TC_NO_ADJUST );
 		CnmsColAdjToneCurveDraw( CNMS_CA_DIALOG_TC );

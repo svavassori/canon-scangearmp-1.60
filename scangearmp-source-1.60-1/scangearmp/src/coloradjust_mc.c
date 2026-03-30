@@ -47,10 +47,10 @@ CNMSVoid CnmsMCDialogShow(
 
 	/* Show/UnShow Change */
 	if( keep == CNMS_CA_DIALOG_NON_KEEP ){
-		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_MC, !( GTK_WIDGET_VISIBLE( mc_dlg.widget ) ) );
+		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_MC, !( gtk_widget_get_visible( mc_dlg.widget ) ) );
 	}
 	gtk_range_set_value( GTK_RANGE( mc_scale ), ( CNMSDec32 )mc_mono.threshold );
-	if( GTK_WIDGET_VISIBLE( mc_dlg.widget ) ){
+	if( gtk_widget_get_visible( mc_dlg.widget ) ){
 		CnmsColAdjToneCurveDraw( CNMS_CA_DIALOG_MC );
 	}
 
@@ -81,7 +81,7 @@ CNMSVoid CnmsMCReset(
 {
 	/* Data Initialize						*/
 	CnmsMCInit();
-	if( GTK_WIDGET_VISIBLE( mc_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( mc_dlg.widget ) == CNMS_TRUE ){
 		gtk_range_set_value( GTK_RANGE( mc_scale ), ( CNMSDec32 )mc_mono.threshold );
 		CnmsColAdjToneCurveDraw( CNMS_CA_DIALOG_MC );
 	}

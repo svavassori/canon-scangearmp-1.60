@@ -81,7 +81,7 @@ CNMSInt32 ShowErrorDialog( CNMSVoid )
 		W1_ModalDialogShowAction( error_dialog );
 	}
 	ret = lastErrorQuit;
-	if( GTK_WIDGET_VISIBLE( error_dialog ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( error_dialog ) == CNMS_TRUE ){
 		if( ( ldata = ComGtk_GtkMain() ) == CNMS_ERR ){
 			DBGMSG( "[ShowErrorDialog]Function error by ComGtk_GtkMain() = %d.\n",ldata );
 			ret = ldata;
@@ -98,13 +98,13 @@ void error_dialog_ok_del_clicked()
 	CNMSInt32	ldata;
 	
 	/* hide calibration dialog */
-	if ( GTK_WIDGET_VISIBLE( calibration_dialog ) ) {
+	if ( gtk_widget_get_visible( calibration_dialog ) ) {
 		W1_ModalDialogHideAction( calibration_dialog );
 	}
 	/* hide progress dialog */
 	ProgressBarHide();
 
-	if( GTK_WIDGET_VISIBLE( error_dialog ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( error_dialog ) == CNMS_TRUE ){
 		if( ( ldata = ComGtk_GtkMainQuit( COMGTK_GTKMAIN_OK ) ) == CNMS_ERR ){
 			DBGMSG( "[error_dialog_ok_del_clicked]Function error by ComGtk_GtkMain() = %d.\n",ldata );
 		}			

@@ -65,7 +65,7 @@ CNMSVoid CnmsFRDialogShow(
 
 	/* Show/UnShow Change */
 	if( keep == CNMS_CA_DIALOG_NON_KEEP ){
-		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_FR, !( GTK_WIDGET_VISIBLE( fr_dlg.widget ) ) );
+		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_FR, !( gtk_widget_get_visible( fr_dlg.widget ) ) );
 	}
 	CnmsColAdjSetChannelItem( &fr_dlg );
 
@@ -83,7 +83,7 @@ CNMSVoid CnmsFRReset(
 	if( fr_dlg.channel != CNMS_CA_GRAY ){
 		fr_dlg.channel = CNMS_CA_MASTER;
 	}
-	if( GTK_WIDGET_VISIBLE( fr_dlg.widget ) == CNMS_TRUE ){
+	if( gtk_widget_get_visible( fr_dlg.widget ) == CNMS_TRUE ){
 		CnmsColAdjSetChannelItem( &fr_dlg );
 	}
 

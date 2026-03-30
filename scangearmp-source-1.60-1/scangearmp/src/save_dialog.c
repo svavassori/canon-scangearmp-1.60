@@ -474,7 +474,7 @@ static CNMSVoid dialog_save_error_disp(
 		gtk_label_set_text( GTK_LABEL( label ), gettext( str ) );
 	}
 		
-	if( GTK_WIDGET_VISIBLE( child ) == 0 ){
+	if( gtk_widget_get_visible( child ) == 0 ){
 		gtk_widget_show( child );
 		gtk_window_set_transient_for( GTK_WINDOW( child ), GTK_WINDOW( parent ) );
 		

@@ -316,7 +316,7 @@ CNMSInt32 Preference_Show(
 				if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
 					gtk_widget_set_sensitive( widget, FALSE );
 				}
-				if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+				if( gtk_widget_get_visible( widget ) == 0 ){
 					gtk_widget_show( widget );
 				}
 				break;

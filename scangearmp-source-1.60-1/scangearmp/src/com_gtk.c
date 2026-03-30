@@ -83,7 +83,7 @@ CNMSVoid ComGtk_WidgetHideAndShow(
 		return;
 	}
 
-	if( GTK_WIDGET_VISIBLE( widget ) == TRUE ){
+	if( gtk_widget_get_visible( widget ) == TRUE ){
 		gtk_widget_hide( widget );
 		gtk_widget_show( widget );
 	}

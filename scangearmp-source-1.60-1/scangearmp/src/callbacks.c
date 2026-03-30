@@ -180,17 +180,17 @@ gboolean on_main_window_button_press_event(
 	if( ( ldata = CnmsHGSpuitButtonToggleRelease() ) == CNMS_NO_ERR ){
 		W1_SetModal( CNMS_FALSE );
 		if( bc_dlg.widget != CNMSNULL ){
-			if( GTK_WIDGET_VISIBLE( bc_dlg.widget ) != 0 ){
+			if( gtk_widget_get_visible( bc_dlg.widget ) != 0 ){
 				ComGtk_CursorImageSet( bc_dlg.widget, CNMS_CURSOR_ID_NORMAL );
 			}
 		}
 		if( tc_dlg.widget != CNMSNULL ){
-			if( GTK_WIDGET_VISIBLE( tc_dlg.widget ) != 0 ){
+			if( gtk_widget_get_visible( tc_dlg.widget ) != 0 ){
 				ComGtk_CursorImageSet( tc_dlg.widget, CNMS_CURSOR_ID_NORMAL );
 			}
 		}
 		if( fr_dlg.widget != CNMSNULL ){
-			if( GTK_WIDGET_VISIBLE( fr_dlg.widget ) != 0 ){
+			if( gtk_widget_get_visible( fr_dlg.widget ) != 0 ){
 				ComGtk_CursorImageSet( fr_dlg.widget, CNMS_CURSOR_ID_NORMAL );
 			}
 		}

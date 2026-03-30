@@ -129,7 +129,7 @@ CNMSVoid CnmsHGDialogShow(
 	
 	/* Show/UnShow Change */
 	if( keep == CNMS_CA_DIALOG_NON_KEEP ){
-		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_HG, !( GTK_WIDGET_VISIBLE( hg_dlg.widget ) ) );
+		CnmsColAdjDialogShowHide( CNMS_CA_DIALOG_HG, !( gtk_widget_get_visible( hg_dlg.widget ) ) );
 		CnmsHGPreviewChangedAfter();
 	}
 	CnmsColAdjSetChannelItem( &hg_dlg );
@@ -196,7 +196,7 @@ CNMSVoid CnmsHGReset(
 	if( hg_dlg.channel != CNMS_CA_GRAY ){
 		hg_dlg.channel = CNMS_CA_MASTER;
 	}
-	if( GTK_WIDGET_VISIBLE( hg_dlg.widget ) != 0 ){
+	if( gtk_widget_get_visible( hg_dlg.widget ) != 0 ){
 		CnmsColAdjSetChannelItem( &hg_dlg );
 		CnmsColAdjToneCurveDraw( CNMS_CA_DIALOG_HG );
 	}
@@ -482,13 +482,13 @@ CNMSVoid CnmsHGSpuitButtonToggled(
 
 	if( gtk_toggle_button_get_active( togglebutton ) == CNMS_TRUE ){
 		ComGtk_CursorImageSet( hg_dlg.widget, CNMS_CURSOR_ID_CROSS );
-		if( GTK_WIDGET_VISIBLE( bc_dlg.widget ) == CNMS_TRUE ){
+		if( gtk_widget_get_visible( bc_dlg.widget ) == CNMS_TRUE ){
 			ComGtk_CursorImageSet( bc_dlg.widget, CNMS_CURSOR_ID_CROSS );
 		}
-		if( GTK_WIDGET_VISIBLE( tc_dlg.widget ) == CNMS_TRUE ){
+		if( gtk_widget_get_visible( tc_dlg.widget ) == CNMS_TRUE ){
 			ComGtk_CursorImageSet( tc_dlg.widget, CNMS_CURSOR_ID_CROSS );
 		}
-		if( GTK_WIDGET_VISIBLE( fr_dlg.widget ) == CNMS_TRUE ){
+		if( gtk_widget_get_visible( fr_dlg.widget ) == CNMS_TRUE ){
 			ComGtk_CursorImageSet( fr_dlg.widget, CNMS_CURSOR_ID_CROSS );
 		}
 
@@ -504,13 +504,13 @@ CNMSVoid CnmsHGSpuitButtonToggled(
 		hg_info.btnType = CNMS_HG_SPUIT_ERR;
 
 		ComGtk_CursorImageSet( hg_dlg.widget, CNMS_CURSOR_ID_NORMAL );
-		if( GTK_WIDGET_VISIBLE( bc_dlg.widget ) == CNMS_TRUE ){
+		if( gtk_widget_get_visible( bc_dlg.widget ) == CNMS_TRUE ){
 			ComGtk_CursorImageSet( bc_dlg.widget, CNMS_CURSOR_ID_NORMAL );
 		}
-		if( GTK_WIDGET_VISIBLE( tc_dlg.widget ) == CNMS_TRUE ){
+		if( gtk_widget_get_visible( tc_dlg.widget ) == CNMS_TRUE ){
 			ComGtk_CursorImageSet( tc_dlg.widget, CNMS_CURSOR_ID_NORMAL );
 		}
-		if( GTK_WIDGET_VISIBLE( fr_dlg.widget ) == CNMS_TRUE ){
+		if( gtk_widget_get_visible( fr_dlg.widget ) == CNMS_TRUE ){
 			ComGtk_CursorImageSet( fr_dlg.widget, CNMS_CURSOR_ID_NORMAL );
 		}
 

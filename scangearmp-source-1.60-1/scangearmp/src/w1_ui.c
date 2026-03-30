@@ -496,7 +496,7 @@ static CNMSInt32 SubInitButtons(
 				if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
 					gtk_widget_set_sensitive( widget, TRUE );
 				}
-				if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+				if( gtk_widget_get_visible( widget ) == 0 ){
 					gtk_widget_show( widget );
 				}
 				break;
@@ -504,13 +504,13 @@ static CNMSInt32 SubInitButtons(
 				if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
 					gtk_widget_set_sensitive( widget, FALSE );
 				}
-				if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+				if( gtk_widget_get_visible( widget ) == 0 ){
 					gtk_widget_show( widget );
 				}
 				break;
 			
 			case	CNMS_MODE_DELETE:
-				if( GTK_WIDGET_VISIBLE( widget ) != 0 ){
+				if( gtk_widget_get_visible( widget ) != 0 ){
 					gtk_widget_hide( widget );
 				}
 				break;
@@ -560,7 +560,7 @@ static CNMSInt32 SubInitETC(
 					if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
 						gtk_widget_set_sensitive( widget, TRUE );
 					}
-					if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+					if( gtk_widget_get_visible( widget ) == 0 ){
 						gtk_widget_show( widget );
 					}
 					break;
@@ -568,13 +568,13 @@ static CNMSInt32 SubInitETC(
 					if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
 						gtk_widget_set_sensitive( widget, FALSE );
 					}
-					if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+					if( gtk_widget_get_visible( widget ) == 0 ){
 						gtk_widget_show( widget );
 					}
 					break;
 				
 				case	CNMS_MODE_DELETE:
-					if( GTK_WIDGET_VISIBLE( widget ) != 0 ){
+					if( gtk_widget_get_visible( widget ) != 0 ){
 						gtk_widget_hide( widget );
 					}
 					break;
@@ -618,7 +618,7 @@ static CNMSInt32 RelocateUI(
 				if( GTK_WIDGET_SENSITIVE( widget ) == 0 ){
 					gtk_widget_set_sensitive( widget, TRUE );
 				}
-				if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+				if( gtk_widget_get_visible( widget ) == 0 ){
 					gtk_widget_show( widget );
 				}
 				break;
@@ -626,12 +626,12 @@ static CNMSInt32 RelocateUI(
 				if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
 					gtk_widget_set_sensitive( widget, FALSE );
 				}
-				if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+				if( gtk_widget_get_visible( widget ) == 0 ){
 					gtk_widget_show( widget );
 				}
 				break;
 			case	CNMS_MODE_DELETE:
-				if( GTK_WIDGET_VISIBLE( widget ) != 0 ){
+				if( gtk_widget_get_visible( widget ) != 0 ){
 					gtk_widget_hide( widget );
 				}
 				break;
@@ -1067,7 +1067,7 @@ static CNMSInt32 SubAspectToggleSet(
 		goto	EXIT;
 	}
 
-	if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+	if( gtk_widget_get_visible( widget ) == 0 ){
 		gtk_widget_show( widget );
 	}
 
@@ -1137,7 +1137,7 @@ CNMSInt32 W1Ui_ChangeClearPrevButtonVisible( CNMSVoid )
 			gtk_widget_hide( widget );
 			gtk_widget_show( widget );
 		}
-		if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+		if( gtk_widget_get_visible( widget ) == 0 ){
 			gtk_widget_show( widget );
 		}
 	}
@@ -1145,7 +1145,7 @@ CNMSInt32 W1Ui_ChangeClearPrevButtonVisible( CNMSVoid )
 		if( GTK_WIDGET_SENSITIVE( widget ) != 0 ){
 			gtk_widget_set_sensitive( widget, FALSE );
 		}
-		if( GTK_WIDGET_VISIBLE( widget ) == 0 ){
+		if( gtk_widget_get_visible( widget ) == 0 ){
 			gtk_widget_show( widget );
 		}
 	}
