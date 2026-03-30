@@ -29,7 +29,7 @@
 
 
 void
-main_window_destroy                    (GtkObject       *object,
+main_window_destroy                    (GObject       *object,
                                         gpointer         user_data);
 
 gboolean
@@ -206,7 +206,7 @@ on_advance_reset_button_clicked        (GtkButton       *button,
                                         gpointer         user_data);
 
 void
-on_preference_window_destroy           (GtkObject       *object,
+on_preference_window_destroy           (GObject       *object,
                                         gpointer         user_data);
 
 gboolean

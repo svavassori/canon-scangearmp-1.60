@@ -137,7 +137,7 @@ void on_select_model_search_button_clicked(
 /***** main window *****/
 /***********************/
 void main_window_destroy(
-		GtkObject		*object,
+		GObject		*object,
 		gpointer		user_data )
 {
 #ifdef	__CNMS_DEBUG_EVENT__
@@ -992,7 +992,7 @@ void on_advance_descreen_combo_changed(
  /***** preference dialog *****/
 /*****************************/
 void on_preference_window_destroy(
-		GtkObject		*object,
+		GObject		*object,
 		gpointer		user_data )
 {
 #ifdef	__CNMS_DEBUG_EVENT__
