@@ -1779,7 +1779,7 @@ create_dialog_bright_contrast (void)
   gtk_widget_show (hbox71);
   gtk_box_pack_start (GTK_BOX (vbox38), hbox71, FALSE, FALSE, 0);
 
-  bc_scale_bright = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, -127, 127, 1, 0, 0)));
+  bc_scale_bright = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, GTK_ADJUSTMENT (gtk_adjustment_new (0, -127, 127, 1, 0, 0)));
   gtk_widget_show (bc_scale_bright);
   gtk_box_pack_end (GTK_BOX (hbox71), bc_scale_bright, TRUE, FALSE, 10);
   gtk_widget_set_size_request (bc_scale_bright, 215, -1);
@@ -1828,7 +1828,7 @@ create_dialog_bright_contrast (void)
   gtk_widget_show (hbox74);
   gtk_box_pack_start (GTK_BOX (vbox39), hbox74, FALSE, FALSE, 0);
 
-  bc_scale_contrast = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (0, -127, 127, 1, 0, 0)));
+  bc_scale_contrast = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, GTK_ADJUSTMENT (gtk_adjustment_new (0, -127, 127, 1, 0, 0)));
   gtk_widget_show (bc_scale_contrast);
   gtk_box_pack_end (GTK_BOX (hbox74), bc_scale_contrast, TRUE, FALSE, 10);
   gtk_widget_set_size_request (bc_scale_contrast, 215, -1);
@@ -2931,7 +2931,7 @@ create_dialog_monochrome (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label202), 0, 0.5);
 
-  mc_scale = gtk_hscale_new (GTK_ADJUSTMENT (gtk_adjustment_new (72, 0, 255, 1, 0, 0)));
+  mc_scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, GTK_ADJUSTMENT (gtk_adjustment_new (72, 0, 255, 1, 0, 0)));
   gtk_widget_show (mc_scale);
   gtk_table_attach (GTK_TABLE (table17), mc_scale, 1, 2, 0, 1,
                     (GtkAttachOptions) (GTK_FILL),

@@ -4069,7 +4069,8 @@ Are you sure to overwrite it?</property>
 	      <property name="spacing">0</property>
 
 	      <child>
-		<widget class="GtkHScale" id="bc_scale_bright">
+		<widget class="GtkScale" id="bc_scale_bright">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="width_request">215</property>
 		  <property name="visible">True</property>
 		  <property name="can_focus">True</property>
@@ -4247,7 +4248,8 @@ Are you sure to overwrite it?</property>
 	      <property name="spacing">0</property>
 
 	      <child>
-		<widget class="GtkHScale" id="bc_scale_contrast">
+		<widget class="GtkScale" id="bc_scale_contrast">
+		  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 		  <property name="width_request">215</property>
 		  <property name="visible">True</property>
 		  <property name="can_focus">True</property>
@@ -6669,7 +6671,8 @@ High contrast</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkHScale" id="mc_scale">
+	    <widget class="GtkScale" id="mc_scale">
+	      <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	      <property name="width_request">250</property>
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
