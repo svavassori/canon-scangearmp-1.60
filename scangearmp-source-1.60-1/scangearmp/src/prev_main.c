@@ -340,8 +340,7 @@ EXIT:
 static CNMSInt32 ret_Preview_ChangeStatus_Exec = CNMS_ERR;
 static CNMSInt32 mode_Preview_ChangeStatus_Exec;
 
-gint Preview_ChangeStatus_Exec(
-		CNMSVoid )
+gboolean Preview_ChangeStatus_Exec(gpointer data)
 {
 	CNMSInt32		Actionmode = mode_Preview_ChangeStatus_Exec;
 	CNMSInt32		ret = CNMS_ERR, ldata;
@@ -405,7 +404,7 @@ EXIT:
 
 	ret_Preview_ChangeStatus_Exec = ret;
 	
-	return 0;
+	return G_SOURCE_REMOVE;
 }
 
 #define CNMS_RELOAD_TIME	(200)
@@ -420,11 +419,11 @@ CNMSInt32 Preview_ChangeStatus(
 	ret_Preview_ChangeStatus_Exec = CNMS_NO_ERR;
 	
 	if ( Actionmode == CNMSSCPROC_ACTION_PREV_CLEAR || Actionmode < CNMSSCPROC_ACTION_PARAM ) {
-		Preview_ChangeStatus_Exec();
+		Preview_ChangeStatus_Exec(CNMSNULL);
 	}
 	else {
-		time_current = gtk_timeout_add( CNMS_RELOAD_TIME, ( GtkFunction )Preview_ChangeStatus_Exec, CNMSNULL );
-		gtk_timeout_remove( time_before );
+		time_current = g_timeout_add( CNMS_RELOAD_TIME, ( GSourceFunc )Preview_ChangeStatus_Exec, CNMSNULL );
+		g_source_remove( (guint) time_before );
 		time_before = time_current;
 	}
 
