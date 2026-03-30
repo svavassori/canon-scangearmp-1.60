@@ -30,7 +30,8 @@
       <property name="spacing">0</property>
 
       <child>
-	<widget class="GtkVBox" id="vbox2">
+	<widget class="GtkBox" id="vbox2">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -133,7 +134,8 @@
       </child>
 
       <child>
-	<widget class="GtkVBox" id="main_box">
+	<widget class="GtkBox" id="main_box">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -150,7 +152,8 @@
 	      <signal name="switch_page" handler="on_main_notebook_switch_page" last_modification_time="Thu, 01 Jun 2006 09:34:13 GMT"/>
 
 	      <child>
-		<widget class="GtkVBox" id="vbox3">
+		<widget class="GtkBox" id="vbox3">
+		  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 		  <property name="border_width">15</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
@@ -1273,7 +1276,8 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkVBox" id="vbox9">
+		<widget class="GtkBox" id="vbox9">
+		  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 		  <property name="border_width">2</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
@@ -2131,7 +2135,8 @@
 		      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		      <child>
-			<widget class="GtkVBox" id="vbox12">
+			<widget class="GtkBox" id="vbox12">
+			  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 			  <property name="border_width">1</property>
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
@@ -2272,7 +2277,8 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkVBox" id="vbox13">
+		    <widget class="GtkBox" id="vbox13">
+		      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 		      <property name="border_width">2</property>
 		      <property name="visible">True</property>
 		      <property name="homogeneous">False</property>
@@ -2373,7 +2379,8 @@
 		      <property name="shadow_type">GTK_SHADOW_ETCHED_IN</property>
 
 		      <child>
-			<widget class="GtkVBox" id="vbox14">
+			<widget class="GtkBox" id="vbox14">
+			  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 			  <property name="border_width">2</property>
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
@@ -2603,7 +2610,8 @@
   <signal name="delete_event" handler="on_preference_window_delete_event" last_modification_time="Mon, 06 Nov 2006 02:27:59 GMT"/>
 
   <child>
-    <widget class="GtkVBox" id="vbox15">
+    <widget class="GtkBox" id="vbox15">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -2619,7 +2627,8 @@
 	  <property name="enable_popup">False</property>
 
 	  <child>
-	    <widget class="GtkVBox" id="vbox70">
+	    <widget class="GtkBox" id="vbox70">
+	      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">0</property>
@@ -2655,7 +2664,8 @@
 	      </child>
 
 	      <child>
-		<widget class="GtkVBox" id="vbox71">
+		<widget class="GtkBox" id="vbox71">
+		  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
 		  <property name="spacing">0</property>
@@ -2774,7 +2784,8 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkVBox" id="vbox16">
+	    <widget class="GtkBox" id="vbox16">
+	      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	      <property name="border_width">5</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
@@ -3128,7 +3139,8 @@
   <signal name="delete_event" handler="on_select_model_dialog_delete_event" last_modification_time="Thu, 20 Jul 2006 10:33:25 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox20">
+    <widget class="GtkBox" id="vbox20">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -3317,7 +3329,8 @@
   <signal name="delete_event" handler="on_save_main_dialog_delete_event" last_modification_time="Thu, 01 Jun 2006 10:44:33 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox22">
+    <widget class="GtkBox" id="vbox22">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -3469,7 +3482,8 @@
   <signal name="delete_event" handler="on_save_overwrite_dialog_delete_event" last_modification_time="Thu, 01 Jun 2006 10:48:27 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox23">
+    <widget class="GtkBox" id="vbox23">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -3594,7 +3608,8 @@ Are you sure to overwrite it?</property>
   <signal name="delete_event" handler="on_save_error_dialog_delete_event" last_modification_time="Thu, 01 Jun 2006 10:56:39 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox26">
+    <widget class="GtkBox" id="vbox26">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -3704,7 +3719,8 @@ Are you sure to overwrite it?</property>
   <signal name="delete_event" handler="on_dialog_bright_contrast_delete_event" last_modification_time="Fri, 19 May 2006 08:28:57 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox35">
+    <widget class="GtkBox" id="vbox35">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -3906,7 +3922,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkVBox" id="vbox38">
+	<widget class="GtkBox" id="vbox38">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="width_request">250</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
@@ -4083,7 +4100,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkVBox" id="vbox39">
+	<widget class="GtkBox" id="vbox39">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="width_request">250</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
@@ -4282,7 +4300,8 @@ Are you sure to overwrite it?</property>
   <signal name="delete_event" handler="on_dialog_histogram_delete_event" last_modification_time="Mon, 22 May 2006 02:32:31 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox40">
+    <widget class="GtkBox" id="vbox40">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -4632,7 +4651,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkVBox" id="vbox43">
+	<widget class="GtkBox" id="vbox43">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -5220,7 +5240,8 @@ Are you sure to overwrite it?</property>
   <signal name="delete_event" handler="on_dialog_tonecurve_delete_event" last_modification_time="Fri, 19 May 2006 09:01:23 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox44">
+    <widget class="GtkBox" id="vbox44">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -5422,7 +5443,8 @@ Are you sure to overwrite it?</property>
       </child>
 
       <child>
-	<widget class="GtkVBox" id="vbox47">
+	<widget class="GtkBox" id="vbox47">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -5527,7 +5549,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_dialog_final_review_delete_event" last_modification_time="Wed, 15 Nov 2006 04:30:33 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox48">
+    <widget class="GtkBox" id="vbox48">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -5738,7 +5761,8 @@ High contrast</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkVBox" id="vbox51">
+	    <widget class="GtkBox" id="vbox51">
+	      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">5</property>
@@ -5974,7 +5998,8 @@ High contrast</property>
 	  </child>
 
 	  <child>
-	    <widget class="GtkVBox" id="vbox52">
+	    <widget class="GtkBox" id="vbox52">
+	      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">5</property>
@@ -6238,7 +6263,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_dialog_monochrome_delete_event" last_modification_time="Mon, 29 May 2006 09:18:44 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox53">
+    <widget class="GtkBox" id="vbox53">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -6425,7 +6451,8 @@ High contrast</property>
 	  <property name="spacing">0</property>
 
 	  <child>
-	    <widget class="GtkVBox" id="vbox56">
+	    <widget class="GtkBox" id="vbox56">
+	      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">2</property>
@@ -6683,7 +6710,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_dialog_calibration_delete_event" last_modification_time="Mon, 07 Aug 2006 04:59:49 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="dialog-vbox1">
+    <widget class="GtkBox" id="dialog-vbox1">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -6837,7 +6865,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_error_dialog_delete_event" last_modification_time="Wed, 09 Aug 2006 06:25:20 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="dialog-vbox2">
+    <widget class="GtkBox" id="dialog-vbox2">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -6946,7 +6975,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_dialog_about_delete_event" last_modification_time="Wed, 11 Oct 2006 04:49:30 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="dialog-vbox3">
+    <widget class="GtkBox" id="dialog-vbox3">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -6979,7 +7009,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkVBox" id="vbox62">
+	<widget class="GtkBox" id="vbox62">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">2</property>
@@ -7136,7 +7167,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_dialog_clear_preview_delete_event" last_modification_time="Mon, 06 Nov 2006 01:54:26 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="dialog-vbox4">
+    <widget class="GtkBox" id="dialog-vbox4">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -7183,7 +7215,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkVBox" id="vbox63">
+	<widget class="GtkBox" id="vbox63">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -7290,7 +7323,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_progress_bar_dialog_delete_event" last_modification_time="Thu, 12 Apr 2007 06:35:13 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox64">
+    <widget class="GtkBox" id="vbox64">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -7369,7 +7403,8 @@ High contrast</property>
       </child>
 
       <child>
-	<widget class="GtkVBox" id="vbox65">
+	<widget class="GtkBox" id="vbox65">
+	  <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">0</property>
@@ -7469,7 +7504,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_dialog_child_with_checkBox_delete_event" last_modification_time="Fri, 25 May 2007 05:18:36 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox66">
+    <widget class="GtkBox" id="vbox66">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -7646,7 +7682,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_dialog_child_with_ok_delete_event" last_modification_time="Fri, 25 May 2007 05:19:04 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox67">
+    <widget class="GtkBox" id="vbox67">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>
@@ -7776,7 +7813,8 @@ High contrast</property>
   <signal name="delete_event" handler="on_dialog_child_with_okcancel_delete_event" last_modification_time="Fri, 25 May 2007 05:19:21 GMT"/>
 
   <child internal-child="vbox">
-    <widget class="GtkVBox" id="vbox68">
+    <widget class="GtkBox" id="vbox68">
+      <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">0</property>

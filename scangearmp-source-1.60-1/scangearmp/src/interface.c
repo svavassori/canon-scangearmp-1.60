@@ -168,7 +168,7 @@ create_main_window (void)
   gtk_widget_show (hbox3);
   gtk_container_add (GTK_CONTAINER (main_window), hbox3);
 
-  vbox2 = gtk_vbox_new (FALSE, 0);
+  vbox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox2);
   gtk_box_pack_start (GTK_BOX (hbox3), vbox2, TRUE, TRUE, 0);
 
@@ -203,7 +203,7 @@ create_main_window (void)
   gtk_container_add (GTK_CONTAINER (preview_frame), main_preview);
   gtk_widget_set_events (main_preview, GDK_EXPOSURE_MASK | GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON1_MOTION_MASK | GDK_BUTTON3_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK);
 
-  main_box = gtk_vbox_new (FALSE, 0);
+  main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (main_box);
   gtk_box_pack_start (GTK_BOX (hbox3), main_box, FALSE, FALSE, 0);
 
@@ -211,7 +211,7 @@ create_main_window (void)
   gtk_widget_show (main_notebook);
   gtk_box_pack_start (GTK_BOX (main_box), main_notebook, TRUE, TRUE, 0);
 
-  vbox3 = gtk_vbox_new (FALSE, 0);
+  vbox3 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox3);
   gtk_container_add (GTK_CONTAINER (main_notebook), vbox3);
   gtk_container_set_border_width (GTK_CONTAINER (vbox3), 15);
@@ -487,7 +487,7 @@ create_main_window (void)
   gtk_widget_show (label7);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (main_notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (main_notebook), 0), label7);
 
-  vbox9 = gtk_vbox_new (FALSE, 0);
+  vbox9 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox9);
   gtk_container_add (GTK_CONTAINER (main_notebook), vbox9);
   gtk_container_set_border_width (GTK_CONTAINER (vbox9), 2);
@@ -738,7 +738,7 @@ create_main_window (void)
   gtk_box_pack_start (GTK_BOX (vbox9), frame4, TRUE, TRUE, 0);
   gtk_frame_set_label_align (GTK_FRAME (frame4), 0.04, 0.5);
 
-  vbox12 = gtk_vbox_new (FALSE, 3);
+  vbox12 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 3);
   gtk_widget_show (vbox12);
   gtk_container_add (GTK_CONTAINER (frame4), vbox12);
   gtk_container_set_border_width (GTK_CONTAINER (vbox12), 1);
@@ -775,7 +775,7 @@ create_main_window (void)
   gtk_widget_show (label30);
   gtk_frame_set_label_widget (GTK_FRAME (frame4), label30);
 
-  vbox13 = gtk_vbox_new (FALSE, 3);
+  vbox13 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 3);
   gtk_widget_show (vbox13);
   gtk_box_pack_end (GTK_BOX (vbox9), vbox13, FALSE, FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (vbox13), 2);
@@ -806,7 +806,7 @@ create_main_window (void)
   gtk_box_pack_end (GTK_BOX (vbox9), frame5, FALSE, TRUE, 0);
   gtk_frame_set_label_align (GTK_FRAME (frame5), 0.04, 0.5);
 
-  vbox14 = gtk_vbox_new (FALSE, 0);
+  vbox14 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox14);
   gtk_container_add (GTK_CONTAINER (frame5), vbox14);
   gtk_container_set_border_width (GTK_CONTAINER (vbox14), 2);
@@ -1148,7 +1148,7 @@ create_preference_window (void)
   gtk_window_set_destroy_with_parent (GTK_WINDOW (preference_window), TRUE);
   gtk_window_set_type_hint (GTK_WINDOW (preference_window), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox15 = gtk_vbox_new (FALSE, 0);
+  vbox15 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox15);
   gtk_container_add (GTK_CONTAINER (preference_window), vbox15);
 
@@ -1156,7 +1156,7 @@ create_preference_window (void)
   gtk_widget_show (notebook2);
   gtk_box_pack_start (GTK_BOX (vbox15), notebook2, TRUE, TRUE, 0);
 
-  vbox70 = gtk_vbox_new (FALSE, 0);
+  vbox70 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox70);
   gtk_container_add (GTK_CONTAINER (notebook2), vbox70);
 
@@ -1168,7 +1168,7 @@ create_preference_window (void)
   gtk_widget_show (hseparator4);
   gtk_box_pack_start (GTK_BOX (vbox70), hseparator4, TRUE, TRUE, 0);
 
-  vbox71 = gtk_vbox_new (FALSE, 0);
+  vbox71 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox71);
   gtk_box_pack_start (GTK_BOX (vbox70), vbox71, TRUE, TRUE, 0);
 
@@ -1193,7 +1193,7 @@ create_preference_window (void)
   gtk_widget_show (preference_scanner_label);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook2), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook2), 0), preference_scanner_label);
 
-  vbox16 = gtk_vbox_new (FALSE, 0);
+  vbox16 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox16);
   gtk_container_add (GTK_CONTAINER (notebook2), vbox16);
   gtk_container_set_border_width (GTK_CONTAINER (vbox16), 5);
@@ -1737,7 +1737,7 @@ create_dialog_bright_contrast (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label190), 0, 0.5);
 
-  vbox38 = gtk_vbox_new (FALSE, 0);
+  vbox38 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox38);
   gtk_box_pack_start (GTK_BOX (vbox35), vbox38, FALSE, FALSE, 5);
   gtk_widget_set_size_request (vbox38, 250, -1);
@@ -1786,7 +1786,7 @@ create_dialog_bright_contrast (void)
   gtk_scale_set_draw_value (GTK_SCALE (bc_scale_bright), FALSE);
   gtk_scale_set_digits (GTK_SCALE (bc_scale_bright), 0);
 
-  vbox39 = gtk_vbox_new (FALSE, 0);
+  vbox39 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox39);
   gtk_box_pack_start (GTK_BOX (vbox35), vbox39, FALSE, FALSE, 5);
   gtk_widget_set_size_request (vbox39, 250, -1);
@@ -2086,7 +2086,7 @@ create_dialog_histogram (void)
   gtk_widget_set_size_request (hg_drawingarea_scalebar, 260, 20);
   gtk_widget_set_events (hg_drawingarea_scalebar, GDK_EXPOSURE_MASK | GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_LEAVE_NOTIFY_MASK);
 
-  vbox43 = gtk_vbox_new (FALSE, 0);
+  vbox43 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox43);
   gtk_box_pack_start (GTK_BOX (vbox40), vbox43, FALSE, TRUE, 5);
 
@@ -2442,7 +2442,7 @@ create_dialog_tonecurve (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (label196), 0, 0.5);
 
-  vbox47 = gtk_vbox_new (FALSE, 0);
+  vbox47 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox47);
   gtk_box_pack_start (GTK_BOX (vbox44), vbox47, FALSE, FALSE, 5);
 
@@ -2632,7 +2632,7 @@ create_dialog_final_review (void)
   gtk_box_pack_start (GTK_BOX (hbox94), image43, TRUE, TRUE, 0);
   gtk_misc_set_alignment (GTK_MISC (image43), 0.5, 0);
 
-  vbox51 = gtk_vbox_new (FALSE, 5);
+  vbox51 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
   gtk_widget_show (vbox51);
   gtk_box_pack_start (GTK_BOX (hbox94), vbox51, TRUE, FALSE, 0);
 
@@ -2682,7 +2682,7 @@ create_dialog_final_review (void)
   gtk_box_pack_start (GTK_BOX (hbox97), fr_label_value_b_3, FALSE, FALSE, 0);
   gtk_widget_set_size_request (fr_label_value_b_3, 60, -1);
 
-  vbox52 = gtk_vbox_new (FALSE, 5);
+  vbox52 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
   gtk_widget_show (vbox52);
   gtk_box_pack_start (GTK_BOX (hbox94), vbox52, TRUE, FALSE, 0);
 
@@ -2878,7 +2878,7 @@ create_dialog_monochrome (void)
   gtk_widget_show (hbox102);
   gtk_box_pack_start (GTK_BOX (vbox53), hbox102, FALSE, FALSE, 18);
 
-  vbox56 = gtk_vbox_new (FALSE, 2);
+  vbox56 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
   gtk_widget_show (vbox56);
   gtk_box_pack_start (GTK_BOX (hbox102), vbox56, TRUE, TRUE, 0);
 
@@ -3158,7 +3158,7 @@ create_dialog_about (void)
   dialog_vbox3 = GTK_DIALOG (dialog_about)->vbox;
   gtk_widget_show (dialog_vbox3);
 
-  vbox62 = gtk_vbox_new (FALSE, 2);
+  vbox62 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
   gtk_widget_show (vbox62);
   gtk_box_pack_start (GTK_BOX (dialog_vbox3), vbox62, FALSE, TRUE, 0);
 
@@ -3241,7 +3241,7 @@ create_dialog_clear_preview (void)
   dialog_vbox4 = GTK_DIALOG (dialog_clear_preview)->vbox;
   gtk_widget_show (dialog_vbox4);
 
-  vbox63 = gtk_vbox_new (FALSE, 0);
+  vbox63 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox63);
   gtk_box_pack_start (GTK_BOX (dialog_vbox4), vbox63, FALSE, FALSE, 0);
 
@@ -3320,7 +3320,7 @@ create_dialog_progress_bar (void)
   vbox64 = GTK_DIALOG (dialog_progress_bar)->vbox;
   gtk_widget_show (vbox64);
 
-  vbox65 = gtk_vbox_new (FALSE, 0);
+  vbox65 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vbox65);
   gtk_box_pack_start (GTK_BOX (vbox64), vbox65, TRUE, TRUE, 0);
 
