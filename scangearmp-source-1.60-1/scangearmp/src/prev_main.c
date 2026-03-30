@@ -318,7 +318,7 @@ static CNMSInt32 DrawRectInvert( CNMSVoid )
 		bottomPos[ i ] = max;
 	}
 
-	gc = gdk_gc_new( lpPrevComp->main_widget->window );
+	gc = gdk_gc_new( gtk_widget_get_window(lpPrevComp->main_widget) );
 	gdk_gc_set_function( gc, GDK_INVERT );
 
 	update_rect.x = (gdouble)( topPos[ CNMS_DIM_H ] );
@@ -326,7 +326,7 @@ static CNMSInt32 DrawRectInvert( CNMSVoid )
 	update_rect.width  = (gdouble)( bottomPos[ CNMS_DIM_H ] - topPos[ CNMS_DIM_H ] - 1 );
 	update_rect.height = (gdouble)( bottomPos[ CNMS_DIM_V ] - topPos[ CNMS_DIM_V ] - 1 );
 	gdk_gc_set_line_attributes( gc, 1, GDK_LINE_ON_OFF_DASH, GDK_CAP_BUTT, GDK_JOIN_BEVEL );
-	gdk_draw_rectangle( lpPrevComp->prev_widget->window, gc, FALSE, update_rect.x, update_rect.y, update_rect.width, update_rect.height );
+	gdk_draw_rectangle( gtk_widget_get_window(lpPrevComp->prev_widget), gc, FALSE, update_rect.x, update_rect.y, update_rect.width, update_rect.height );
 	gdk_gc_unref( gc );
 
 	ret = CNMS_NO_ERR;
@@ -477,7 +477,7 @@ static CNMSInt32 SubPrevResize( CNMSBool prevFlag )
 		goto	EXIT;
 	}
 	if( lpPrevComp->gc == CNMSNULL ) {
-		lpPrevComp->gc = gdk_gc_new( lpPrevComp->prev_widget->window );
+		lpPrevComp->gc = gdk_gc_new( gtk_widget_get_window(lpPrevComp->prev_widget) );
 	}
 	dstOffset = dstSize[ CNMS_DIM_H ] * 3;
 	areaOffset = areaSize[ CNMS_DIM_H ] * 3;
@@ -491,7 +491,7 @@ static CNMSInt32 SubPrevResize( CNMSBool prevFlag )
 	CnmsSetMem( (CNMSLPSTR)lpArea, PREVIEW_OUT_COLOR_R, areaOffset * ( areaSize[ CNMS_DIM_V ] - dstSize[ CNMS_DIM_V ]) );
 
 	/* redraw preview area */
-	gdk_draw_rgb_image( lpPrevComp->prev_widget->window, lpPrevComp->gc, 0, 0,
+	gdk_draw_rgb_image( gtk_widget_get_window(lpPrevComp->prev_widget), lpPrevComp->gc, 0, 0,
 			areaSize[ CNMS_DIM_H ], areaSize[ CNMS_DIM_V ], GDK_RGB_DITHER_NONE, 
 			(guchar*)lpPrevComp->lpBuf, areaSize[ CNMS_DIM_H ] * 3 );
 
@@ -547,7 +547,7 @@ CNMSVoid Preview_Expose_Event( CNMSVoid )
 	if( lpPrevComp != CNMSNULL ){
 		/* redraw preview area */
 		if( lpPrevComp->lpBuf && lpPrevComp->gc ) {
-			gdk_draw_rgb_image( lpPrevComp->prev_widget->window, lpPrevComp->gc, 0, 0,
+			gdk_draw_rgb_image( gtk_widget_get_window(lpPrevComp->prev_widget), lpPrevComp->gc, 0, 0,
 					lpPrevComp->areaSize[ CNMS_DIM_H ], lpPrevComp->areaSize[ CNMS_DIM_V ], GDK_RGB_DITHER_NONE, 
 					(guchar*)lpPrevComp->lpBuf, lpPrevComp->areaSize[ CNMS_DIM_H ] * 3 );
 		}

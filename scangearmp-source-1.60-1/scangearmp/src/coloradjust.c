@@ -1190,7 +1190,7 @@ CNMSVoid CnmsColAdjDrawingAreaExposeEvent(
 	}
 
 	/* Drawing Pixmap	*/
-	gdk_draw_pixmap( widget->window, widget->style->fg_gc[ gtk_widget_get_state_flags( widget ) ],
+	gdk_draw_pixmap( gtk_widget_get_window(widget), widget->style->fg_gc[ gtk_widget_get_state_flags( widget ) ],
 		dlg->pmap, event->area.x, event->area.y, event->area.x, event->area.y, event->area.width, event->area.height );
 		
 	return;
@@ -1219,11 +1219,11 @@ CNMSVoid CnmsColAdjDrawingAreaConfigureEvent(
 	if ( dlg->pmap != CNMSNULL ){
 		gdk_pixmap_unref( dlg->pmap );
 	}
-	dlg->pmap = gdk_pixmap_new( widget->window, widget->allocation.width, widget->allocation.height, -1 );
+	dlg->pmap = gdk_pixmap_new( gtk_widget_get_window(widget), widget->allocation.width, widget->allocation.height, -1 );
 
 	/* Create Graphic Context	*/
 	if( dlg->gc == CNMSNULL ){
-		dlg->gc = gdk_gc_new( widget->window );
+		dlg->gc = gdk_gc_new( gtk_widget_get_window(widget) );
 	}
 
 	/* Draw ToneCurve			*/
@@ -1402,7 +1402,7 @@ CNMSVoid CnmsColAdjToneCurveDraw(
 			break;
 	}
 
-	gdk_draw_pixmap( dlg->darea->window, dlg->darea->style->fg_gc[gtk_widget_get_state_flags(dlg->darea)],
+	gdk_draw_pixmap( gtk_widget_get_window(dlg->darea), dlg->darea->style->fg_gc[gtk_widget_get_state_flags(dlg->darea)],
 		dlg->pmap, 0, 0, 0, 0, dlg->darea->allocation.width, dlg->darea->allocation.height);
 
 	if( id < CNMS_CA_DIALOG_FR ){

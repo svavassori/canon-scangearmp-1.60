@@ -51,7 +51,7 @@ CNMSInt32 ComGtk_CursorImageSet(
 	else if( ( cursor = gdk_cursor_new( (GdkCursorType)imageId ) ) == CNMSNULL ){
 		goto	EXIT;
 	}
-	gdk_window_set_cursor( widget->window, cursor );
+	gdk_window_set_cursor( gtk_widget_get_window(widget), cursor );
 
 	gdk_cursor_unref( cursor );
 

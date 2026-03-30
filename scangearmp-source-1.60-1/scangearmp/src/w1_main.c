@@ -1220,7 +1220,7 @@ CNMSInt32 W1_SetModal(
 		gtk_window_set_keep_above( (GtkWindow*)hg_dlg.widget, CNMS_TRUE );		
 		gtk_window_set_keep_above( (GtkWindow*)hg_dlg.widget, CNMS_FALSE );		
 	}
-	gdk_window_set_cursor( main_window->window, cursor );
+	gdk_window_set_cursor( gtk_widget_get_window(GTK_WIDGET(main_window)), cursor );
 	gdk_cursor_unref (cursor);
 
 	ret = CNMS_NO_ERR;
