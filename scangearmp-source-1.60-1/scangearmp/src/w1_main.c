@@ -65,6 +65,9 @@
 #include "scanflow.h"
 #include "cnmsnetwork.h"
 
+#include "coloradjust.h"
+#include "scanstdlg.h"
+
 static CNMSBool	ui_flag = CNMS_FALSE;
 static CNMSBool	swPaA_flag = CNMS_FALSE;
 

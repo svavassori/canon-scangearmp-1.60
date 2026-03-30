@@ -45,6 +45,8 @@
 #include "progress_bar.h"
 #include "raw2pdf.h"
 #include "scanmsg.h"
+#include "scanstdlg.h"
+#include "scanmain.h"
 
 #define GRAY2MONO_BK		(0)
 #define GRAY2MONO_GRAY		(1)

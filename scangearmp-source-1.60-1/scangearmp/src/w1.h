@@ -156,6 +156,7 @@ CNMSInt32 W1_ChangeCombo( GtkComboBox *combobox, CNMSInt32 objectID );
 CNMSInt32 W1_ChangeComboSub( CNMSInt32 objectID, CNMSInt32 value, CNMSInt32 clipKey );
 
 CNMSInt32 W1_ResetSize( CNMSVoid );
+CNMSInt32 W1_SetModal( CNMSBool flag );
 
 CNMSInt32 W1_Preview( CNMSVoid );
 CNMSInt32 W1_PreviewCancel( CNMSVoid );
@@ -203,6 +204,7 @@ CNMSInt32 W1Ui_SetComboDefVal( GtkWidget *combobox, CNMSInt32 obj );
 
 CNMSInt32 W1Ui_InitUIFormat( CNMSVoid );
 CNMSInt32 W1Ui_SwitchPlatenAndADF( CNMSInt32 object, CNMSInt32 currentGp, CNMSInt32 changedGp );
+CNMSInt32 W1Ui_SwitchSelectModelFromDevnum( CNMSInt32 devnum );
 
 
 #endif	/* _W1_H_ */

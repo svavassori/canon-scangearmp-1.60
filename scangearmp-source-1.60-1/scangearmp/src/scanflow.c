@@ -54,6 +54,7 @@
 #include "file_control.h"
 #include "child_dialog.h"
 #include "com_gtk.h"
+#include "w1.h"
 
 #include "errors.h"
 

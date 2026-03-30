@@ -53,6 +53,8 @@
 #include "file_control.h"
 #include "cnmsstrings.h"
 
+#include "scanfile.h"
+
 #include "errors.h"
 
 //#define	__CNMS_DEBUG_SAVE_DIALOG__

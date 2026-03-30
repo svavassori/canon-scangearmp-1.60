@@ -374,6 +374,9 @@ CNMSVoid CnmsColAdjAllDataReset(
 CNMSVoid CnmsColAdjResetComplete(
 						CNMSVoid									);
 
+CNMSVoid CnmsColAdjClose(
+						CNMSVoid									);
+
 CNMSInt32 CnmsColAdjSetHistogram(
 						CNMSUInt32			type,
 						CNMSUInt32			masterSrc[],

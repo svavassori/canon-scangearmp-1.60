@@ -50,6 +50,7 @@
 #include "preference.h"
 #include "save_dialog.h"
 #include "child_dialog.h"
+#include "progress_bar.h"
 
 #include "errors.h"
 

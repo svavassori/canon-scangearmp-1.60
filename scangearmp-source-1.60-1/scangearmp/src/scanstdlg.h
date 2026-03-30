@@ -32,5 +32,6 @@
 
 
 CNMSInt32 ShowErrorDialog( CNMSVoid );
+void error_dialog_ok_del_clicked();
 
 #endif	/* _SCANSTDLG_H_ */
