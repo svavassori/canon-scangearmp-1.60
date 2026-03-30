@@ -1263,7 +1263,7 @@ create_preference_window (void)
   gtk_widget_show (label33);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook2), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook2), 1), label33);
 
-  hbuttonbox15 = gtk_hbutton_box_new ();
+  hbuttonbox15 = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_widget_show (hbuttonbox15);
   gtk_box_pack_end (GTK_BOX (vbox15), hbuttonbox15, FALSE, TRUE, 6);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox15), GTK_BUTTONBOX_END);

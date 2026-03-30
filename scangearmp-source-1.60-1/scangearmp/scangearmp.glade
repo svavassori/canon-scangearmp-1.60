@@ -3078,7 +3078,8 @@
       </child>
 
       <child>
-	<widget class="GtkHButtonBox" id="hbuttonbox15">
+	<widget class="GtkButtonBox" id="hbuttonbox15">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
 	  <property name="spacing">10</property>
@@ -3146,7 +3147,8 @@
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox20">
+	<widget class="GtkButtonBox" id="hbuttonbox20">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -3336,7 +3338,8 @@
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox4">
+	<widget class="GtkButtonBox" id="hbuttonbox4">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -3489,7 +3492,8 @@
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox5">
+	<widget class="GtkButtonBox" id="hbuttonbox5">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -3615,7 +3619,8 @@ Are you sure to overwrite it?</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox8">
+	<widget class="GtkButtonBox" id="hbuttonbox8">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -3726,7 +3731,8 @@ Are you sure to overwrite it?</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox10">
+	<widget class="GtkButtonBox" id="hbuttonbox10">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -4307,7 +4313,8 @@ Are you sure to overwrite it?</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox11">
+	<widget class="GtkButtonBox" id="hbuttonbox11">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -5247,7 +5254,8 @@ Are you sure to overwrite it?</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox12">
+	<widget class="GtkButtonBox" id="hbuttonbox12">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -5556,7 +5564,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox13">
+	<widget class="GtkButtonBox" id="hbuttonbox13">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
 
@@ -6270,7 +6279,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox14">
+	<widget class="GtkButtonBox" id="hbuttonbox14">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -6717,7 +6727,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="dialog-action_area1">
+	<widget class="GtkButtonBox" id="dialog-action_area1">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
 	</widget>
@@ -6872,7 +6883,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="dialog-action_area2">
+	<widget class="GtkButtonBox" id="dialog-action_area2">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_EDGE</property>
 
@@ -6982,7 +6994,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="dialog-action_area3">
+	<widget class="GtkButtonBox" id="dialog-action_area3">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_EDGE</property>
 
@@ -7174,7 +7187,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="dialog-action_area4">
+	<widget class="GtkButtonBox" id="dialog-action_area4">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -7330,7 +7344,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox16">
+	<widget class="GtkButtonBox" id="hbuttonbox16">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_EDGE</property>
 
@@ -7511,7 +7526,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox17">
+	<widget class="GtkButtonBox" id="hbuttonbox17">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
@@ -7689,7 +7705,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox18">
+	<widget class="GtkButtonBox" id="hbuttonbox18">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_EDGE</property>
 
@@ -7820,7 +7837,8 @@ High contrast</property>
       <property name="spacing">0</property>
 
       <child internal-child="action_area">
-	<widget class="GtkHButtonBox" id="hbuttonbox19">
+	<widget class="GtkButtonBox" id="hbuttonbox19">
+	  <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_SPREAD</property>
 
