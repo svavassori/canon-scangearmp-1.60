@@ -198,8 +198,10 @@ CNMSInt32 CnmsColAdjDrawAreaBaseDraw(
 	}		
 
 	/* Drawing Back ground		*/
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(widget, &allocation);
 	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_BACKGROUND_R, CNMS_CA_GC_BACKGROUND_G, CNMS_CA_GC_BACKGROUND_B );
-	gdk_draw_rectangle( pixmap, gc, CNMS_TRUE, 0, 0, widget->allocation.width, widget->allocation.height );
+	gdk_draw_rectangle( pixmap, gc, CNMS_TRUE, 0, 0, allocation.width, allocation.height );
 
 	/* Drawing Frame outside	*/
 	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_FRAME_R, CNMS_CA_GC_FRAME_G, CNMS_CA_GC_FRAME_B );
@@ -1219,7 +1221,9 @@ CNMSVoid CnmsColAdjDrawingAreaConfigureEvent(
 	if ( dlg->pmap != CNMSNULL ){
 		gdk_pixmap_unref( dlg->pmap );
 	}
-	dlg->pmap = gdk_pixmap_new( gtk_widget_get_window(widget), widget->allocation.width, widget->allocation.height, -1 );
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(widget, &allocation);
+	dlg->pmap = gdk_pixmap_new( gtk_widget_get_window(widget), allocation.width, allocation.height, -1 );
 
 	/* Create Graphic Context	*/
 	if( dlg->gc == CNMSNULL ){
@@ -1402,8 +1406,10 @@ CNMSVoid CnmsColAdjToneCurveDraw(
 			break;
 	}
 
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(dlg->darea, &allocation);
 	gdk_draw_pixmap( gtk_widget_get_window(dlg->darea), dlg->darea->style->fg_gc[gtk_widget_get_state_flags(dlg->darea)],
-		dlg->pmap, 0, 0, 0, 0, dlg->darea->allocation.width, dlg->darea->allocation.height);
+		dlg->pmap, 0, 0, 0, 0, allocation.width, allocation.height);
 
 	if( id < CNMS_CA_DIALOG_FR ){
 		CnmsColAdjCurveCalcFR();

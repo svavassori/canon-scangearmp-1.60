@@ -264,7 +264,9 @@ CNMSVoid CnmsHGScaleBarConfigureEvent(
 	if ( hg_pmap != CNMSNULL ){
 		gdk_pixmap_unref( hg_pmap );
 	}
-	hg_pmap = gdk_pixmap_new( gtk_widget_get_window(widget), widget->allocation.width, widget->allocation.height, -1 );
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(widget, &allocation);
+	hg_pmap = gdk_pixmap_new( gtk_widget_get_window(widget), allocation.width, allocation.height, -1 );
 
 	/* Create Graphic Context	*/
 	if( hg_gc == CNMSNULL ){
@@ -922,7 +924,9 @@ static CNMSVoid CnmsHGDrawOnlyScaleBar(
 		
 	/* Draw BackGround 				*/
 	CnmsColAdjGdkGCSetColor( gc, HG_GC_TRIICON_BG_R, HG_GC_TRIICON_BG_G, HG_GC_TRIICON_BG_B );
-	gdk_draw_rectangle (pixmap, gc, CNMS_TRUE, 0, 0, hg_scalebar_drawarea->allocation.width, hg_scalebar_drawarea->allocation.height);
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(hg_scalebar_drawarea, &allocation);
+	gdk_draw_rectangle (pixmap, gc, CNMS_TRUE, 0, 0, allocation.width, allocation.height);
 
 	/* Get Value, Set Center		*/
 	center_s = ( ( CNMSInt32 )( ( ( CNMSDec32 )hg[hg_dlg.channel].shadow.disp * HG_SCALE_AREA_WIDTH / 255 ) + 0.5 ) ) + HG_SCALE_AREA_OFFSET;
@@ -942,7 +946,7 @@ static CNMSVoid CnmsHGDrawOnlyScaleBar(
 	CnmsHGDrawTriangle( highlight, center_h );
 
 	gdk_draw_pixmap( gtk_widget_get_window(hg_scalebar_drawarea), hg_scalebar_drawarea->style->fg_gc[gtk_widget_get_state_flags(hg_scalebar_drawarea)],
-															pixmap, 0, 0, 0, 0,	hg_scalebar_drawarea->allocation.width, hg_scalebar_drawarea->allocation.height );
+															pixmap, 0, 0, 0, 0,	allocation.width, allocation.height );
 	return;
 }
 

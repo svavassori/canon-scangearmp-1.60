@@ -444,8 +444,10 @@ static CNMSInt32 SubPrevResize( CNMSBool prevFlag )
 		DBGMSG( "[SubPrevResize]Status is error!\n" );
 		goto	EXIT;
 	}
-	areaSize[ CNMS_DIM_H ] = (CNMSInt32)( lpPrevComp->prev_widget->allocation.width );
-	areaSize[ CNMS_DIM_V ] = (CNMSInt32)( lpPrevComp->prev_widget->allocation.height );
+	GtkAllocation allocation;
+	gtk_widget_get_allocation(lpPrevComp->prev_widget, &allocation);
+	areaSize[ CNMS_DIM_H ] = (CNMSInt32)( allocation.width );
+	areaSize[ CNMS_DIM_V ] = (CNMSInt32)( allocation.height );
 	
 	if( !prevFlag	&& areaSize[ CNMS_DIM_H ] == lpPrevComp->pre_areaSize[ CNMS_DIM_H ] 
 					&& areaSize[ CNMS_DIM_V ] == lpPrevComp->pre_areaSize[ CNMS_DIM_V ] ){
