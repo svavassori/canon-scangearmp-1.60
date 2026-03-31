@@ -2260,8 +2260,8 @@ create_dialog_histogram (void)
   g_signal_connect ((gpointer) hg_drawingarea, "configure_event",
                     G_CALLBACK (on_hg_drawingarea_configure_event),
                     NULL);
-  g_signal_connect ((gpointer) hg_drawingarea, "expose_event",
-                    G_CALLBACK (on_hg_drawingarea_expose_event),
+  g_signal_connect ((gpointer) hg_drawingarea, "draw",
+                    G_CALLBACK (on_hg_drawingarea_draw),
                     NULL);
   g_signal_connect ((gpointer) hg_drawingarea_scalebar, "configure_event",
                     G_CALLBACK (on_hg_drawingarea_scalebar_configure_event),

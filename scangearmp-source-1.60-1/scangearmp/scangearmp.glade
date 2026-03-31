@@ -4443,7 +4443,7 @@ Are you sure to overwrite it?</property>
 	      <property name="visible">True</property>
 	      <property name="events">GDK_EXPOSURE_MASK</property>
 	      <signal name="configure_event" handler="on_hg_drawingarea_configure_event" last_modification_time="Thu, 13 Apr 2006 10:59:14 GMT"/>
-	      <signal name="expose_event" handler="on_hg_drawingarea_expose_event" last_modification_time="Thu, 13 Apr 2006 10:59:18 GMT"/>
+	      <signal name="draw" handler="on_hg_drawingarea_draw" last_modification_time="Thu, 13 Apr 2006 10:59:18 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">2</property>
