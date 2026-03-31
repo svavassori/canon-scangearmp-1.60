@@ -4635,7 +4635,7 @@ Are you sure to overwrite it?</property>
 	      <property name="visible">True</property>
 	      <property name="events">GDK_EXPOSURE_MASK | GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_LEAVE_NOTIFY_MASK</property>
 	      <signal name="configure_event" handler="on_hg_drawingarea_scalebar_configure_event" last_modification_time="Wed, 14 Jun 2006 00:26:15 GMT"/>
-	      <signal name="expose_event" handler="on_hg_drawingarea_scalebar_expose_event" after="yes" last_modification_time="Wed, 14 Jun 2006 00:26:26 GMT"/>
+	      <signal name="draw" handler="on_hg_drawingarea_scalebar_draw" after="yes" last_modification_time="Wed, 14 Jun 2006 00:26:26 GMT"/>
 	      <signal name="button_press_event" handler="on_hg_drawingarea_scalebar_button_press_event" last_modification_time="Wed, 14 Jun 2006 00:26:40 GMT"/>
 	      <signal name="button_release_event" handler="on_hg_drawingarea_scalebar_button_release_event" last_modification_time="Wed, 14 Jun 2006 00:26:43 GMT"/>
 	      <signal name="motion_notify_event" handler="on_hg_drawingarea_scalebar_motion_notify_event" last_modification_time="Wed, 14 Jun 2006 00:26:51 GMT"/>

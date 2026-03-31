@@ -70,7 +70,7 @@ typedef struct{
 								*hg_adjust_mid					= CNMSNULL,					/* SpinButton Adjustment for Mid					*/
 								*hg_adjust_highlight			= CNMSNULL;					/* SpinButton Adjustment for Highlight				*/
 	static	GtkToggleButton		*hg_toggle						= CNMSNULL;					/* Selecting Toggle Button							*/
-	static	GdkPixmap			*hg_pmap						= CNMSNULL;					/* Pixmap For Triangle Scale Drawing Area			*/
+	static	GdkPixbuf			*hg_pmap						= CNMSNULL;					/* Pixmap For Triangle Scale Drawing Area			*/
 	static	GdkGC				*hg_gc							= CNMSNULL;					/* Graphic Context For Triangle Scale Drawing Area	*/
 
 	static	CNMSHGTriIconRect	hg_area_shadow					= { 0, 0, 0, 0, 0 };		/* Triangle Icon Information for Shadow				*/
@@ -264,6 +264,7 @@ CNMSVoid CnmsHGScaleBarConfigureEvent(
 	if ( hg_pmap != CNMSNULL ){
 		gdk_pixmap_unref( hg_pmap );
 	}
+	// TODO change allocation to GdkPixbuf
 	GtkAllocation allocation;
 	gtk_widget_get_allocation(widget, &allocation);
 	hg_pmap = gdk_pixmap_new( gtk_widget_get_window(widget), allocation.width, allocation.height, -1 );
@@ -282,15 +283,15 @@ CNMSVoid CnmsHGScaleBarConfigureEvent(
 /***   Expose for Draw Triangle Icon   ***/
 CNMSVoid CnmsHGScaleBarExposeEvent(
 						GtkWidget			*widget,
-						GdkEventExpose		*event					)
+						cairo_t				*cr					)
 {
-	if( ( widget == CNMSNULL ) || ( event == CNMSNULL ) ){
-		DBGMSG( "[CnmsHGScaleBarExposeEvent] Arg Pointer is NULL. widget[%p], event[%p]\n", widget, event );
+	if( ( widget == CNMSNULL ) || ( cr == CNMSNULL ) ){
+		DBGMSG( "[CnmsHGScaleBarExposeEvent] Arg Pointer is NULL. widget[%p], event[%p]\n", widget, cr );
 		return;
 	}
 
-	gdk_draw_pixmap( gtk_widget_get_window(widget), widget->style->fg_gc[gtk_widget_get_state_flags(widget)], hg_pmap,
-		event->area.x, event->area.y, event->area.x, event->area.y, event->area.width, event->area.height );
+	gdk_cairo_set_source_pixbuf(cr, (GdkPixbuf*)(hg_pmap), 0, 0);
+	cairo_paint(cr);
 		
 	return;
 }

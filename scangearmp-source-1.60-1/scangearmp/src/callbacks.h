@@ -368,9 +368,9 @@ on_hg_drawingarea_scalebar_configure_event
                                         gpointer         user_data);
 
 gboolean
-on_hg_drawingarea_scalebar_expose_event
+on_hg_drawingarea_scalebar_draw
                                         (GtkWidget       *widget,
-                                        GdkEventExpose  *event,
+                                        cairo_t          *cr,
                                         gpointer         user_data);
 
 gboolean

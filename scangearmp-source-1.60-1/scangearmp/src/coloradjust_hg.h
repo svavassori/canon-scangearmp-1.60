@@ -28,6 +28,7 @@
 #ifndef	_COLORADJUST_HG_H_
 #define	_COLORADJUST_HG_H_
 
+#include <cairo.h>
 #include "coloradjust.h"
 #include "cnmstype.h"
 
@@ -54,7 +55,7 @@ CNMSVoid CnmsHGScaleBarConfigureEvent(
 
 CNMSVoid CnmsHGScaleBarExposeEvent(
 						GtkWidget			*widget,
-						GdkEventExpose		*event					);
+						cairo_t				*cr					);
 
 CNMSVoid CnmsHGScaleBarButtonPressEvent(
 						GdkEventButton		*event					);

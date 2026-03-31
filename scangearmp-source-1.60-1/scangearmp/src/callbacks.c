@@ -1346,15 +1346,15 @@ gboolean on_hg_drawingarea_scalebar_configure_event(
 	return	TRUE;
 }
 
-gboolean on_hg_drawingarea_scalebar_expose_event(
+gboolean on_hg_drawingarea_scalebar_draw(
 		GtkWidget		*widget,
-		GdkEventExpose	*event,
+		cairo_t			*cr,
 		gpointer		user_data )
 {
 #ifdef	__CNMS_DEBUG_EVENT__
-	DBGMSG( "[[ on_hg_drawingarea_scalebar_expose_event ]]\n" );
+	DBGMSG( "[[ on_hg_drawingarea_scalebar_draw ]]\n" );
 #endif
-	CnmsHGScaleBarExposeEvent( widget, event );
+	CnmsHGScaleBarExposeEvent( widget, cr );
 
 	return	FALSE;
 }
