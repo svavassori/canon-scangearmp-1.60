@@ -1539,15 +1539,15 @@ gboolean on_tc_drawingarea_configure_event(
 	return	FALSE;
 }
 
-gboolean on_tc_drawingarea_expose_event(
+gboolean on_tc_drawingarea_draw(
 		GtkWidget			*widget,
-		GdkEventExpose		*event,
+		cairo_t				*cr,
 		gpointer			user_data )
 {
 #ifdef	__CNMS_DEBUG_EVENT__
-	DBGMSG( "[[ on_tc_drawingarea_expose_event ]]\n" );
+	DBGMSG( "[[ on_tc_drawingarea_draw ]]\n" );
 #endif
-	CnmsColAdjDrawingAreaExposeEvent( widget, event, CNMS_CA_DIALOG_TC );
+	CnmsColAdjDrawingAreaExposeEvent( widget, cr, CNMS_CA_DIALOG_TC);
 
 	return	FALSE;
 }

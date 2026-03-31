@@ -2489,8 +2489,8 @@ create_dialog_tonecurve (void)
   g_signal_connect ((gpointer) tc_drawingarea, "configure_event",
                     G_CALLBACK (on_tc_drawingarea_configure_event),
                     NULL);
-  g_signal_connect ((gpointer) tc_drawingarea, "expose_event",
-                    G_CALLBACK (on_tc_drawingarea_expose_event),
+  g_signal_connect ((gpointer) tc_drawingarea, "draw",
+                    G_CALLBACK (on_tc_drawingarea_draw),
                     NULL);
   g_signal_connect ((gpointer) tc_combobox_tc_select, "changed",
                     G_CALLBACK (on_tc_combobox_tc_select_changed),
