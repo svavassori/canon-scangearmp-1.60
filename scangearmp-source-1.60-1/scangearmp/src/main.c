@@ -37,6 +37,7 @@
 #  include <config.h>
 #endif
 
+#include <locale.h>
 #include <stdio.h>
 #include <gtk/gtk.h>
 
@@ -74,7 +75,7 @@ int init(
 	textdomain( GETTEXT_PACKAGE );
 #endif
 
-	gtk_set_locale();
+	setlocale(LC_ALL, "");
 	gtk_init( &argc, &argv );
 
 	add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
@@ -147,7 +148,7 @@ int main(
 	char		*str = NULL;
 	CNMSInt32	ldata;
 
-	str = gtk_set_locale();
+	str = setlocale(LC_ALL, "");
 
 #ifdef	__GIMP_PLUGIN_ENABLE__
 	if ( argc > 1 ) {
