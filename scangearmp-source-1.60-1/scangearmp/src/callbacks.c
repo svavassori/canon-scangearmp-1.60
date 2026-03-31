@@ -653,7 +653,7 @@ gboolean on_main_preview_button_press_event(
 	if( gdk_event_get_event_type((GdkEvent *) event) != GDK_BUTTON_PRESS )
 		goto	EXIT;
 
-	gdk_window_get_pointer( gdk_event_get_window((GdkEvent *) event), &x, &y, &state );
+	gdk_window_get_device_position( gdk_event_get_window((GdkEvent *) event), gdk_event_get_device((GdkEvent *) event), &x, &y, &state );
 	cursorPos[ CNMS_DIM_H ] = ( x < 0 ) ? 0 : (CNMSInt32)x;
 	cursorPos[ CNMS_DIM_V ] = ( y < 0 ) ? 0 : (CNMSInt32)y;
 	
@@ -687,7 +687,7 @@ gboolean on_main_preview_button_release_event(
 
 	if( W1_GetSelectSourceADF() == CNMS_TRUE )	goto EXIT;
 
-	gdk_window_get_pointer( gdk_event_get_window((GdkEvent *) event), &x, &y, &state );
+	gdk_window_get_device_position( gdk_event_get_window((GdkEvent *) event), gdk_event_get_device((GdkEvent *) event), &x, &y, &state );
 	cursorPos[ CNMS_DIM_H ] = ( x < 0 ) ? 0 : (CNMSInt32)x;
 	cursorPos[ CNMS_DIM_V ] = ( y < 0 ) ? 0 : (CNMSInt32)y;
 
@@ -717,7 +717,7 @@ gboolean on_main_preview_motion_notify_event(
 	if( W1_GetSelectSourceADF() == CNMS_TRUE )	goto EXIT;
 
 	if( event->is_hint != 0 ){
-		gdk_window_get_pointer( gdk_event_get_window((GdkEvent *) event), &x, &y, &state );
+		gdk_window_get_device_position( gdk_event_get_window((GdkEvent *) event), gdk_event_get_device((GdkEvent *) event), &x, &y, &state );
 		cursorPos[ CNMS_DIM_H ] = ( x < 0 ) ? 0 : (CNMSInt32)x;
 		cursorPos[ CNMS_DIM_V ] = ( y < 0 ) ? 0 : (CNMSInt32)y;
 	}

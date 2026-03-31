@@ -358,7 +358,7 @@ CNMSVoid CnmsHGScaleBarMotionNotifyEvent(
 	}
 
 	if ( event->is_hint ){
-		gdk_window_get_pointer ( gdk_event_get_window((GdkEvent *) event), &xBase, &yBase, &state );
+		gdk_window_get_device_position( gdk_event_get_window((GdkEvent *) event), gdk_event_get_device((GdkEvent *) event), &xBase, &yBase, &state );
 	}
 	else{
 		xBase = event->x;
