@@ -6381,7 +6381,7 @@ High contrast</property>
 	      <property name="visible">True</property>
 	      <property name="events">GDK_EXPOSURE_MASK</property>
 	      <signal name="configure_event" handler="on_mc_drawingarea_configure_event" last_modification_time="Mon, 29 May 2006 09:28:20 GMT"/>
-	      <signal name="expose_event" handler="on_mc_drawingarea_expose_event" last_modification_time="Mon, 29 May 2006 09:28:25 GMT"/>
+	      <signal name="draw" handler="on_mc_drawingarea_draw" last_modification_time="Mon, 29 May 2006 09:28:25 GMT"/>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">1</property>

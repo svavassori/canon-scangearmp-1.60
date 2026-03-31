@@ -2960,8 +2960,8 @@ create_dialog_monochrome (void)
   g_signal_connect ((gpointer) mc_drawingarea, "configure_event",
                     G_CALLBACK (on_mc_drawingarea_configure_event),
                     NULL);
-  g_signal_connect ((gpointer) mc_drawingarea, "expose_event",
-                    G_CALLBACK (on_mc_drawingarea_expose_event),
+  g_signal_connect ((gpointer) mc_drawingarea, "draw",
+                    G_CALLBACK (on_mc_drawingarea_draw),
                     NULL);
   g_signal_connect ((gpointer) mc_spinbutton, "value_changed",
                     G_CALLBACK (on_mc_spinbutton_value_changed),

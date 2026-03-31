@@ -493,8 +493,8 @@ on_mc_drawingarea_configure_event      (GtkWidget       *widget,
                                         gpointer         user_data);
 
 gboolean
-on_mc_drawingarea_expose_event         (GtkWidget       *widget,
-                                        GdkEventExpose  *event,
+on_mc_drawingarea_draw                 (GtkWidget       *widget,
+                                        cairo_t         *cr,
                                         gpointer         user_data);
 
 void
