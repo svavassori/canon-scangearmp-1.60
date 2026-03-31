@@ -874,8 +874,8 @@ create_main_window (void)
   g_signal_connect ((gpointer) main_preview, "motion_notify_event",
                     G_CALLBACK (on_main_preview_motion_notify_event),
                     NULL);
-  g_signal_connect ((gpointer) main_preview, "expose_event",
-                    G_CALLBACK (on_main_preview_expose_event),
+  g_signal_connect ((gpointer) main_preview, "draw",
+                    G_CALLBACK (on_main_preview_draw),
                     NULL);
   g_signal_connect ((gpointer) main_preview, "configure_event",
                     G_CALLBACK (on_main_preview_configure_event),

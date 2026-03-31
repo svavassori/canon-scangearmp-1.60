@@ -541,10 +541,10 @@ EXIT:
 	return	ret;
 }
 
-CNMSVoid Preview_Expose_Event( CNMSVoid )
+CNMSVoid Preview_Expose_Event( cairo_t *cr )
 {
 	CNMSInt32		ldata;
-	
+	// TODO use cairo parameter instead of get window(widget)?
 	if( lpPrevComp != CNMSNULL ){
 		/* redraw preview area */
 		if( lpPrevComp->lpBuf && lpPrevComp->gc ) {

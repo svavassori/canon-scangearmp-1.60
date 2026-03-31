@@ -620,16 +620,16 @@ gboolean on_main_preview_configure_event(
 	return TRUE;
 }
 
-gboolean on_main_preview_expose_event(
+gboolean on_main_preview_draw(
 		GtkWidget		*widget,
-		GdkEventExpose	*event,
+		cairo_t			*cr,
 		gpointer		user_data )
 {
 #ifdef	__CNMS_DEBUG_EVENT__
-	DBGMSG( "[[ on_main_preview_expose_event ]]\n" );
+	DBGMSG( "[[ on_main_preview_draw ]]\n" );
 #endif
 
-	Preview_Expose_Event();
+	Preview_Expose_Event(cr);
 EXIT:
 	return	FALSE;
 }

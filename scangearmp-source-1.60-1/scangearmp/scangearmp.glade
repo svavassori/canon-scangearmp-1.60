@@ -114,7 +114,7 @@
 		  <signal name="button_press_event" handler="on_main_preview_button_press_event" last_modification_time="Thu, 22 Jan 2009 08:35:14 GMT"/>
 		  <signal name="button_release_event" handler="on_main_preview_button_release_event" last_modification_time="Thu, 22 Jan 2009 08:35:21 GMT"/>
 		  <signal name="motion_notify_event" handler="on_main_preview_motion_notify_event" last_modification_time="Thu, 22 Jan 2009 08:35:36 GMT"/>
-		  <signal name="expose_event" handler="on_main_preview_expose_event" last_modification_time="Mon, 26 Jan 2009 08:30:07 GMT"/>
+		  <signal name="draw" handler="on_main_preview_draw" last_modification_time="Mon, 26 Jan 2009 08:30:07 GMT"/>
 		  <signal name="configure_event" handler="on_main_preview_configure_event" last_modification_time="Thu, 29 Jan 2009 05:10:58 GMT"/>
 		</widget>
 	      </child>

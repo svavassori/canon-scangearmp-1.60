@@ -28,6 +28,7 @@
 #define	_PREV_MAIN_H_
 
 #include <gtk/gtk.h>
+#include <cairo.h>
 
 #include "cnmstype.h"
 #include "coloradjust.h"
@@ -44,7 +45,7 @@ CNMSInt32 Preview_Reset( CNMSInt32 type );
 CNMSInt32 Preview_ChangeStatus( CNMSInt32 Actionmode );
 
 CNMSInt32 Preview_Configure_Event( CNMSVoid );
-CNMSVoid  Preview_Expose_Event( CNMSVoid );
+CNMSVoid  Preview_Expose_Event( cairo_t *cr );
 
 CNMSInt32 Preview_GetMinMaxSize( CNMSInt32 *lpMinSize, CNMSInt32 *lpMaxSize );
 CNMSInt32 Preview_GetNewInOutSize( CNMSInt32 *lpNewSize, CNMSInt32 *lpInSize, CNMSInt32 *lpOutSize, CNMSInt32 *lpScale );

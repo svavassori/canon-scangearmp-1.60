@@ -26,6 +26,7 @@
 
 
 #include <gtk/gtk.h>
+#include <cairo.h>
 
 
 void
@@ -78,8 +79,8 @@ on_main_preview_configure_event        (GtkWidget       *widget,
                                         gpointer         user_data);
 
 gboolean
-on_main_preview_expose_event           (GtkWidget       *widget,
-                                        GdkEventExpose  *event,
+on_main_preview_draw                   (GtkWidget       *widget,
+                                        cairo_t         *cr,
                                         gpointer         user_data);
 
 void
