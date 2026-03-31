@@ -2750,8 +2750,8 @@ create_dialog_final_review (void)
   g_signal_connect ((gpointer) fr_drawingarea, "configure_event",
                     G_CALLBACK (on_fr_drawingarea_configure_event),
                     NULL);
-  g_signal_connect ((gpointer) fr_drawingarea, "expose_event",
-                    G_CALLBACK (on_fr_drawingarea_expose_event),
+  g_signal_connect ((gpointer) fr_drawingarea, "draw",
+                    G_CALLBACK (on_fr_drawingarea_draw),
                     NULL);
   g_signal_connect ((gpointer) button27, "clicked",
                     G_CALLBACK (on_fr_button_close_clicked),
