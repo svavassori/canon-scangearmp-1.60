@@ -34,6 +34,7 @@
 	#define	CNMS_CA_GLOBALS	extern
 #endif
 
+#include <cairo.h>
 #include <gtk/gtk.h>
 #include <string.h>
 #include <math.h>
@@ -137,7 +138,7 @@ typedef struct{
 		GtkWidget			*cbox;						/* Channel Conbobox on Dialog			*/
 		CNMSInt32			channel;					/* Current Channel						*/
 		GtkWidget			*darea;						/* Drawing Area Widget					*/
-		GdkPixmap			*pmap;						/* Pixmap in Drawing Area				*/
+		GdkPixbuf			*pmap;						/* Pixmap in Drawing Area				*/  // evaluate if change to Cairo Surface
 		GdkGC				*gc;						/* Graphic Context in Drawing Area		*/
 		CNMSInt 			x;							/* Dialog X position					*/ 
 		CNMSInt 			y;							/* Dialog Y position					*/ 
@@ -399,7 +400,7 @@ CNMSInt32 CnmsColAdjInitThresholdDefault(
 
 CNMSVoid CnmsColAdjDrawingAreaExposeEvent(
 						GtkWidget			*widget,
-						GdkEventExpose		*event,
+						cairo_t				*cr,
 						CNMSInt32			id						);
 
 CNMSVoid CnmsColAdjDrawingAreaConfigureEvent(

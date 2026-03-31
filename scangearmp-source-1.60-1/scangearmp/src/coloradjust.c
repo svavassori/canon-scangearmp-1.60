@@ -1176,13 +1176,13 @@ CNMSVoid CnmsColAdjSetCurrentPage(
 /***   Drawing Pixmap Event for Hiden Pixmap Area   ***/
 CNMSVoid CnmsColAdjDrawingAreaExposeEvent(
 						GtkWidget			*widget,
-						GdkEventExpose		*event,
+						cairo_t				*cr,
 						CNMSInt32			id						)
 {
 	CNMSCADialog	*dlg = CNMSNULL;
 
-	if( ( widget == CNMSNULL ) || ( event == CNMSNULL ) ){
-		DBGMSG( "[CnmsColAdjDrawingAreaExposeEvent] Arg Pointer is MULL. widget[%p], event[%p]\n", widget, event );
+	if( ( widget == CNMSNULL ) || ( cr == CNMSNULL ) ){
+		DBGMSG( "[CnmsColAdjDrawingAreaExposeEvent] Arg Pointer is MULL. widget[%p], cairo[%p]\n", widget, cr );
 		return;
 	}
 
@@ -1192,8 +1192,8 @@ CNMSVoid CnmsColAdjDrawingAreaExposeEvent(
 	}
 
 	/* Drawing Pixmap	*/
-	gdk_draw_pixmap( gtk_widget_get_window(widget), widget->style->fg_gc[ gtk_widget_get_state_flags( widget ) ],
-		dlg->pmap, event->area.x, event->area.y, event->area.x, event->area.y, event->area.width, event->area.height );
+	gdk_cairo_set_source_pixbuf(cr, (GdkPixbuf*)(dlg->pmap), 0, 0);
+	cairo_paint(cr);
 		
 	return;
 }
