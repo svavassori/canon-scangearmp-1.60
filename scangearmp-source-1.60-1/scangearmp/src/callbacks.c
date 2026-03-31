@@ -650,7 +650,7 @@ gboolean on_main_preview_button_press_event(
 	if( W1_GetSelectSourceADF() == CNMS_TRUE )	goto EXIT;
 
 	/* Avoid without Single Click */
-	if( event->type != GDK_BUTTON_PRESS )
+	if( gdk_event_get_event_type((GdkEvent *) event) != GDK_BUTTON_PRESS )
 		goto	EXIT;
 
 	gdk_window_get_pointer( gdk_event_get_window((GdkEvent *) event), &x, &y, &state );
