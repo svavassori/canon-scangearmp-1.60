@@ -22,7 +22,7 @@ AC_PROG_CC
 
 AC_PROG_RANLIB
 
-pkg_modules="gtk+-2.0 >= 2.6.0"
+pkg_modules="gtk+-3.0 >= 3.24.0"
 PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
 AC_SUBST(PACKAGE_CFLAGS)
 AC_SUBST(PACKAGE_LIBS)
