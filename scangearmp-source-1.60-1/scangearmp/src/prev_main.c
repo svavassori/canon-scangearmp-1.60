@@ -87,7 +87,6 @@ typedef struct{
 	CNMSLPSTR			lpImage;
 
 /* GtkPreview -> GtkDrawingArea */
-	GdkGC				*gc;
 	CNMSUInt8			*lpBuf;
 	CNMSInt32			areaSize[ CNMS_DIM_MAX ];
 	CNMSInt32			pre_areaSize[ CNMS_DIM_MAX ];
@@ -97,7 +96,7 @@ typedef struct{
 
 static LPPREVIEWCOMP	lpPrevComp = CNMSNULL;
 
-static CNMSInt32 DrawRectInvert( CNMSVoid );
+static CNMSInt32 DrawRectInvert( cairo_t *cr );
 static CNMSInt32 SubPrevResize( CNMSBool prevFlag );
 static CNMSVoid SubClickHg( CNMSBool prevFlag, CNMSInt32 scale, CNMSInt32 *lpCurPos, LPPREVSUBCOMP lpSub );
 static CNMSInt32 SubSetShowSizeToSpin( LPPREVSUBCOMP lpSub );
@@ -131,7 +130,6 @@ CNMSInt32 Preview_Open( GtkWidget *mainWindow )
 	lpPrevComp->prevRes = 0;
 	lpPrevComp->scale = 0;
 	/* GtkPreview -> GtkDrawingArea */
-	lpPrevComp->gc = CNMSNULL;
 	lpPrevComp->lpBuf = CNMSNULL;
 	
 	for( i = 0 ; i < CNMS_DIM_MAX ; i ++ ){
@@ -217,10 +215,8 @@ CNMSInt32 Preview_Init(
 		DBGMSG( "[Preview_Init]Error is occured in PrevSub_GetStatus!\n" );
 		goto	EXIT;
 	}
-	if( status  >= PREVSUB_STATUS_CROP_WRITE ){
-		/* Clear old rect( if exist ) */
-		DrawRectInvert();
-	}
+	gtk_widget_queue_draw( lpPrevComp->prev_widget );
+
 	if( ( i = PrevSub_Init( lpPrevComp->minSize, lpPrevComp->maxSize, &( lpPrevComp->subComp ) ) ) != CNMS_NO_ERR ){
 		DBGMSG( "[Preview_Init]Error is occured in PrevSub_Init!\n" );
 		goto	EXIT;
@@ -267,7 +263,7 @@ CNMSInt32 Preview_Reset(
 		}
 		/* Clear old rect( if exist ) */
 		if( status >= PREVSUB_STATUS_CROP_WRITE ){
-			DrawRectInvert();
+			gtk_widget_queue_draw( lpPrevComp->prev_widget );
 		}
 		if( ( ldata = PrevSub_Reset( &( lpPrevComp->subComp ) ) ) != CNMS_NO_ERR ){
 			DBGMSG( "[Preview_Reset]Error is occured in PrevSub_Reset!\n" );
@@ -292,14 +288,11 @@ CNMSVoid Preview_ResetMaxSize( CNMSInt32 *lpMax )
 }
 
 
-static CNMSInt32 DrawRectInvert( CNMSVoid )
+static CNMSInt32 DrawRectInvert( cairo_t *cr )
 {
 	CNMSInt32		ret = CNMS_ERR, i, topPos[ CNMS_DIM_MAX ], bottomPos[ CNMS_DIM_MAX ], min, max;
 	LPPREVSUBCOMP	lpSub;
-	GdkGC			*gc = NULL;
-	GdkRectangle	update_rect;
 
-	/* check */
 	if( lpPrevComp == CNMSNULL ){
 		DBGMSG( "[Preview_Reset]Status is error!\n" );
 		goto	EXIT;
@@ -318,16 +311,32 @@ static CNMSInt32 DrawRectInvert( CNMSVoid )
 		bottomPos[ i ] = max;
 	}
 
-	gc = gdk_gc_new( gtk_widget_get_window(lpPrevComp->main_widget) );
-	gdk_gc_set_function( gc, GDK_INVERT );
+	/* Prepare Cairo context for XOR-like effect */
+	cairo_save(cr); /* Save state to avoid affecting other drawing operations */
 
-	update_rect.x = (gdouble)( topPos[ CNMS_DIM_H ] );
-	update_rect.y = (gdouble)( topPos[ CNMS_DIM_V ] );
-	update_rect.width  = (gdouble)( bottomPos[ CNMS_DIM_H ] - topPos[ CNMS_DIM_H ] - 1 );
-	update_rect.height = (gdouble)( bottomPos[ CNMS_DIM_V ] - topPos[ CNMS_DIM_V ] - 1 );
-	gdk_gc_set_line_attributes( gc, 1, GDK_LINE_ON_OFF_DASH, GDK_CAP_BUTT, GDK_JOIN_BEVEL );
-	gdk_draw_rectangle( gtk_widget_get_window(lpPrevComp->prev_widget), gc, FALSE, update_rect.x, update_rect.y, update_rect.width, update_rect.height );
-	gdk_gc_unref( gc );
+	/* Set operator to difference (XOR equivalent for white lines) */
+	cairo_set_operator(cr, CAIRO_OPERATOR_DIFFERENCE);
+	cairo_set_source_rgb(cr, 1.0, 1.0, 1.0); /* White color for inversion effect */
+
+	/* Set line attributes */
+	const double dashes[] = { 4.0, 4.0 }; /* Dash pattern: 4px on, 4px off */
+	cairo_set_line_width(cr, 1.0);
+	cairo_set_dash(cr, dashes, G_N_ELEMENTS( dashes ), 0.0); /* Equivalent to GDK_LINE_ON_OFF_DASH */
+	cairo_set_line_cap(cr, CAIRO_LINE_CAP_BUTT);
+	cairo_set_line_join(cr, CAIRO_LINE_JOIN_BEVEL);
+
+	/* Define the rectangle path */
+	cairo_rectangle(cr,
+		topPos[ CNMS_DIM_H ] + 0.5,
+		topPos[ CNMS_DIM_V ] + 0.5,
+		bottomPos[ CNMS_DIM_H ] - topPos[ CNMS_DIM_H ] - 1,
+		bottomPos[ CNMS_DIM_V ] - topPos[ CNMS_DIM_V ] - 1
+	);
+
+	/* Stroke the path (FALSE in gdk_draw_rectangle means outline only) */
+	cairo_stroke(cr);
+
+	cairo_restore(cr); /* Restore state */
 
 	ret = CNMS_NO_ERR;
 EXIT:
@@ -477,9 +486,6 @@ static CNMSInt32 SubPrevResize( CNMSBool prevFlag )
 		DBGMSG( "[SubPrevResize]Can't change scale.\n" );
 		goto	EXIT;
 	}
-	if( lpPrevComp->gc == CNMSNULL ) {
-		lpPrevComp->gc = gdk_gc_new( gtk_widget_get_window(lpPrevComp->prev_widget) );
-	}
 	dstOffset = dstSize[ CNMS_DIM_H ] * 3;
 	areaOffset = areaSize[ CNMS_DIM_H ] * 3;
 	outWidth = areaOffset - dstOffset;
@@ -491,10 +497,6 @@ static CNMSInt32 SubPrevResize( CNMSBool prevFlag )
 	}
 	CnmsSetMem( (CNMSLPSTR)lpArea, PREVIEW_OUT_COLOR_R, areaOffset * ( areaSize[ CNMS_DIM_V ] - dstSize[ CNMS_DIM_V ]) );
 
-	/* redraw preview area */
-	gdk_draw_rgb_image( gtk_widget_get_window(lpPrevComp->prev_widget), lpPrevComp->gc, 0, 0,
-			areaSize[ CNMS_DIM_H ], areaSize[ CNMS_DIM_V ], GDK_RGB_DITHER_NONE, 
-			(guchar*)lpPrevComp->lpBuf, areaSize[ CNMS_DIM_H ] * 3 );
 
 	/* redraw rect line */
 	if( ( ldata = PrevSub_GetStatus( &( lpPrevComp->subComp ) ) ) == CNMS_ERR ){
@@ -502,7 +504,7 @@ static CNMSInt32 SubPrevResize( CNMSBool prevFlag )
 		goto	EXIT;
 	}
 	if( ldata >= PREVSUB_STATUS_CROP_WRITE ){
-		DrawRectInvert();
+		gtk_widget_queue_draw( lpPrevComp->prev_widget );
 	}
 
 	gtk_widget_queue_draw( lpPrevComp->prev_widget );
@@ -544,20 +546,34 @@ EXIT:
 CNMSVoid Preview_Expose_Event( cairo_t *cr )
 {
 	CNMSInt32		ldata;
-	// TODO use cairo parameter instead of get window(widget)?
+
 	if( lpPrevComp != CNMSNULL ){
 		/* redraw preview area */
-		if( lpPrevComp->lpBuf && lpPrevComp->gc ) {
-			gdk_draw_rgb_image( gtk_widget_get_window(lpPrevComp->prev_widget), lpPrevComp->gc, 0, 0,
-					lpPrevComp->areaSize[ CNMS_DIM_H ], lpPrevComp->areaSize[ CNMS_DIM_V ], GDK_RGB_DITHER_NONE, 
-					(guchar*)lpPrevComp->lpBuf, lpPrevComp->areaSize[ CNMS_DIM_H ] * 3 );
+		if( lpPrevComp->lpBuf) {
+			GdkPixbuf *pixbuf = gdk_pixbuf_new_from_data(
+				(guchar*)lpPrevComp->lpBuf,
+				GDK_COLORSPACE_RGB,
+				FALSE, // No alpha channel
+				8,     // Bits per sample
+				lpPrevComp->areaSize[ CNMS_DIM_H ],
+				lpPrevComp->areaSize[ CNMS_DIM_V ],
+				lpPrevComp->areaSize[ CNMS_DIM_H ] * 3, // Rowstride
+				NULL,  // No destroy notification (buffer gestito da lpPrevComp)
+				NULL
+			);
+
+			if (pixbuf != NULL) {
+				gdk_cairo_set_source_pixbuf(cr, pixbuf, 0, 0);
+				cairo_paint(cr);
+				g_object_unref(pixbuf); // free the pixbuf wrapper, not the underlying buffer
+			}
 		}
 		if( ( ldata = PrevSub_GetStatus( &( lpPrevComp->subComp ) ) ) == CNMS_ERR ){
 			DBGMSG( "[Preview_Expose_Event_After]Error is occured in PrevSub_GetStatus!\n" );
 			return;
 		}
 		if( ldata >= PREVSUB_STATUS_CROP_WRITE ){
-			DrawRectInvert();
+			DrawRectInvert(cr);
 		}
 	}
 }
@@ -674,22 +690,10 @@ CNMSInt32 Preview_RectSet(
 		goto	EXIT;
 	}
 	lpSub = &( lpPrevComp->subComp );
-	/* Erase old rect ( if exist ) */
-	if( ( ldata = PrevSub_GetStatus( &( lpPrevComp->subComp ) ) ) >= PREVSUB_STATUS_CROP_WRITE ){
-		if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-			DBGMSG( "[Preview_RectSet]Error is occured in DrawRectInvert(erase)!\n" );
-			goto	EXIT;
-		}
-	}
 	if( ( ldata = PrevSub_RectSet( lpOffset, lpInSize, &( lpPrevComp->subComp ) ) ) != CNMS_NO_ERR ){
 		DBGMSG( "[Preview_RectSet]Error is occured in PrevSub_RectSet!\n" );
 		goto	EXIT;
 	}
-	if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-		DBGMSG( "[Preview_RectSet]Error is occured in DrawRectInvert(write)!\n" );
-		goto	EXIT;
-	}
-
 	gtk_widget_queue_draw( lpPrevComp->prev_widget );
 	
 	ret = CNMS_NO_ERR;
@@ -807,13 +811,6 @@ CNMSVoid Preview_Mouse_Button_Press(
 			SubClickHg( prevFlag, lpPrevComp->scale, curPos, lpSub );
 			goto	EXIT;
 		}
-		/* Clear Rect */
-		if( PREVSUB_STATUS_CROP_WRITE <= lpSub->status ){
-			if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-				DBGMSG( "[Preview_Mouse_Button_Press]Error is occured in DrawRectInvert(erase)!\n" );
-				goto	EXIT;
-			}
-		}
 		if( ( ldata = PrevSub_ClickLeft( hgFlag, prevFlag, lpPrevComp->scale, curPos, lpSub ) ) != CNMS_NO_ERR ){
 			DBGMSG( "[Preview_Mouse_Button_Press]Error is occured in PrevSub_ClickLeft!\n" );
 			goto	EXIT;
@@ -827,10 +824,7 @@ CNMSVoid Preview_Mouse_Button_Press(
 		}
 		else{
 			if( PREVSUB_STATUS_CROP_WRITE <= lpSub->status ){
-				if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-					DBGMSG( "[Preview_Mouse_Button_Press]Error is occured in DrawRectInvert(write)!\n" );
-					goto	EXIT;
-				}
+				gtk_widget_queue_draw( lpPrevComp->prev_widget );
 			}
 			lpPrevComp->clickedButton = PREVIEW_MOUSE_CLICKED_LEFT;
 		}
@@ -838,12 +832,7 @@ CNMSVoid Preview_Mouse_Button_Press(
 	/* right button is clicked */
 	if( ( state & GDK_BUTTON3_MASK ) != 0 ){
 		lpPrevComp->clickedButton = PREVIEW_MOUSE_CLICKED_RIGHT;
-		if( PREVSUB_STATUS_CROP_WRITE <= lpSub->status ){
-			if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-				DBGMSG( "[Preview_Mouse_Button_Press]Error is occured in DrawRectInvert(erase)!\n" );
-				goto	EXIT;
-			}
-		}
+
 		if( ( ldata = PrevSub_ClickRight( lpSub ) ) != CNMS_NO_ERR ){
 			DBGMSG( "[Preview_Mouse_Button_Press]Error is occured in PrevSub_ClickRight!\n" );
 			goto	EXIT;
@@ -905,22 +894,12 @@ CNMSVoid Preview_Motion(
 		if( lpPrevComp->clickedButton != PREVIEW_MOUSE_CLICKED_LEFT ){
 			goto	EXIT;
 		}
-		/* Erase Rect Line */
-		if( PREVSUB_STATUS_CROP_WRITE <= lpSub->status ){
-			if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-				DBGMSG( "[Preview_Motion]Error is occured in DrawRectInvert(erase)!\n" );
-				goto	EXIT;
-			}
-		}
 		if( ( ldata = PrevSub_Motion( curPos, lpSub ) ) != CNMS_NO_ERR ){
 			DBGMSG( "[Preview_Motion]Error is occured in PrevSub_Motion!\n" );
 			goto	EXIT;
 		}
-		/* Write Rect */
-		if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-			DBGMSG( "[Preview_Motion]Error is occured in DrawRectInvert(write)!\n" );
-			goto	EXIT;
-		}
+		/* Request redraw — the draw handler will paint the rect at the new position */
+		gtk_widget_queue_draw( lpPrevComp->prev_widget );
 		/* show size to spinbox */
 		if( ( ldata = SubSetShowSizeToSpin( lpSub ) ) != CNMS_NO_ERR ){
 			DBGMSG( "[Preview_Motion]Error is occured in SubSetShowSizeToSpin!\n" );
@@ -984,12 +963,6 @@ CNMSVoid Preview_Mouse_Button_Release(
 
 	/* left button is released */
 	if( ( lpPrevComp->clickedButton == PREVIEW_MOUSE_CLICKED_LEFT ) && ( ( state & GDK_BUTTON1_MASK ) == 0 ) ){
-		if( PREVSUB_STATUS_CROP_WRITE <= lpSub->status ){
-			if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-				DBGMSG( "[Preview_Mouse_Button_Release]Error is occured in DrawRectInvert(erase)!\n" );
-				goto	EXIT;
-			}
-		}
 		if( ( ldata = PrevSub_ReleaseLeft( hgFlag, prevFlag, curPos, lpSub ) ) != CNMS_NO_ERR ){
 			DBGMSG( "[Preview_Mouse_Button_Release]Error is occured in PrevSub_ReleaseLeft!\n" );
 			goto	EXIT;
@@ -1002,10 +975,7 @@ CNMSVoid Preview_Mouse_Button_Release(
 			}
 		}
 		if( PREVSUB_STATUS_CROP_WRITE <= lpSub->status ){
-			if( ( ldata = DrawRectInvert() ) != CNMS_NO_ERR ){
-				DBGMSG( "[Preview_Mouse_Button_Release]Error is occured in DrawRectInvert(write)!\n" );
-				goto	EXIT;
-			}
+			gtk_widget_queue_draw( lpPrevComp->prev_widget );
 		}
 		/* show size to spinbox */
 		if( ( ldata = SubSetShowSizeToSpin( lpSub ) ) != CNMS_NO_ERR ){
