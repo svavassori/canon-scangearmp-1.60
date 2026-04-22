@@ -70,8 +70,8 @@ typedef struct{
 								*hg_adjust_mid					= CNMSNULL,					/* SpinButton Adjustment for Mid					*/
 								*hg_adjust_highlight			= CNMSNULL;					/* SpinButton Adjustment for Highlight				*/
 	static	GtkToggleButton		*hg_toggle						= CNMSNULL;					/* Selecting Toggle Button							*/
-	static	GdkPixbuf			*hg_pmap						= CNMSNULL;					/* Pixmap For Triangle Scale Drawing Area			*/
-	static	GdkGC				*hg_gc							= CNMSNULL;					/* Graphic Context For Triangle Scale Drawing Area	*/
+	static	cairo_surface_t		*hg_surface						= CNMSNULL;					/* Cairo Surface For Triangle Scale Drawing Area	*/
+	static	cairo_t				*hg_cr							= CNMSNULL;					/* Cairo Context For Triangle Scale Drawing Area	*/
 
 	static	CNMSHGTriIconRect	hg_area_shadow					= { 0, 0, 0, 0, 0 };		/* Triangle Icon Information for Shadow				*/
 	static	CNMSHGTriIconRect	hg_area_mid						= { 0, 0, 0, 0, 0 };		/* Triangle Icon Information for Mid				*/
@@ -81,6 +81,7 @@ static CNMSInt32 CnmsHGSpuitButtonStatusChange(
 						CNMSLPSTR			buttonStr				);
 						
 static CNMSVoid CnmsHGDrawTriangle(
+						cairo_t				*cr,
 						CNMSHGTriIconRect	*icon,
 						CNMSInt32			center					);
 
@@ -260,19 +261,21 @@ CNMSVoid CnmsHGScaleBarConfigureEvent(
 		return;
 	}
 
-	/* Create Pixmap			*/
-	if ( hg_pmap != CNMSNULL ){
-		gdk_pixmap_unref( hg_pmap );
+	/* Destroy old surface and context	*/
+	if( hg_cr != CNMSNULL ){
+		cairo_destroy( hg_cr );
+		hg_cr = CNMSNULL;
 	}
-	// TODO change allocation to GdkPixbuf
+	if( hg_surface != CNMSNULL ){
+		cairo_surface_destroy( hg_surface );
+		hg_surface = CNMSNULL;
+	}
+
+	/* Create Cairo Surface and Context	*/
 	GtkAllocation allocation;
 	gtk_widget_get_allocation(widget, &allocation);
-	hg_pmap = gdk_pixmap_new( gtk_widget_get_window(widget), allocation.width, allocation.height, -1 );
-
-	/* Create Graphic Context	*/
-	if( hg_gc == CNMSNULL ){
-		hg_gc = gdk_gc_new( gtk_widget_get_window(widget) );
-	}
+	hg_surface = cairo_image_surface_create( CAIRO_FORMAT_RGB24, allocation.width, allocation.height );
+	hg_cr = cairo_create( hg_surface );
 
 	CnmsHGDrawOnlyScaleBar();
 
@@ -290,9 +293,11 @@ CNMSVoid CnmsHGScaleBarExposeEvent(
 		return;
 	}
 
-	gdk_cairo_set_source_pixbuf(cr, (GdkPixbuf*)(hg_pmap), 0, 0);
-	cairo_paint(cr);
-		
+	if( hg_surface != CNMSNULL ){
+		cairo_set_source_surface( cr, hg_surface, 0, 0 );
+		cairo_paint( cr );
+	}
+
 	return;
 }
 
@@ -679,39 +684,38 @@ EXIT:
 
 /***   Draw Icon depending on Triangle Icon Position   ***/
 static CNMSVoid CnmsHGDrawTriangle(
+						cairo_t				*cr,
 						CNMSHGTriIconRect	*icon,
 						CNMSInt32			center					)
 {
-	GdkPoint		point[4];
-	GdkDrawable		*drawable = hg_pmap;
-	GdkGC			*gc = hg_gc;
-	
-	if( ( drawable == CNMSNULL ) || ( gc == CNMSNULL ) || ( icon == CNMSNULL ) ){
-		DBGMSG( "[CnmsHGDrawTriangle] Pointer is NULL. drawable[%p], gc[%p], icon[%p]\n",drawable,gc,icon );
+	if( ( cr == CNMSNULL ) || ( icon == CNMSNULL ) ){
+		DBGMSG( "[CnmsHGDrawTriangle] Pointer is NULL. cr[%p], icon[%p]\n", cr, icon );
 		return;
-	}		
+	}
 
 	icon->center	= center;
 
-	/* Create Triangle Icon Coordinate	*/
-	point[0].x = icon->center;							point[0].y = HG_SCALE_TRI_TOP;
-	point[1].x = icon->center - HG_SCALE_TRI_HEIGHT;	point[1].y = HG_SCALE_TRI_TOP + HG_SCALE_TRI_HEIGHT;
-	point[2].x = icon->center + HG_SCALE_TRI_HEIGHT;	point[2].y = HG_SCALE_TRI_TOP + HG_SCALE_TRI_HEIGHT;
-	point[3].x = point[0].x;							point[3].y = point[0].y;
-
 	/* Set Triangle Icon Information	*/
-	icon->left		= icon->center - ( HG_SCALE_TRI_HEIGHT / 2 ); 
+	icon->left		= icon->center - ( HG_SCALE_TRI_HEIGHT / 2 );
 	icon->top		= HG_SCALE_TRI_TOP;
 	icon->right		= icon->center + ( HG_SCALE_TRI_HEIGHT / 2 );
 	icon->bottom	= HG_SCALE_TRI_TOP + HG_SCALE_TRI_HEIGHT;
 
-	/* Draw Triangle Icon Inside		*/
-	gdk_draw_polygon( drawable, gc, CNMS_TRUE, point, 4 );
+	/* Create Triangle Icon Path		*/
+	cairo_new_path( cr );
+	cairo_move_to( cr, (double)icon->center + 0.5,                              (double)HG_SCALE_TRI_TOP + 0.5 );
+	cairo_line_to( cr, (double)(icon->center - HG_SCALE_TRI_HEIGHT) + 0.5,      (double)(HG_SCALE_TRI_TOP + HG_SCALE_TRI_HEIGHT) + 0.5 );
+	cairo_line_to( cr, (double)(icon->center + HG_SCALE_TRI_HEIGHT) + 0.5,      (double)(HG_SCALE_TRI_TOP + HG_SCALE_TRI_HEIGHT) + 0.5 );
+	cairo_close_path( cr );
+
+	/* Draw Triangle Icon Inside (fill, color already set by caller)	*/
+	cairo_fill_preserve( cr );
 
 	/* Draw Triangle Icon Outframe		*/
-	CnmsColAdjGdkGCSetColor( gc, HG_GC_TRIICON_FRAME, HG_GC_TRIICON_FRAME, HG_GC_TRIICON_FRAME );	
-	gdk_draw_polygon( drawable, gc, CNMS_FALSE, point, 4 );
-	
+	CnmsColAdjCairoSetColor( cr, HG_GC_TRIICON_FRAME, HG_GC_TRIICON_FRAME, HG_GC_TRIICON_FRAME );
+	cairo_set_line_width( cr, 1.0 );
+	cairo_stroke( cr );
+
 	return;
 }
 
@@ -912,22 +916,22 @@ static CNMSVoid CnmsHGDrawOnlyScaleBar(
 						center_m	= 0,
 						center_h	= 0;
 
-	GdkPixmap			*pixmap		= hg_pmap;
-	GdkGC				*gc			= hg_gc;
+	cairo_t				*cr			= hg_cr;
 	CNMSHGTriIconRect	*highlight	= &hg_area_highlight,
 						*mid		= &hg_area_mid,
 						*shadow		= &hg_area_shadow;
 
-	if( ( pixmap == CNMSNULL ) || ( gc == CNMSNULL ) && ( highlight == CNMSNULL ) && ( mid == CNMSNULL ) && ( shadow == CNMSNULL ) ){
-		DBGMSG( "[CnmsHGDrawOnlyScaleBar] Arg Pointer is NULL. pixmap[%p], gc[%p], highlight[%p], mid[%p], shadow[%p]\n", pixmap, gc, highlight, mid, shadow );
+	if( ( cr == CNMSNULL ) || ( hg_surface == CNMSNULL ) || ( highlight == CNMSNULL ) || ( mid == CNMSNULL ) || ( shadow == CNMSNULL ) ){
+		DBGMSG( "[CnmsHGDrawOnlyScaleBar] Arg Pointer is NULL. cr[%p], surface[%p], highlight[%p], mid[%p], shadow[%p]\n", cr, hg_surface, highlight, mid, shadow );
 		return;
 	}
-		
+
 	/* Draw BackGround 				*/
-	CnmsColAdjGdkGCSetColor( gc, HG_GC_TRIICON_BG_R, HG_GC_TRIICON_BG_G, HG_GC_TRIICON_BG_B );
+	CnmsColAdjCairoSetColor( cr, HG_GC_TRIICON_BG_R, HG_GC_TRIICON_BG_G, HG_GC_TRIICON_BG_B );
 	GtkAllocation allocation;
 	gtk_widget_get_allocation(hg_scalebar_drawarea, &allocation);
-	gdk_draw_rectangle (pixmap, gc, CNMS_TRUE, 0, 0, allocation.width, allocation.height);
+	cairo_rectangle( cr, 0, 0, allocation.width, allocation.height );
+	cairo_fill( cr );
 
 	/* Get Value, Set Center		*/
 	center_s = ( ( CNMSInt32 )( ( ( CNMSDec32 )hg[hg_dlg.channel].shadow.disp * HG_SCALE_AREA_WIDTH / 255 ) + 0.5 ) ) + HG_SCALE_AREA_OFFSET;
@@ -935,19 +939,20 @@ static CNMSVoid CnmsHGDrawOnlyScaleBar(
 	center_h = ( ( CNMSInt32 )( ( ( CNMSDec32 )hg[hg_dlg.channel].highlight.disp * HG_SCALE_AREA_WIDTH / 255 ) + 0.5 ) ) + HG_SCALE_AREA_OFFSET;
 
 	/* Draw Shadow Triangle Icon	*/
-	CnmsColAdjGdkGCSetColor( gc, HG_GC_TRIICON_SHADOW, HG_GC_TRIICON_SHADOW, HG_GC_TRIICON_SHADOW );
-	CnmsHGDrawTriangle( shadow, center_s );
+	CnmsColAdjCairoSetColor( cr, HG_GC_TRIICON_SHADOW, HG_GC_TRIICON_SHADOW, HG_GC_TRIICON_SHADOW );
+	CnmsHGDrawTriangle( cr, shadow, center_s );
 
 	/* Draw Mid Triangle Icon		*/
-	CnmsColAdjGdkGCSetColor( gc, HG_GC_TRIICON_MID, HG_GC_TRIICON_MID, HG_GC_TRIICON_MID );
-	CnmsHGDrawTriangle( mid, center_m );
+	CnmsColAdjCairoSetColor( cr, HG_GC_TRIICON_MID, HG_GC_TRIICON_MID, HG_GC_TRIICON_MID );
+	CnmsHGDrawTriangle( cr, mid, center_m );
 
 	/* Draw Highlight Triangle Icon	*/
-	CnmsColAdjGdkGCSetColor( gc, HG_GC_TRIICON_HIGH, HG_GC_TRIICON_HIGH, HG_GC_TRIICON_HIGH );
-	CnmsHGDrawTriangle( highlight, center_h );
+	CnmsColAdjCairoSetColor( cr, HG_GC_TRIICON_HIGH, HG_GC_TRIICON_HIGH, HG_GC_TRIICON_HIGH );
+	CnmsHGDrawTriangle( cr, highlight, center_h );
 
-	gdk_draw_pixmap( gtk_widget_get_window(hg_scalebar_drawarea), hg_scalebar_drawarea->style->fg_gc[gtk_widget_get_state_flags(hg_scalebar_drawarea)],
-															pixmap, 0, 0, 0, 0,	allocation.width, allocation.height );
+	/* Trigger redraw of the widget	*/
+	gtk_widget_queue_draw( hg_scalebar_drawarea );
+
 	return;
 }
 
