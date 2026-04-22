@@ -138,9 +138,8 @@ typedef struct{
 		GtkWidget			*cbox;						/* Channel Conbobox on Dialog			*/
 		CNMSInt32			channel;					/* Current Channel						*/
 		GtkWidget			*darea;						/* Drawing Area Widget					*/
-		GdkPixbuf			*pmap;						/* Pixmap in Drawing Area				*/  // evaluate if change to Cairo Surface
-		GdkGC				*gc;						/* Graphic Context in Drawing Area		*/
-		CNMSInt 			x;							/* Dialog X position					*/ 
+		cairo_surface_t		*surface;					/* Cairo surface for Drawing Area		*/
+		CNMSInt 			x;							/* Dialog X position					*/
 		CNMSInt 			y;							/* Dialog Y position					*/ 
 		CNMSBool			show;						/* Flag for Dialog show/hide			*/
 		CNMSInt32			*curve[CNMS_CA_MAX];		/* Tone Curve Data						*/
@@ -288,18 +287,15 @@ typedef struct{
 
 CNMSInt32 CnmsColAdjDrawAreaBaseDraw(
 						GtkWidget			*widget,
-						GdkPixmap			*pixmap,
-						GdkGC				*gc						);
+						cairo_t				*cr						);
 
 CNMSInt32 CnmsColAdjDrawAreaCurveDraw(
-						GdkPixmap			*pixmap,
-						GdkGC				*gc,
+						cairo_t				*cr,
 						CNMSInt32			curve[],
 						CNMSInt32			color					);
 
 CNMSInt32 CnmsColAdjDrawAreaHistogramDraw(
-						GdkPixmap			*pixmap,
-						GdkGC				*gc,
+						cairo_t				*cr,
 						CNMSUInt32			histogram[]				);
 
 CNMSInt32 CnmsColAdjGetColorGroupNum(
@@ -308,8 +304,8 @@ CNMSInt32 CnmsColAdjGetColorGroupNum(
 CNMSVoid CnmsColAdjComboBoxItemAllClear(
 						GtkComboBox			*combobox				);
 
-CNMSVoid CnmsColAdjGdkGCSetColor(
-						GdkGC				*gc,
+CNMSVoid CnmsColAdjCairoSetColor(
+						cairo_t				*cr,
 						CNMSUInt16			r,
 						CNMSUInt16			g,
 						CNMSUInt16			b						);

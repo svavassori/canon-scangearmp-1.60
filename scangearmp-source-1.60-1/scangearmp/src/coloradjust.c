@@ -183,8 +183,7 @@ EXIT:
 /***   Drawing Graph Base ( Frame and Line )   ***/
 CNMSInt32 CnmsColAdjDrawAreaBaseDraw(
 						GtkWidget			*widget,
-						GdkPixmap			*pixmap,
-						GdkGC				*gc						)
+						cairo_t				*cr						)
 {
 	CNMSInt32	ret		= CNMS_ERR,
 				Left	= CNMS_CA_GRAPH_FRAME_LEFT,
@@ -192,28 +191,38 @@ CNMSInt32 CnmsColAdjDrawAreaBaseDraw(
 				Right	= CNMS_CA_GRAPH_FRAME_RIGHT,
 				Bottom	= CNMS_CA_GRAPH_FRAME_BOTTOM;
 
-	if( ( widget == CNMSNULL ) || ( pixmap == CNMSNULL ) || ( gc == CNMSNULL ) ){
-		DBGMSG( "[CnmsColAdjDrawAreaBaseDraw] Arg Pointer is NULL. widget[%p], pixmap[%p], gc[%p]\n",widget,pixmap,gc );
+	if( ( widget == CNMSNULL ) || ( cr == CNMSNULL ) ){
+		DBGMSG( "[CnmsColAdjDrawAreaBaseDraw] Arg Pointer is NULL. widget[%p], cr[%p]\n",widget,cr );
 		goto EXIT;
 	}		
 
 	/* Drawing Back ground		*/
 	GtkAllocation allocation;
 	gtk_widget_get_allocation(widget, &allocation);
-	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_BACKGROUND_R, CNMS_CA_GC_BACKGROUND_G, CNMS_CA_GC_BACKGROUND_B );
-	gdk_draw_rectangle( pixmap, gc, CNMS_TRUE, 0, 0, allocation.width, allocation.height );
+	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_BACKGROUND_R, CNMS_CA_GC_BACKGROUND_G, CNMS_CA_GC_BACKGROUND_B );
+	cairo_rectangle( cr, 0, 0, allocation.width, allocation.height );
+	cairo_fill( cr );
 
 	/* Drawing Frame outside	*/
-	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_FRAME_R, CNMS_CA_GC_FRAME_G, CNMS_CA_GC_FRAME_B );
-	gdk_draw_rectangle( pixmap, gc, CNMS_FALSE, Left, Top, Right - Left, Bottom - Top );
-								
+	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_FRAME_R, CNMS_CA_GC_FRAME_G, CNMS_CA_GC_FRAME_B );
+	cairo_set_line_width( cr, 1.0 );
+	cairo_rectangle( cr, Left + 0.5, Top + 0.5, Right - Left, Bottom - Top );
+	cairo_stroke( cr );
+
 	/* Drawing Frame inside	*/
-	gdk_draw_line( pixmap, gc, ( ( Right - Left ) * 1 / 4 ) + Left, Top, ( ( Right - Left ) * 1 / 4 ) + Left, Bottom ); 	/* Vertical line 1st from leftside	*/
-	gdk_draw_line( pixmap, gc, ( ( Right - Left ) * 2 / 4 ) + Left, Top, ( ( Right - Left ) * 2 / 4 ) + Left, Bottom ); 	/* Vertical line 2nd from leftside	*/
-	gdk_draw_line( pixmap, gc, ( ( Right - Left ) * 3 / 4 ) + Left, Top, ( ( Right - Left ) * 3 / 4 ) + Left, Bottom ); 	/* Vertical line 3rd from leftside	*/
-	gdk_draw_line( pixmap, gc,   Left,  ( ( Bottom - Top ) * 1 / 4 ) + Top, Right, ( ( Bottom - Top ) * 1 / 4 ) +Top ); 	/* Horizontal line 1st from topside	*/
-	gdk_draw_line( pixmap, gc, 	 Left,  ( ( Bottom - Top ) * 2 / 4 ) + Top, Right, ( ( Bottom - Top ) * 2 / 4 ) + Top ); 	/* Horizontal line 2nd from topside	*/
-	gdk_draw_line( pixmap, gc,	 Left,  ( ( Bottom - Top ) * 3 / 4 ) + Top, Right, ( ( Bottom - Top ) * 3 / 4 ) + Top ); 	/* Horizontal line 3rd from topside	*/
+	cairo_move_to( cr, ( ( Right - Left ) * 1 / 4 ) + Left + 0.5, Top );		/* Vertical line 1st from leftside	*/
+	cairo_line_to( cr, ( ( Right - Left ) * 1 / 4 ) + Left + 0.5, Bottom );
+	cairo_move_to( cr, ( ( Right - Left ) * 2 / 4 ) + Left + 0.5, Top );		/* Vertical line 2nd from leftside	*/
+	cairo_line_to( cr, ( ( Right - Left ) * 2 / 4 ) + Left + 0.5, Bottom );
+	cairo_move_to( cr, ( ( Right - Left ) * 3 / 4 ) + Left + 0.5, Top );		/* Vertical line 3rd from leftside	*/
+	cairo_line_to( cr, ( ( Right - Left ) * 3 / 4 ) + Left + 0.5, Bottom );
+	cairo_move_to( cr, Left,  ( ( Bottom - Top ) * 1 / 4 ) + Top + 0.5 );		/* Horizontal line 1st from topside	*/
+	cairo_line_to( cr, Right, ( ( Bottom - Top ) * 1 / 4 ) + Top + 0.5 );
+	cairo_move_to( cr, Left,  ( ( Bottom - Top ) * 2 / 4 ) + Top + 0.5 );		/* Horizontal line 2nd from topside	*/
+	cairo_line_to( cr, Right, ( ( Bottom - Top ) * 2 / 4 ) + Top + 0.5 );
+	cairo_move_to( cr, Left,  ( ( Bottom - Top ) * 3 / 4 ) + Top + 0.5 );		/* Horizontal line 3rd from topside	*/
+	cairo_line_to( cr, Right, ( ( Bottom - Top ) * 3 / 4 ) + Top + 0.5 );
+	cairo_stroke( cr );
 
 	ret = CNMS_NO_ERR;
 EXIT:
@@ -228,8 +237,7 @@ EXIT:
 
 /***   Drawing ToneCurve on Graph without Graph Base   ***/
 CNMSInt32 CnmsColAdjDrawAreaCurveDraw(
-						GdkPixmap			*pixmap,
-						GdkGC				*gc,
+						cairo_t				*cr,
 						CNMSInt32			curve[],
 						CNMSInt32			color					)
 {
@@ -250,18 +258,18 @@ CNMSInt32 CnmsColAdjDrawAreaCurveDraw(
 	CNMSDec32	Xdash,
 				Ydash;
 	
-	if( ( pixmap == CNMSNULL ) || ( gc == CNMSNULL ) ){
-		DBGMSG( "[CnmsColAdjDrawAreaCurveDraw] Arg Pointer is NULL. pixmap[%p], gc[%p]\n",pixmap,gc );
+	if( cr == CNMSNULL ){
+		DBGMSG( "[CnmsColAdjDrawAreaCurveDraw] Arg Pointer is NULL. cr[%p]\n",cr );
 		goto EXIT;
 	}		
 
 	/* Set line color */
 	switch( color ){
-		case CNMS_CA_COLOR_BLACK:	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO );	break;		/* Draw black line	*/
-		case CNMS_CA_COLOR_RED:		CnmsColAdjGdkGCSetColor( gc,  CNMS_CA_GC_VALUE_MAX, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO );	break;		/* Draw   red line	*/
-		case CNMS_CA_COLOR_GREEN:	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_VALUE_ZERO,  CNMS_CA_GC_VALUE_MAX, CNMS_CA_GC_VALUE_ZERO );	break;		/* Draw green line	*/
-		case CNMS_CA_COLOR_BLUE:	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO,  CNMS_CA_GC_VALUE_MAX );	break;		/* Draw  blue line	*/
-		case CNMS_CA_COLOR_GRAY:	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_VALUE_GRAY, CNMS_CA_GC_VALUE_GRAY, CNMS_CA_GC_VALUE_GRAY );	break;		/* Draw  gray line	*/
+		case CNMS_CA_COLOR_BLACK:	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO );	break;		/* Draw black line	*/
+		case CNMS_CA_COLOR_RED:		CnmsColAdjCairoSetColor( cr,  CNMS_CA_GC_VALUE_MAX, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO );	break;		/* Draw   red line	*/
+		case CNMS_CA_COLOR_GREEN:	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_VALUE_ZERO,  CNMS_CA_GC_VALUE_MAX, CNMS_CA_GC_VALUE_ZERO );	break;		/* Draw green line	*/
+		case CNMS_CA_COLOR_BLUE:	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO,  CNMS_CA_GC_VALUE_MAX );	break;		/* Draw  blue line	*/
+		case CNMS_CA_COLOR_GRAY:	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_VALUE_GRAY, CNMS_CA_GC_VALUE_GRAY, CNMS_CA_GC_VALUE_GRAY );	break;		/* Draw  gray line	*/
 		default:					DBGMSG("[CnmsColAdjDrawAreaCurveDraw] Arg color is invalid. color[%d]\n",color);			goto	EXIT;
 	}
 	
@@ -284,10 +292,13 @@ CNMSInt32 CnmsColAdjDrawAreaCurveDraw(
 	}
 
 	/* Draw curve line */
+	cairo_set_line_width( cr, 1.0 );
 	for( i = 0 ; i < DispCurveMaxX ; i++ ){
-		gdk_draw_line( pixmap, gc, i + Left + 1, abs( DispCurve[ i ] - Bottom + 1 ), i + Left + 2, abs( DispCurve[ i + 1 ] - Bottom + 1 ) );
+		cairo_move_to( cr, i + Left + 1 + 0.5, abs( DispCurve[ i ] - Bottom + 1 ) + 0.5 );
+		cairo_line_to( cr, i + Left + 2 + 0.5, abs( DispCurve[ i + 1 ] - Bottom + 1 ) + 0.5 );
 	}
-							
+	cairo_stroke( cr );
+
 	ret = CNMS_NO_ERR;
 EXIT:
 
@@ -301,8 +312,7 @@ EXIT:
 
 /***   Drawing Histogram on Graph without Graph Base   ***/
 CNMSInt32 CnmsColAdjDrawAreaHistogramDraw(
-						GdkPixmap			*pixmap,
-						GdkGC				*gc,
+						cairo_t				*cr,
 						CNMSUInt32			histogram[]				)
 {
 	CNMSInt32	i		= 0,
@@ -318,13 +328,14 @@ CNMSInt32 CnmsColAdjDrawAreaHistogramDraw(
 		goto EXIT;
 	}
 
-	if( ( pixmap == CNMSNULL ) || ( gc == CNMSNULL ) ){
-		DBGMSG( "[CnmsColAdjDrawAreaHistogramDraw] Arg Pointer is NULL. pixmap[%p], gc[%p]\n",pixmap,gc );
+	if( cr == CNMSNULL ){
+		DBGMSG( "[CnmsColAdjDrawAreaHistogramDraw] Arg Pointer is NULL. cr[%p]\n",cr );
 		goto EXIT;
 	}		
 
 	/* Set Histogram color (Black only) */
-	CnmsColAdjGdkGCSetColor( gc, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO );
+	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO );
+	cairo_set_line_width( cr, 1.0 );
 
 	/* Draw histogram line */
 	for( i = 0 ; i < VecLen ; i++ ){
@@ -334,12 +345,12 @@ CNMSInt32 CnmsColAdjDrawAreaHistogramDraw(
 
 			for( i = 0 ; i < VecLen ; i++ )
 			{
-				gdk_draw_line( pixmap, gc,
-								( CNMSInt32 )( ( ( CNMSDec32 )i / ( VecLen - 1 ) * ( Right - Left - 1 ) ) - 0.5 ) + ( Left + 1 ),						/* Start X */
-								( Bottom - 1 ),																											/* Start Y */
-								( CNMSInt32 )( ( ( CNMSDec32 )i / ( VecLen - 1 ) * ( Right - Left - 1 ) ) - 0.5 ) + ( Left + 1 ),						/* End   X */
-								abs( ( CNMSInt32 )( ( ( CNMSDec32 )histogram[i] * ( Bottom - Top - 1 ) / ( VecLen - 1 ) ) - 0.5 ) - ( Bottom - 1 ) ) );	/* End   Y */
+				CNMSInt32 x_pos = ( CNMSInt32 )( ( ( CNMSDec32 )i / ( VecLen - 1 ) * ( Right - Left - 1 ) ) + 0.5 ) + ( Left + 1 );	/* X */
+				CNMSInt32 y_end = abs( ( CNMSInt32 )( ( ( CNMSDec32 )histogram[i] * ( Bottom - Top - 1 ) / ( VecLen - 1 ) ) + 0.5 ) - ( Bottom - 1 ) );	/* End Y */
+				cairo_move_to( cr, x_pos + 0.5, Bottom - 1 );	/* Start X, Start Y */
+				cairo_line_to( cr, x_pos + 0.5, y_end );		/* End   X, End   Y */
 			}
+			cairo_stroke( cr );
 			break;
 		}
 	}
@@ -746,28 +757,25 @@ CNMSVoid CnmsColAdjComboBoxItemAllClear(
 }
 
 
-/***   Set GdkGC Color from RGB Value   ***/
-CNMSVoid CnmsColAdjGdkGCSetColor(
-						GdkGC				*gc,
+/***   Set Cairo Color from RGB Value (16-bit)   ***/
+CNMSVoid CnmsColAdjCairoSetColor(
+						cairo_t				*cr,
 						CNMSUInt16			r,
 						CNMSUInt16			g,
 						CNMSUInt16			b						)
 {
-	GdkColor		color;
-
-	if( gc == CNMSNULL ){
-		DBGMSG( "[CnmsColAdjGdkGCSetColor] Arg Pointer[gc] is NULL.\n" );
+	if( cr == CNMSNULL ){
+		DBGMSG( "[CnmsColAdjCairoSetColor] Arg Pointer[cr] is NULL.\n" );
 		return;
 	}
 
-	color.red = r;
-	color.green = g;
-	color.blue = b;
-	if( ( gdk_colormap_alloc_color( gdk_colormap_get_system(), &color, CNMS_TRUE, CNMS_FALSE ) ) != CNMS_TRUE )	return;
-	gdk_gc_set_foreground( gc, &color );
+	cairo_set_source_rgb( cr,
+		(double)r / (double)CNMS_CA_GC_VALUE_MAX,
+		(double)g / (double)CNMS_CA_GC_VALUE_MAX,
+		(double)b / (double)CNMS_CA_GC_VALUE_MAX );
 
 #ifdef __COLOR_ADJUST_DEBUG__
-	DBGMSG( "\t[ CnmsColAdjGdkGCSetColor ]\n" );
+	DBGMSG( "\t[ CnmsColAdjCairoSetColor ]\n" );
 #endif
 
 	return;
@@ -1071,8 +1079,7 @@ CNMSVoid CnmsColAdjDialogInfoInit(
 
 	dlg->id			= id;
 	dlg->channel	= CNMS_CA_MASTER;
-	dlg->pmap 		= CNMSNULL;
-	dlg->gc 		= CNMSNULL;
+	dlg->surface	= CNMSNULL;
 	dlg->show		= CNMS_FALSE;
 
 	for( i = 0 ; i < CNMS_CA_COLOR_MAX ; i++ ){
@@ -1099,6 +1106,10 @@ CNMSVoid CnmsColAdjClose(
 	for( id = 0 ; id < CNMS_CA_DIALOG_MAX ; id++ ){
 		if( ( CnmsColAdjGetDialogInfo( id, &dlg ) ) != CNMS_NO_ERR ){
 			DBGMSG( "[CnmsColAdjClose] Arg Value is Invalid. id[%d]\n", id );
+		}
+		if( dlg->surface != CNMSNULL ){
+			cairo_surface_destroy( dlg->surface );
+			dlg->surface = CNMSNULL;
 		}
 		for( i = 0 ; i < CNMS_CA_COLOR_MAX ; i++ ){
 			if( dlg->hist[i] != CNMSNULL ){
@@ -1173,7 +1184,7 @@ CNMSVoid CnmsColAdjSetCurrentPage(
 }
 
 
-/***   Drawing Pixmap Event for Hiden Pixmap Area   ***/
+/***   Drawing surface Event for Drawing Area   ***/
 CNMSVoid CnmsColAdjDrawingAreaExposeEvent(
 						GtkWidget			*widget,
 						cairo_t				*cr,
@@ -1182,7 +1193,7 @@ CNMSVoid CnmsColAdjDrawingAreaExposeEvent(
 	CNMSCADialog	*dlg = CNMSNULL;
 
 	if( ( widget == CNMSNULL ) || ( cr == CNMSNULL ) ){
-		DBGMSG( "[CnmsColAdjDrawingAreaExposeEvent] Arg Pointer is MULL. widget[%p], cairo[%p]\n", widget, cr );
+		DBGMSG( "[CnmsColAdjDrawingAreaExposeEvent] Arg Pointer is NULL. widget[%p], cairo[%p]\n", widget, cr );
 		return;
 	}
 
@@ -1191,10 +1202,12 @@ CNMSVoid CnmsColAdjDrawingAreaExposeEvent(
 		return;
 	}
 
-	/* Drawing Pixmap	*/
-	gdk_cairo_set_source_pixbuf(cr, (GdkPixbuf*)(dlg->pmap), 0, 0);
-	cairo_paint(cr);
-		
+	/* Paint from surface	*/
+	if( dlg->surface != CNMSNULL ){
+		cairo_set_source_surface( cr, dlg->surface, 0, 0 );
+		cairo_paint( cr );
+	}
+
 	return;
 }
 
@@ -1208,7 +1221,7 @@ CNMSVoid CnmsColAdjDrawingAreaConfigureEvent(
 	CNMSCADialog	*dlg = CNMSNULL;
 
 	if( ( widget == CNMSNULL ) || ( event == CNMSNULL ) ){
-		DBGMSG( "[CnmsColAdjDrawingAreaConfigureEvent] Arg Pointer is MULL. widget[%p], event[%p]\n", widget, event );
+		DBGMSG( "[CnmsColAdjDrawingAreaConfigureEvent] Arg Pointer is NULL. widget[%p], event[%p]\n", widget, event );
 		return;
 	}
 
@@ -1217,18 +1230,13 @@ CNMSVoid CnmsColAdjDrawingAreaConfigureEvent(
 		return;
 	}
 
-	/* Create Pixmap			*/
-	if ( dlg->pmap != CNMSNULL ){
-		gdk_pixmap_unref( dlg->pmap );
+	/* Create Cairo Surface		*/
+	if ( dlg->surface != CNMSNULL ){
+		cairo_surface_destroy( dlg->surface );
 	}
 	GtkAllocation allocation;
 	gtk_widget_get_allocation(widget, &allocation);
-	dlg->pmap = gdk_pixmap_new( gtk_widget_get_window(widget), allocation.width, allocation.height, -1 );
-
-	/* Create Graphic Context	*/
-	if( dlg->gc == CNMSNULL ){
-		dlg->gc = gdk_gc_new( gtk_widget_get_window(widget) );
-	}
+	dlg->surface = cairo_image_surface_create( CAIRO_FORMAT_RGB24, allocation.width, allocation.height );
 
 	/* Draw ToneCurve			*/
 	CnmsColAdjToneCurveDraw( id );
@@ -1323,6 +1331,7 @@ CNMSVoid CnmsColAdjToneCurveDraw(
 						CNMSInt32			id						)
 {
 	CNMSCADialog	*dlg		= CNMSNULL;
+	cairo_t			*cr			= CNMSNULL;
 
 	if( ( CnmsColAdjGetDialogInfo( id, &dlg ) ) != CNMS_NO_ERR ){
 		DBGMSG( "[CnmsColAdjToneCurveDraw] Arg Value is Invalid. id[%d]\n", id );
@@ -1334,51 +1343,56 @@ CNMSVoid CnmsColAdjToneCurveDraw(
 	if( ( dlg->fhist > 0 ) && ( ca_info.reloadhist == CNMS_FALSE ) ){
 		return;
 	}
+	if( dlg->surface == CNMSNULL ){
+		return;
+	}
 
-	CnmsColAdjDrawAreaBaseDraw( dlg->widget, dlg->pmap, dlg->gc );
+	cr = cairo_create( dlg->surface );
+
+	CnmsColAdjDrawAreaBaseDraw( dlg->widget, cr );
 
 	switch( ca_info.colorgroup )
 	{
 		case CNMS_CA_COLORGROUP_COLOR:
 			if( dlg->fhist > 0 ){
-				CnmsColAdjDrawAreaHistogramDraw( dlg->pmap, dlg->gc, dlg->hist[dlg->channel] );
+				CnmsColAdjDrawAreaHistogramDraw( cr, dlg->hist[dlg->channel] );
 			}
 			switch( dlg->channel )
 			{
 				case CNMS_CA_MASTER:
 					if( dlg->fcurve > 0 ){
 						if( dlg->id == CNMS_CA_DIALOG_FR ){
-							CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_RED], CNMS_CA_COLOR_RED );
-							CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_GREEN], CNMS_CA_COLOR_GREEN );
-							CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_BLUE], CNMS_CA_COLOR_BLUE );
+							CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_RED], CNMS_CA_COLOR_RED );
+							CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_GREEN], CNMS_CA_COLOR_GREEN );
+							CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_BLUE], CNMS_CA_COLOR_BLUE );
 						}
 						else{
-							CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_MASTER], CNMS_CA_COLOR_GRAY );
+							CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_MASTER], CNMS_CA_COLOR_GRAY );
 						}
 					}
 					break;
 				
 				case CNMS_CA_RED:
 					if( dlg->fcurve > 0 ){
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_GREEN], CNMS_CA_COLOR_GREEN );
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_BLUE], CNMS_CA_COLOR_BLUE );
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_RED], CNMS_CA_COLOR_RED );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_GREEN], CNMS_CA_COLOR_GREEN );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_BLUE], CNMS_CA_COLOR_BLUE );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_RED], CNMS_CA_COLOR_RED );
 					}
 					break;
 				
 				case CNMS_CA_GREEN:
 					if( dlg->fcurve > 0 ){
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_RED], CNMS_CA_COLOR_RED );
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_BLUE], CNMS_CA_COLOR_BLUE );
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_GREEN], CNMS_CA_COLOR_GREEN );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_RED], CNMS_CA_COLOR_RED );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_BLUE], CNMS_CA_COLOR_BLUE );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_GREEN], CNMS_CA_COLOR_GREEN );
 					}
 					break;
 				
 				case CNMS_CA_BLUE:
 					if( dlg->fcurve > 0 ){
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_RED], CNMS_CA_COLOR_RED );
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_GREEN], CNMS_CA_COLOR_GREEN );
-						CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_BLUE], CNMS_CA_COLOR_BLUE );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_RED], CNMS_CA_COLOR_RED );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_GREEN], CNMS_CA_COLOR_GREEN );
+						CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_BLUE], CNMS_CA_COLOR_BLUE );
 					}
 					break;
 				
@@ -1390,10 +1404,10 @@ CNMSVoid CnmsColAdjToneCurveDraw(
 			
 		case CNMS_CA_COLORGROUP_GRAY:
 			if( dlg->fhist > 0 ){
-				CnmsColAdjDrawAreaHistogramDraw( dlg->pmap, dlg->gc, dlg->hist[CNMS_CA_GRAY] );
+				CnmsColAdjDrawAreaHistogramDraw( cr, dlg->hist[CNMS_CA_GRAY] );
 			}
 			if( dlg->fcurve > 0 ){
-				CnmsColAdjDrawAreaCurveDraw( dlg->pmap, dlg->gc, dlg->curve[CNMS_CA_GRAY], CNMS_CA_COLOR_GRAY );
+				CnmsColAdjDrawAreaCurveDraw( cr, dlg->curve[CNMS_CA_GRAY], CNMS_CA_COLOR_GRAY );
 			}
 			break;
 			
@@ -1406,10 +1420,10 @@ CNMSVoid CnmsColAdjToneCurveDraw(
 			break;
 	}
 
-	GtkAllocation allocation;
-	gtk_widget_get_allocation(dlg->darea, &allocation);
-	gdk_draw_pixmap( gtk_widget_get_window(dlg->darea), dlg->darea->style->fg_gc[gtk_widget_get_state_flags(dlg->darea)],
-		dlg->pmap, 0, 0, 0, 0, allocation.width, allocation.height);
+	cairo_destroy( cr );
+
+	/* Request redraw of the drawing area widget */
+	gtk_widget_queue_draw( dlg->darea );
 
 	if( id < CNMS_CA_DIALOG_FR ){
 		CnmsColAdjCurveCalcFR();
