@@ -147,38 +147,54 @@ CNMSVoid CnmsMCDrawThreshold(
 				Top				= CNMS_CA_GRAPH_FRAME_TOP,
 				Right			= CNMS_CA_GRAPH_FRAME_RIGHT,
 				Bottom			= CNMS_CA_GRAPH_FRAME_BOTTOM,
-				XPosRedBar		= CnmsWidthConvertFrom255( value, ( Right - Left - 1 ) - 0.5 ) + ( Left + 1 ),
-				XPosUnderThre	= CnmsWidthConvertFrom255( value, ( Right - Left - 1 ) - 0.5 );
-	GdkPixmap	*Pixmap			= mc_dlg.pmap;
-	GdkGC		*Gc				= mc_dlg.gc;
-				
-	if( ( widget == CNMSNULL ) || ( histogram == CNMSNULL ) || ( Pixmap == CNMSNULL ) || ( Gc == CNMSNULL ) ){
-		DBGMSG( "[CnmsMCDrawThreshold] Pointer is NULL. widget[%p], histogram[%p], Pixmap[%p], Gc[%p]\n", widget, histogram, Pixmap, Gc );
+				XPosRedBar		= CnmsWidthConvertFrom255( value, ( Right - Left - 1 ) + 0.5 ) + ( Left + 1 ),
+				XPosUnderThre	= CnmsWidthConvertFrom255( value, ( Right - Left - 1 ) + 0.5 );
+	cairo_t		*cr				= CNMSNULL;
+
+	if( ( widget == CNMSNULL ) || ( histogram == CNMSNULL ) || ( mc_dlg.surface == CNMSNULL ) ){
+		DBGMSG( "[CnmsMCDrawThreshold] Pointer is NULL. widget[%p], histogram[%p], surface[%p]\n", widget, histogram, mc_dlg.surface );
 		return;
 	}
 
+	cr = cairo_create( mc_dlg.surface );
+
 	/* Draw	Graph Frame									*/
-	CnmsColAdjDrawAreaBaseDraw( widget, Pixmap, Gc );
+	CnmsColAdjDrawAreaBaseDraw( widget, cr );
 
 	/* Draw Background for Under Threshold				*/
-	CnmsColAdjGdkGCSetColor( Gc, MC_GC_UNDER_THRESHOLD, MC_GC_UNDER_THRESHOLD, MC_GC_UNDER_THRESHOLD );
-	gdk_draw_rectangle (Pixmap, Gc, CNMS_TRUE, ( Left + 1 ), ( Top + 1 ), XPosUnderThre, ( Bottom - Top - 1 ) );
+	CnmsColAdjCairoSetColor( cr, MC_GC_UNDER_THRESHOLD, MC_GC_UNDER_THRESHOLD, MC_GC_UNDER_THRESHOLD );
+	cairo_rectangle( cr, (double)( Left + 1 ), (double)( Top + 1 ), (double)XPosUnderThre, (double)( Bottom - Top - 1 ) );
+	cairo_fill( cr );
 
-	/* Process above Hide Base Frame, ReDraw Base Frame	*/ 
-	CnmsColAdjGdkGCSetColor( Gc, CNMS_CA_GC_FRAME_R, CNMS_CA_GC_FRAME_G, CNMS_CA_GC_FRAME_B );
-	gdk_draw_line( Pixmap, Gc, 	( ( Right - Left ) * 1 / 4 ) + Left, Top, ( ( Right - Left ) * 1 / 4 ) + Left, Bottom ); 
-	gdk_draw_line( Pixmap, Gc, 	( ( Right - Left ) * 2 / 4 ) + Left, Top, ( ( Right - Left ) * 2 / 4 ) + Left, Bottom ); 
-	gdk_draw_line( Pixmap, Gc, 	( ( Right - Left ) * 3 / 4 ) + Left, Top, ( ( Right - Left ) * 3 / 4 ) + Left, Bottom ); 
-	gdk_draw_line( Pixmap, Gc,	Left, ( ( Bottom - Top ) * 1 / 4 ) + Top, Right,( ( Bottom - Top ) * 1 / 4 ) + Top ); 
-	gdk_draw_line( Pixmap, Gc,	Left, ( ( Bottom - Top ) * 2 / 4 ) + Top, Right,( ( Bottom - Top ) * 2 / 4 ) + Top ); 
-	gdk_draw_line( Pixmap, Gc,	Left, ( ( Bottom - Top ) * 3 / 4 ) + Top, Right,( ( Bottom - Top ) * 3 / 4 ) + Top ); 
+	/* Process above Hide Base Frame, ReDraw Base Frame	*/
+	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_FRAME_R, CNMS_CA_GC_FRAME_G, CNMS_CA_GC_FRAME_B );
+	cairo_set_line_width( cr, 1.0 );
+	/* Vertical grid lines (1/4, 2/4, 3/4)				*/
+	cairo_move_to( cr, (double)( ( ( Right - Left ) * 1 / 4 ) + Left ) + 0.5, (double)Top + 0.5 );
+	cairo_line_to( cr, (double)( ( ( Right - Left ) * 1 / 4 ) + Left ) + 0.5, (double)Bottom + 0.5 );
+	cairo_move_to( cr, (double)( ( ( Right - Left ) * 2 / 4 ) + Left ) + 0.5, (double)Top + 0.5 );
+	cairo_line_to( cr, (double)( ( ( Right - Left ) * 2 / 4 ) + Left ) + 0.5, (double)Bottom + 0.5 );
+	cairo_move_to( cr, (double)( ( ( Right - Left ) * 3 / 4 ) + Left ) + 0.5, (double)Top + 0.5 );
+	cairo_line_to( cr, (double)( ( ( Right - Left ) * 3 / 4 ) + Left ) + 0.5, (double)Bottom + 0.5 );
+	/* Horizontal grid lines (1/4, 2/4, 3/4)			*/
+	cairo_move_to( cr, (double)Left + 0.5,  (double)( ( ( Bottom - Top ) * 1 / 4 ) + Top ) + 0.5 );
+	cairo_line_to( cr, (double)Right + 0.5, (double)( ( ( Bottom - Top ) * 1 / 4 ) + Top ) + 0.5 );
+	cairo_move_to( cr, (double)Left + 0.5,  (double)( ( ( Bottom - Top ) * 2 / 4 ) + Top ) + 0.5 );
+	cairo_line_to( cr, (double)Right + 0.5, (double)( ( ( Bottom - Top ) * 2 / 4 ) + Top ) + 0.5 );
+	cairo_move_to( cr, (double)Left + 0.5,  (double)( ( ( Bottom - Top ) * 3 / 4 ) + Top ) + 0.5 );
+	cairo_line_to( cr, (double)Right + 0.5, (double)( ( ( Bottom - Top ) * 3 / 4 ) + Top ) + 0.5 );
+	cairo_stroke( cr );
 
 	/* Draw	Histogram									*/
-	CnmsColAdjDrawAreaHistogramDraw( Pixmap, Gc, histogram );
+	CnmsColAdjDrawAreaHistogramDraw( cr, histogram );
 
 	/* Draw	Red Bar for Threshold						*/
-	CnmsColAdjGdkGCSetColor( Gc, CNMS_CA_GC_VALUE_MAX, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO );
-	gdk_draw_line( Pixmap, Gc, XPosRedBar, ( Top + 1 ), XPosRedBar, ( Bottom - 1 ) ); 
+	CnmsColAdjCairoSetColor( cr, CNMS_CA_GC_VALUE_MAX, CNMS_CA_GC_VALUE_ZERO, CNMS_CA_GC_VALUE_ZERO );
+	cairo_move_to( cr, (double)XPosRedBar + 0.5, (double)( Top + 1 ) + 0.5 );
+	cairo_line_to( cr, (double)XPosRedBar + 0.5, (double)( Bottom - 1 ) + 0.5 );
+	cairo_stroke( cr );
+
+	cairo_destroy( cr );
 
 	return;
 }
