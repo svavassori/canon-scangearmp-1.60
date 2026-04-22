@@ -278,7 +278,7 @@ gboolean on_dialog_about_delete_event(
 /*************************/
 void on_main_notebook_switch_page(
 		GtkNotebook		*notebook,
-		GtkNotebookPage	*page,
+		GtkWidget		*page,
 		guint			page_num,
 		gpointer		user_data )
 {

@@ -85,7 +85,7 @@ on_main_preview_draw                   (GtkWidget       *widget,
 
 void
 on_main_notebook_switch_page           (GtkNotebook     *notebook,
-                                        GtkNotebookPage *page,
+                                        GtkWidget       *page,
                                         guint            page_num,
                                         gpointer         user_data);
 
