@@ -160,7 +160,7 @@ CNMSInt32 SaveDialog_Open( CNMSVoid )
 		snprintf( extbuf, sizeof(extbuf) - 1, "%s (*%s)", extComp[ i ].strInfo, extComp[ i ].strArray[ SAVE_EXT_ARRAY_0 ] );
 		extbuf[ sizeof(extbuf) - 1 ] = '\0';
 
-		gtk_combo_box_append_text( GTK_COMBO_BOX( combobox_save_main ), extbuf );
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( combobox_save_main ), extbuf );
 	}
 	
 	ret = CNMS_NO_ERR;
@@ -207,7 +207,7 @@ CNMSInt32 SaveDialog_Show( CNMSVoid )
 		if( ( W1_GetSelectSourceADF() == CNMS_FALSE ) || ( extComp[ i ].val == CNMS_SAVE_FORMAT_PDF ) ){
 			snprintf( extbuf, sizeof(extbuf) - 1, "%s (*%s)", extComp[ i ].strInfo, extComp[ i ].strArray[ SAVE_EXT_ARRAY_0 ] );
 			extbuf[ sizeof(extbuf) - 1 ] = '\0';
-			gtk_combo_box_append_text( GTK_COMBO_BOX( widget ), extbuf );
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( widget ), extbuf );
 		}
 	}
 	

@@ -396,7 +396,7 @@ static CNMSInt32 SubInitCombo(
 			if( ( lpLink->mode == CNMS_MODE_SELECT ) || ( lpLink->mode == CNMS_MODE_HIDE ) ){
 				defCnt = count;
 			}
-			gtk_combo_box_append_text( combobox, lpStr );
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(combobox), lpStr );
 			count ++;
 		}
 	}
@@ -1195,7 +1195,7 @@ CNMSInt32 W1Ui_SetComboDefVal(
 			if( ( lpLink->mode == CNMS_MODE_SELECT ) || ( lpLink->mode == CNMS_MODE_HIDE ) ){
 				defCnt = count;
 			}
-			gtk_combo_box_append_text( GTK_COMBO_BOX( combobox ), lpStr );
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( combobox ), lpStr );
 			count ++;
 		}
 	}

@@ -1738,7 +1738,7 @@ CNMSInt32 W1_ShowSelectModelForNetwork(
 			if( snprintf( listname, PATH_MAX, "Canon %s", lpStr ) <= 0 ){
 				goto	EXIT;
 			}
-			gtk_combo_box_append_text( GTK_COMBO_BOX( widget ), _( listname ) );
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( widget ), _( listname ) );
 		}
 		gtk_combo_box_set_active( GTK_COMBO_BOX( widget ), CnmsGetDeviceIndexSelectedLatest() );
 	}

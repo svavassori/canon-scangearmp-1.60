@@ -1270,14 +1270,14 @@ CNMSBool CnmsColAdjChannelItemSet(
 			switch( color ){
 				case CNMS_CA_COLORGROUP_COLOR:
 						CnmsColAdjComboBoxItemAllClear( GTK_COMBO_BOX( dlg->cbox ) );
-						gtk_combo_box_append_text( GTK_COMBO_BOX( dlg->cbox ), gettext(ca_ch_litem_master) );
-						gtk_combo_box_append_text( GTK_COMBO_BOX( dlg->cbox ), gettext(ca_ch_litem_red) );
-						gtk_combo_box_append_text( GTK_COMBO_BOX( dlg->cbox ), gettext(ca_ch_litem_green) );
-						gtk_combo_box_append_text( GTK_COMBO_BOX( dlg->cbox ), gettext(ca_ch_litem_blue) );
+						gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( dlg->cbox ), gettext(ca_ch_litem_master) );
+						gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( dlg->cbox ), gettext(ca_ch_litem_red) );
+						gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( dlg->cbox ), gettext(ca_ch_litem_green) );
+						gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( dlg->cbox ), gettext(ca_ch_litem_blue) );
 						break;
 				case CNMS_CA_COLORGROUP_GRAY:
 						CnmsColAdjComboBoxItemAllClear( GTK_COMBO_BOX( dlg->cbox ) );
-						gtk_combo_box_append_text( GTK_COMBO_BOX( dlg->cbox ), gettext(ca_ch_litem_gray) );
+						gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT( dlg->cbox ), gettext(ca_ch_litem_gray) );
 						break;
 				case CNMS_CA_COLORGROUP_MONO:
 						if( gtk_widget_get_visible( dlg->widget ) == CNMS_TRUE )

@@ -2461,10 +2461,10 @@ create_dialog_tonecurve (void)
   tc_combobox_tc_select = gtk_combo_box_text_new ();
   gtk_widget_show (tc_combobox_tc_select);
   gtk_box_pack_start (GTK_BOX (hbox91), tc_combobox_tc_select, TRUE, TRUE, 30);
-  gtk_combo_box_append_text (GTK_COMBO_BOX (tc_combobox_tc_select), _("No correction"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (tc_combobox_tc_select), _("Overexposure"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (tc_combobox_tc_select), _("Underexposure"));
-  gtk_combo_box_append_text (GTK_COMBO_BOX (tc_combobox_tc_select), _("High contrast"));
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (tc_combobox_tc_select), _("No correction"));
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (tc_combobox_tc_select), _("Overexposure"));
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (tc_combobox_tc_select), _("Underexposure"));
+  gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (tc_combobox_tc_select), _("High contrast"));
 
   hbuttonbox12 = GTK_DIALOG (dialog_tonecurve)->action_area;
   gtk_widget_show (hbuttonbox12);
