@@ -1382,7 +1382,7 @@ create_select_model_dialog (void)
   gtk_box_pack_start (GTK_BOX (hbox114), label219, FALSE, FALSE, 0);
   gtk_misc_set_padding (GTK_MISC (label219), 10, 0);
 
-  hbuttonbox20 = GTK_DIALOG (select_model_dialog)->action_area;
+  hbuttonbox20 = gtk_dialog_get_action_area (GTK_DIALOG (select_model_dialog));
   gtk_widget_show (hbuttonbox20);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox20), GTK_BUTTONBOX_SPREAD);
 
@@ -1471,7 +1471,7 @@ create_save_main_dialog (void)
   gtk_widget_show (save_main_filechooser);
   gtk_box_pack_start (GTK_BOX (hbox35), save_main_filechooser, TRUE, TRUE, 0);
 
-  hbuttonbox4 = GTK_DIALOG (save_main_dialog)->action_area;
+  hbuttonbox4 = gtk_dialog_get_action_area (GTK_DIALOG (save_main_dialog));
   gtk_widget_show (hbuttonbox4);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox4), GTK_BUTTONBOX_SPREAD);
 
@@ -1544,7 +1544,7 @@ create_save_overwrite_dialog (void)
   gtk_widget_show (label39);
   gtk_box_pack_start (GTK_BOX (hbox36), label39, FALSE, FALSE, 0);
 
-  hbuttonbox5 = GTK_DIALOG (save_overwrite_dialog)->action_area;
+  hbuttonbox5 = gtk_dialog_get_action_area (GTK_DIALOG (save_overwrite_dialog));
   gtk_widget_show (hbuttonbox5);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox5), GTK_BUTTONBOX_SPREAD);
 
@@ -1614,7 +1614,7 @@ create_save_error_dialog (void)
   gtk_widget_show (save_error_dialog_label);
   gtk_box_pack_start (GTK_BOX (hbox38), save_error_dialog_label, TRUE, TRUE, 0);
 
-  hbuttonbox8 = GTK_DIALOG (save_error_dialog)->action_area;
+  hbuttonbox8 = gtk_dialog_get_action_area (GTK_DIALOG (save_error_dialog));
   gtk_widget_show (hbuttonbox8);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox8), GTK_BUTTONBOX_SPREAD);
 
@@ -1835,7 +1835,7 @@ create_dialog_bright_contrast (void)
   gtk_scale_set_draw_value (GTK_SCALE (bc_scale_contrast), FALSE);
   gtk_scale_set_digits (GTK_SCALE (bc_scale_contrast), 0);
 
-  hbuttonbox10 = GTK_DIALOG (dialog_bright_contrast)->action_area;
+  hbuttonbox10 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_bright_contrast));
   gtk_widget_show (hbuttonbox10);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox10), GTK_BUTTONBOX_SPREAD);
 
@@ -2237,7 +2237,7 @@ create_dialog_histogram (void)
   gtk_box_pack_start (GTK_BOX (hbox87), hg_label_value_3, FALSE, FALSE, 0);
   gtk_widget_set_size_request (hg_label_value_3, 30, -1);
 
-  hbuttonbox11 = GTK_DIALOG (dialog_histogram)->action_area;
+  hbuttonbox11 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_histogram));
   gtk_widget_show (hbuttonbox11);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox11), GTK_BUTTONBOX_SPREAD);
 
@@ -2466,7 +2466,7 @@ create_dialog_tonecurve (void)
   gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (tc_combobox_tc_select), _("Underexposure"));
   gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (tc_combobox_tc_select), _("High contrast"));
 
-  hbuttonbox12 = GTK_DIALOG (dialog_tonecurve)->action_area;
+  hbuttonbox12 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_tonecurve));
   gtk_widget_show (hbuttonbox12);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox12), GTK_BUTTONBOX_SPREAD);
 
@@ -2732,7 +2732,7 @@ create_dialog_final_review (void)
   gtk_box_pack_start (GTK_BOX (hbox100), fr_label_value_a_3, FALSE, FALSE, 0);
   gtk_widget_set_size_request (fr_label_value_a_3, 60, -1);
 
-  hbuttonbox13 = GTK_DIALOG (dialog_final_review)->action_area;
+  hbuttonbox13 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_final_review));
   gtk_widget_show (hbuttonbox13);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox13), GTK_BUTTONBOX_END);
 
@@ -2940,7 +2940,7 @@ create_dialog_monochrome (void)
   gtk_scale_set_draw_value (GTK_SCALE (mc_scale), FALSE);
   gtk_scale_set_digits (GTK_SCALE (mc_scale), 0);
 
-  hbuttonbox14 = GTK_DIALOG (dialog_monochrome)->action_area;
+  hbuttonbox14 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_monochrome));
   gtk_widget_show (hbuttonbox14);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox14), GTK_BUTTONBOX_SPREAD);
 
@@ -3054,7 +3054,7 @@ create_dialog_calibration (void)
   gtk_box_pack_start (GTK_BOX (hbox105), label109, FALSE, FALSE, 0);
   gtk_widget_set_size_request (label109, 15, -1);
 
-  dialog_action_area1 = GTK_DIALOG (dialog_calibration)->action_area;
+  dialog_action_area1 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_calibration));
   gtk_widget_show (dialog_action_area1);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
 
@@ -3107,7 +3107,7 @@ create_error_dialog (void)
   gtk_widget_show (error_dialog_msg);
   gtk_box_pack_start (GTK_BOX (hbox106), error_dialog_msg, TRUE, TRUE, 0);
 
-  dialog_action_area2 = GTK_DIALOG (error_dialog)->action_area;
+  dialog_action_area2 = gtk_dialog_get_action_area (GTK_DIALOG (error_dialog));
   gtk_widget_show (dialog_action_area2);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area2), GTK_BUTTONBOX_EDGE);
 
@@ -3188,7 +3188,7 @@ create_dialog_about (void)
   gtk_widget_show (label180);
   gtk_box_pack_start (GTK_BOX (vbox62), label180, TRUE, TRUE, 0);
 
-  dialog_action_area3 = GTK_DIALOG (dialog_about)->action_area;
+  dialog_action_area3 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_about));
   gtk_widget_show (dialog_action_area3);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area3), GTK_BUTTONBOX_EDGE);
 
@@ -3258,7 +3258,7 @@ create_dialog_clear_preview (void)
   gtk_widget_show (label183);
   gtk_box_pack_start (GTK_BOX (vbox63), label183, FALSE, FALSE, 0);
 
-  dialog_action_area4 = GTK_DIALOG (dialog_clear_preview)->action_area;
+  dialog_action_area4 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_clear_preview));
   gtk_widget_show (dialog_action_area4);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area4), GTK_BUTTONBOX_SPREAD);
 
@@ -3338,7 +3338,7 @@ create_dialog_progress_bar (void)
   gtk_box_pack_start (GTK_BOX (vbox65), dialog_progress_bar_label_pages, FALSE, FALSE, 8);
   gtk_label_set_justify (GTK_LABEL (dialog_progress_bar_label_pages), GTK_JUSTIFY_RIGHT);
 
-  hbuttonbox16 = GTK_DIALOG (dialog_progress_bar)->action_area;
+  hbuttonbox16 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_progress_bar));
   gtk_widget_show (hbuttonbox16);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox16), GTK_BUTTONBOX_EDGE);
 
@@ -3427,7 +3427,7 @@ create_dialog_child_with_checkBox (void)
   gtk_widget_show (dialog_child_checkBox);
   gtk_box_pack_start (GTK_BOX (vbox66), dialog_child_checkBox, FALSE, FALSE, 0);
 
-  hbuttonbox17 = GTK_DIALOG (dialog_child_with_checkBox)->action_area;
+  hbuttonbox17 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_child_with_checkBox));
   gtk_widget_show (hbuttonbox17);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox17), GTK_BUTTONBOX_SPREAD);
 
@@ -3501,7 +3501,7 @@ create_dialog_child_with_ok (void)
   gtk_box_pack_start (GTK_BOX (vbox67), label210, FALSE, FALSE, 0);
   gtk_widget_set_size_request (label210, -1, 8);
 
-  hbuttonbox18 = GTK_DIALOG (dialog_child_with_ok)->action_area;
+  hbuttonbox18 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_child_with_ok));
   gtk_widget_show (hbuttonbox18);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox18), GTK_BUTTONBOX_EDGE);
 
@@ -3562,7 +3562,7 @@ create_dialog_child_with_okcancel (void)
   gtk_widget_show (dialog_child_with_okcancel_label);
   gtk_box_pack_start (GTK_BOX (hbox110), dialog_child_with_okcancel_label, FALSE, FALSE, 0);
 
-  hbuttonbox19 = GTK_DIALOG (dialog_child_with_okcancel)->action_area;
+  hbuttonbox19 = gtk_dialog_get_action_area (GTK_DIALOG (dialog_child_with_okcancel));
   gtk_widget_show (hbuttonbox19);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox19), GTK_BUTTONBOX_SPREAD);
 
