@@ -1225,7 +1225,7 @@ create_preference_window (void)
   preference_reset_button = gtk_button_new ();
   gtk_widget_show (preference_reset_button);
   gtk_box_pack_end (GTK_BOX (hbox30), preference_reset_button, FALSE, FALSE, 0);
-  GTK_WIDGET_SET_FLAGS (preference_reset_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (preference_reset_button, TRUE);
 
   alignment2 = gtk_alignment_new (0.5, 0.5, 0, 0);
   gtk_widget_show (alignment2);
@@ -1272,12 +1272,12 @@ create_preference_window (void)
   preference_ok_button = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (preference_ok_button);
   gtk_container_add (GTK_CONTAINER (hbuttonbox15), preference_ok_button);
-  GTK_WIDGET_SET_FLAGS (preference_ok_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (preference_ok_button, TRUE);
 
   preference_cancel_button = gtk_button_new_with_mnemonic (_("Cancel"));
   gtk_widget_show (preference_cancel_button);
   gtk_container_add (GTK_CONTAINER (hbuttonbox15), preference_cancel_button);
-  GTK_WIDGET_SET_FLAGS (preference_cancel_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (preference_cancel_button, TRUE);
 
   g_signal_connect ((gpointer) preference_window, "destroy",
                     G_CALLBACK (on_preference_window_destroy),
@@ -1389,12 +1389,12 @@ create_select_model_dialog (void)
   select_model_ok_button = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (select_model_ok_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (select_model_dialog), select_model_ok_button, GTK_RESPONSE_OK);
-  GTK_WIDGET_SET_FLAGS (select_model_ok_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (select_model_ok_button, TRUE);
 
   select_model_cancel_button = gtk_button_new_with_mnemonic (_("Cancel"));
   gtk_widget_show (select_model_cancel_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (select_model_dialog), select_model_cancel_button, GTK_RESPONSE_CANCEL);
-  GTK_WIDGET_SET_FLAGS (select_model_cancel_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (select_model_cancel_button, TRUE);
 
   g_signal_connect ((gpointer) select_model_dialog, "delete_event",
                     G_CALLBACK (on_select_model_dialog_delete_event),
@@ -1461,7 +1461,7 @@ create_save_main_dialog (void)
   gtk_widget_show (save_file_type_combo);
   gtk_box_pack_start (GTK_BOX (hbox34), save_file_type_combo, TRUE, FALSE, 0);
   gtk_widget_set_size_request (save_file_type_combo, 150, -1);
-  GTK_WIDGET_SET_FLAGS (save_file_type_combo, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (save_file_type_combo, TRUE);
 
   hbox35 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_widget_show (hbox35);
@@ -1478,12 +1478,12 @@ create_save_main_dialog (void)
   save_main_save_button = gtk_button_new_with_mnemonic (_("Save"));
   gtk_widget_show (save_main_save_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (save_main_dialog), save_main_save_button, 0);
-  GTK_WIDGET_SET_FLAGS (save_main_save_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (save_main_save_button, TRUE);
 
   save_main_cancel_button = gtk_button_new_with_mnemonic (_("Cancel"));
   gtk_widget_show (save_main_cancel_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (save_main_dialog), save_main_cancel_button, 0);
-  GTK_WIDGET_SET_FLAGS (save_main_cancel_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (save_main_cancel_button, TRUE);
 
   g_signal_connect ((gpointer) save_main_dialog, "delete_event",
                     G_CALLBACK (on_save_main_dialog_delete_event),
@@ -1551,12 +1551,12 @@ create_save_overwrite_dialog (void)
   save_overwrite_ok_button = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (save_overwrite_ok_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (save_overwrite_dialog), save_overwrite_ok_button, GTK_RESPONSE_OK);
-  GTK_WIDGET_SET_FLAGS (save_overwrite_ok_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (save_overwrite_ok_button, TRUE);
 
   save_overwrite_cancel_button = gtk_button_new_with_mnemonic (_("Cancel"));
   gtk_widget_show (save_overwrite_cancel_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (save_overwrite_dialog), save_overwrite_cancel_button, GTK_RESPONSE_CANCEL);
-  GTK_WIDGET_SET_FLAGS (save_overwrite_cancel_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (save_overwrite_cancel_button, TRUE);
 
   g_signal_connect ((gpointer) save_overwrite_dialog, "delete_event",
                     G_CALLBACK (on_save_overwrite_dialog_delete_event),
@@ -1621,7 +1621,7 @@ create_save_error_dialog (void)
   save_error_ok_button = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (save_error_ok_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (save_error_dialog), save_error_ok_button, 0);
-  GTK_WIDGET_SET_FLAGS (save_error_ok_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (save_error_ok_button, TRUE);
 
   g_signal_connect ((gpointer) save_error_dialog, "delete_event",
                     G_CALLBACK (on_save_error_dialog_delete_event),
@@ -1842,12 +1842,12 @@ create_dialog_bright_contrast (void)
   button21 = gtk_button_new_with_mnemonic (_("Defaults"));
   gtk_widget_show (button21);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_bright_contrast), button21, 0);
-  GTK_WIDGET_SET_FLAGS (button21, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button21, TRUE);
 
   button22 = gtk_button_new_with_mnemonic (_("Close"));
   gtk_widget_show (button22);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_bright_contrast), button22, 0);
-  GTK_WIDGET_SET_FLAGS (button22, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button22, TRUE);
 
   g_signal_connect ((gpointer) dialog_bright_contrast, "delete_event",
                     G_CALLBACK (on_dialog_bright_contrast_delete_event),
@@ -2244,12 +2244,12 @@ create_dialog_histogram (void)
   button23 = gtk_button_new_with_mnemonic (_("Defaults"));
   gtk_widget_show (button23);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_histogram), button23, 0);
-  GTK_WIDGET_SET_FLAGS (button23, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button23, TRUE);
 
   button24 = gtk_button_new_with_mnemonic (_("Close"));
   gtk_widget_show (button24);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_histogram), button24, 0);
-  GTK_WIDGET_SET_FLAGS (button24, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button24, TRUE);
 
   g_signal_connect ((gpointer) dialog_histogram, "delete_event",
                     G_CALLBACK (on_dialog_histogram_delete_event),
@@ -2473,12 +2473,12 @@ create_dialog_tonecurve (void)
   button25 = gtk_button_new_with_mnemonic (_("Defaults"));
   gtk_widget_show (button25);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_tonecurve), button25, 0);
-  GTK_WIDGET_SET_FLAGS (button25, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button25, TRUE);
 
   button26 = gtk_button_new_with_mnemonic (_("Close"));
   gtk_widget_show (button26);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_tonecurve), button26, 0);
-  GTK_WIDGET_SET_FLAGS (button26, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button26, TRUE);
 
   g_signal_connect ((gpointer) dialog_tonecurve, "delete_event",
                     G_CALLBACK (on_dialog_tonecurve_delete_event),
@@ -2739,7 +2739,7 @@ create_dialog_final_review (void)
   button27 = gtk_button_new_with_mnemonic (_("Close"));
   gtk_widget_show (button27);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_final_review), button27, 0);
-  GTK_WIDGET_SET_FLAGS (button27, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button27, TRUE);
 
   g_signal_connect ((gpointer) dialog_final_review, "delete_event",
                     G_CALLBACK (on_dialog_final_review_delete_event),
@@ -2947,12 +2947,12 @@ create_dialog_monochrome (void)
   button28 = gtk_button_new_with_mnemonic (_("Defaults"));
   gtk_widget_show (button28);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_monochrome), button28, 0);
-  GTK_WIDGET_SET_FLAGS (button28, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button28, TRUE);
 
   button29 = gtk_button_new_with_mnemonic (_("Close"));
   gtk_widget_show (button29);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_monochrome), button29, 0);
-  GTK_WIDGET_SET_FLAGS (button29, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (button29, TRUE);
 
   g_signal_connect ((gpointer) dialog_monochrome, "delete_event",
                     G_CALLBACK (on_dialog_monochrome_delete_event),
@@ -3114,7 +3114,7 @@ create_error_dialog (void)
   error_dialog_ok_button = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (error_dialog_ok_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (error_dialog), error_dialog_ok_button, GTK_RESPONSE_OK);
-  GTK_WIDGET_SET_FLAGS (error_dialog_ok_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (error_dialog_ok_button, TRUE);
 
   g_signal_connect ((gpointer) error_dialog, "delete_event",
                     G_CALLBACK (on_error_dialog_delete_event),
@@ -3195,7 +3195,7 @@ create_dialog_about (void)
   dialog_about_ok_button = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (dialog_about_ok_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_about), dialog_about_ok_button, 0);
-  GTK_WIDGET_SET_FLAGS (dialog_about_ok_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (dialog_about_ok_button, TRUE);
 
   g_signal_connect ((gpointer) dialog_about, "delete_event",
                     G_CALLBACK (on_dialog_about_delete_event),
@@ -3265,12 +3265,12 @@ create_dialog_clear_preview (void)
   dialog_clear_preview_ok = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (dialog_clear_preview_ok);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_clear_preview), dialog_clear_preview_ok, 0);
-  GTK_WIDGET_SET_FLAGS (dialog_clear_preview_ok, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (dialog_clear_preview_ok, TRUE);
 
   dialog_clear_preview_cancel = gtk_button_new_with_mnemonic (_("Cancel"));
   gtk_widget_show (dialog_clear_preview_cancel);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_clear_preview), dialog_clear_preview_cancel, 0);
-  GTK_WIDGET_SET_FLAGS (dialog_clear_preview_cancel, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (dialog_clear_preview_cancel, TRUE);
 
   g_signal_connect ((gpointer) dialog_clear_preview, "delete_event",
                     G_CALLBACK (on_dialog_clear_preview_delete_event),
@@ -3345,7 +3345,7 @@ create_dialog_progress_bar (void)
   progressBar_cancel_button = gtk_button_new ();
   gtk_widget_show (progressBar_cancel_button);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_progress_bar), progressBar_cancel_button, GTK_RESPONSE_CANCEL);
-  GTK_WIDGET_SET_FLAGS (progressBar_cancel_button, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (progressBar_cancel_button, TRUE);
 
   alignment3 = gtk_alignment_new (0.5, 0.5, 0, 0);
   gtk_widget_show (alignment3);
@@ -3434,12 +3434,12 @@ create_dialog_child_with_checkBox (void)
   dialog_child_with_checkBox_button_ok = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (dialog_child_with_checkBox_button_ok);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_child_with_checkBox), dialog_child_with_checkBox_button_ok, 0);
-  GTK_WIDGET_SET_FLAGS (dialog_child_with_checkBox_button_ok, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (dialog_child_with_checkBox_button_ok, TRUE);
 
   dialog_child_with_checkBox_button_cancel = gtk_button_new_with_mnemonic (_("Cancel"));
   gtk_widget_show (dialog_child_with_checkBox_button_cancel);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_child_with_checkBox), dialog_child_with_checkBox_button_cancel, 0);
-  GTK_WIDGET_SET_FLAGS (dialog_child_with_checkBox_button_cancel, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (dialog_child_with_checkBox_button_cancel, TRUE);
 
   g_signal_connect ((gpointer) dialog_child_with_checkBox, "delete_event",
                     G_CALLBACK (on_dialog_child_with_checkBox_delete_event),
@@ -3508,7 +3508,7 @@ create_dialog_child_with_ok (void)
   dialog_child_with_ok_button_ok = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (dialog_child_with_ok_button_ok);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_child_with_ok), dialog_child_with_ok_button_ok, 0);
-  GTK_WIDGET_SET_FLAGS (dialog_child_with_ok_button_ok, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (dialog_child_with_ok_button_ok, TRUE);
 
   g_signal_connect ((gpointer) dialog_child_with_ok, "delete_event",
                     G_CALLBACK (on_dialog_child_with_ok_delete_event),
@@ -3569,12 +3569,12 @@ create_dialog_child_with_okcancel (void)
   dialog_child_with_okcancel_button_ok = gtk_button_new_with_mnemonic (_("OK"));
   gtk_widget_show (dialog_child_with_okcancel_button_ok);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_child_with_okcancel), dialog_child_with_okcancel_button_ok, GTK_RESPONSE_OK);
-  GTK_WIDGET_SET_FLAGS (dialog_child_with_okcancel_button_ok, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (dialog_child_with_okcancel_button_ok, TRUE);
 
   dialog_child_with_okcancel_button_cancel = gtk_button_new_with_mnemonic (_("Cancel"));
   gtk_widget_show (dialog_child_with_okcancel_button_cancel);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog_child_with_okcancel), dialog_child_with_okcancel_button_cancel, GTK_RESPONSE_CANCEL);
-  GTK_WIDGET_SET_FLAGS (dialog_child_with_okcancel_button_cancel, GTK_CAN_DEFAULT);
+  gtk_widget_set_can_default (dialog_child_with_okcancel_button_cancel, TRUE);
 
   g_signal_connect ((gpointer) dialog_child_with_okcancel, "delete_event",
                     G_CALLBACK (on_dialog_child_with_okcancel_delete_event),
