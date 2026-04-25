@@ -3021,16 +3021,21 @@ create_dialog_calibration (void)
   GtkWidget *dialog_calibration_label;
   GtkWidget *label109;
   GtkWidget *dialog_action_area1;
+  GtkWidget *separator;
 
   dialog_calibration = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dialog_calibration), _("Scanning..."));
   gtk_window_set_modal (GTK_WINDOW (dialog_calibration), TRUE);
   gtk_window_set_resizable (GTK_WINDOW (dialog_calibration), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_calibration), GDK_WINDOW_TYPE_HINT_DIALOG);
-  gtk_dialog_set_has_separator (GTK_DIALOG (dialog_calibration), FALSE);
 
   dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_calibration));
   gtk_widget_show (dialog_vbox1);
+
+  // if it does not work, it can be deleted altogether
+  separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_widget_show (separator);
+  gtk_box_pack_end (GTK_BOX (dialog_vbox1), separator, FALSE, FALSE, 0);
 
   label110 = gtk_label_new ("");
   gtk_widget_show (label110);
