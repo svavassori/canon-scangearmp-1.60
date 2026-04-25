@@ -71,7 +71,7 @@ CNMSVoid ComGtk_ClearCombo( GtkComboBox *combobox )
 		if( gtk_combo_box_text_get_active_text( GTK_COMBO_BOX_TEXT (combobox ) ) == CNMSNULL ){
 			break;
 		}
-		gtk_combo_box_remove_text( combobox, 0 );
+		gtk_combo_box_text_remove( GTK_COMBO_BOX_TEXT (combobox), 0 );
 	}
 	return;
 }
