@@ -253,7 +253,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (simple_src_label), 0, 0.5);
 
-  simple_src_combo = gtk_combo_box_new_text ();
+  simple_src_combo = gtk_combo_box_text_new ();
   gtk_widget_show (simple_src_combo);
   gtk_table_attach (GTK_TABLE (table5), simple_src_combo, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
@@ -321,7 +321,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (simple_dst_label), 0, 0.5);
 
-  simple_dst_combo = gtk_combo_box_new_text ();
+  simple_dst_combo = gtk_combo_box_text_new ();
   gtk_widget_show (simple_dst_combo);
   gtk_table_attach (GTK_TABLE (table7), simple_dst_combo, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
@@ -364,7 +364,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (simple_output_size_label), 0, 0.5);
 
-  simple_output_size_combo = gtk_combo_box_new_text ();
+  simple_output_size_combo = gtk_combo_box_text_new ();
   gtk_widget_show (simple_output_size_combo);
   gtk_table_attach (GTK_TABLE (simple_output_size_table), simple_output_size_combo, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
@@ -510,7 +510,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (advance_src_label), 0, 0.5);
 
-  advance_src_combo = gtk_combo_box_new_text ();
+  advance_src_combo = gtk_combo_box_text_new ();
   gtk_widget_show (advance_src_combo);
   gtk_table_attach (GTK_TABLE (table1), advance_src_combo, 1, 2, 0, 1,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
@@ -523,7 +523,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (advance_color_label), 0, 0.5);
 
-  advance_color_combo = gtk_combo_box_new_text ();
+  advance_color_combo = gtk_combo_box_text_new ();
   gtk_widget_show (advance_color_combo);
   gtk_table_attach (GTK_TABLE (table1), advance_color_combo, 1, 2, 3, 4,
                     (GtkAttachOptions) (GTK_FILL),
@@ -576,7 +576,7 @@ create_main_window (void)
   gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (advance_input_height_spin), TRUE);
   gtk_spin_button_set_update_policy (GTK_SPIN_BUTTON (advance_input_height_spin), GTK_UPDATE_IF_VALID);
 
-  advance_unit_combo = gtk_combo_box_new_text ();
+  advance_unit_combo = gtk_combo_box_text_new ();
   gtk_widget_show (advance_unit_combo);
   gtk_box_pack_start (GTK_BOX (hbox41), advance_unit_combo, TRUE, TRUE, 0);
 
@@ -587,7 +587,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (advance_paper_label), 0, 0.5);
 
-  advance_paper_combo = gtk_combo_box_new_text ();
+  advance_paper_combo = gtk_combo_box_text_new ();
   gtk_widget_show (advance_paper_combo);
   gtk_table_attach (GTK_TABLE (table1), advance_paper_combo, 1, 2, 1, 2,
                     (GtkAttachOptions) (GTK_FILL),
@@ -600,7 +600,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (advance_binding_location_label), 0, 0.5);
 
-  advance_binding_location_combo = gtk_combo_box_new_text ();
+  advance_binding_location_combo = gtk_combo_box_text_new ();
   gtk_widget_show (advance_binding_location_combo);
   gtk_table_attach (GTK_TABLE (table1), advance_binding_location_combo, 1, 2, 2, 3,
                     (GtkAttachOptions) (GTK_FILL),
@@ -627,7 +627,7 @@ create_main_window (void)
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL), 0, 0);
 
-  advance_output_resolution_combo = gtk_combo_box_new_text ();
+  advance_output_resolution_combo = gtk_combo_box_text_new ();
   gtk_widget_show (advance_output_resolution_combo);
   gtk_box_pack_start (GTK_BOX (hbox43), advance_output_resolution_combo, TRUE, TRUE, 0);
 
@@ -708,7 +708,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (advance_output_size_label), 0, 0.5);
 
-  advance_output_size_combo = gtk_combo_box_new_text ();
+  advance_output_size_combo = gtk_combo_box_text_new ();
   gtk_widget_show (advance_output_size_combo);
   gtk_table_attach (GTK_TABLE (table2), advance_output_size_combo, 1, 2, 1, 2,
                     (GtkAttachOptions) (GTK_FILL),
@@ -754,7 +754,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (advance_unsharp_label), 0, 0.5);
 
-  advance_unsharp_combo = gtk_combo_box_new_text ();
+  advance_unsharp_combo = gtk_combo_box_text_new ();
   gtk_widget_show (advance_unsharp_combo);
   gtk_table_attach (GTK_TABLE (table4), advance_unsharp_combo, 1, 2, 0, 1,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
@@ -766,7 +766,7 @@ create_main_window (void)
                     (GtkAttachOptions) (0), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (advance_descreen_label), 0, 0.5);
 
-  advance_descreen_combo = gtk_combo_box_new_text ();
+  advance_descreen_combo = gtk_combo_box_text_new ();
   gtk_table_attach (GTK_TABLE (table4), advance_descreen_combo, 1, 2, 1, 2,
                     (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
                     (GtkAttachOptions) (GTK_FILL), 0, 0);
@@ -1185,7 +1185,7 @@ create_preference_window (void)
   gtk_widget_show (preference_scanner_calibset_every_label);
   gtk_box_pack_start (GTK_BOX (hbox112), preference_scanner_calibset_every_label, FALSE, FALSE, 0);
 
-  preference_scanner_calibset_every_combo = gtk_combo_box_new_text ();
+  preference_scanner_calibset_every_combo = gtk_combo_box_text_new ();
   gtk_widget_show (preference_scanner_calibset_every_combo);
   gtk_box_pack_start (GTK_BOX (hbox112), preference_scanner_calibset_every_combo, TRUE, TRUE, 0);
 
@@ -1355,7 +1355,7 @@ create_select_model_dialog (void)
   vbox20 = GTK_DIALOG (select_model_dialog)->vbox;
   gtk_widget_show (vbox20);
 
-  select_model_combo = gtk_combo_box_new_text ();
+  select_model_combo = gtk_combo_box_text_new ();
   gtk_widget_show (select_model_combo);
   gtk_box_pack_start (GTK_BOX (vbox20), select_model_combo, TRUE, TRUE, 5);
 
@@ -1457,7 +1457,7 @@ create_save_main_dialog (void)
   gtk_widget_show (label38);
   gtk_box_pack_start (GTK_BOX (hbox34), label38, TRUE, FALSE, 0);
 
-  save_file_type_combo = gtk_combo_box_new_text ();
+  save_file_type_combo = gtk_combo_box_text_new ();
   gtk_widget_show (save_file_type_combo);
   gtk_box_pack_start (GTK_BOX (hbox34), save_file_type_combo, TRUE, FALSE, 0);
   gtk_widget_set_size_request (save_file_type_combo, 150, -1);
@@ -1698,7 +1698,7 @@ create_dialog_bright_contrast (void)
   gtk_box_pack_start (GTK_BOX (hbox67), label72, FALSE, FALSE, 5);
   gtk_widget_set_size_request (label72, 100, -1);
 
-  bc_combobox = gtk_combo_box_new_text ();
+  bc_combobox = gtk_combo_box_text_new ();
   gtk_widget_show (bc_combobox);
   gtk_box_pack_start (GTK_BOX (hbox67), bc_combobox, TRUE, TRUE, 5);
 
@@ -2006,7 +2006,7 @@ create_dialog_histogram (void)
   gtk_box_pack_start (GTK_BOX (hbox75), label79, FALSE, FALSE, 5);
   gtk_widget_set_size_request (label79, 100, -1);
 
-  hg_combobox = gtk_combo_box_new_text ();
+  hg_combobox = gtk_combo_box_text_new ();
   gtk_widget_show (hg_combobox);
   gtk_box_pack_start (GTK_BOX (hbox75), hg_combobox, TRUE, TRUE, 5);
 
@@ -2403,7 +2403,7 @@ create_dialog_tonecurve (void)
   gtk_box_pack_start (GTK_BOX (hbox88), label87, FALSE, FALSE, 5);
   gtk_widget_set_size_request (label87, 100, -1);
 
-  tc_combobox = gtk_combo_box_new_text ();
+  tc_combobox = gtk_combo_box_text_new ();
   gtk_widget_show (tc_combobox);
   gtk_box_pack_start (GTK_BOX (hbox88), tc_combobox, TRUE, TRUE, 5);
 
@@ -2458,7 +2458,7 @@ create_dialog_tonecurve (void)
   gtk_widget_show (hbox91);
   gtk_box_pack_start (GTK_BOX (vbox47), hbox91, TRUE, TRUE, 5);
 
-  tc_combobox_tc_select = gtk_combo_box_new_text ();
+  tc_combobox_tc_select = gtk_combo_box_text_new ();
   gtk_widget_show (tc_combobox_tc_select);
   gtk_box_pack_start (GTK_BOX (hbox91), tc_combobox_tc_select, TRUE, TRUE, 30);
   gtk_combo_box_append_text (GTK_COMBO_BOX (tc_combobox_tc_select), _("No correction"));
@@ -2584,7 +2584,7 @@ create_dialog_final_review (void)
   gtk_box_pack_start (GTK_BOX (hbox92), label89, FALSE, FALSE, 5);
   gtk_widget_set_size_request (label89, 100, -1);
 
-  fr_combobox = gtk_combo_box_new_text ();
+  fr_combobox = gtk_combo_box_text_new ();
   gtk_widget_show (fr_combobox);
   gtk_box_pack_start (GTK_BOX (hbox92), fr_combobox, TRUE, TRUE, 5);
 
