@@ -141,7 +141,7 @@ CNMSVoid CnmsTCToneCurveSelectComboBoxChanged(
 	}		
 
 	/* Get Selected ToneCurve String	*/
-	if( ( tone = gtk_combo_box_get_active_text( combobox ) ) == CNMSNULL ){
+	if( ( tone = gtk_combo_box_text_get_active_text( GTK_COMBO_BOX_TEXT (combobox ) ) ) == CNMSNULL ){
 		DBGMSG( "[CnmsTCToneCurveSelectComboBoxChanged] Pointer is NULL. tone[%p]\n",tone );
 		return;
 	}		

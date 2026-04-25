@@ -68,7 +68,7 @@ CNMSVoid ComGtk_ClearCombo( GtkComboBox *combobox )
 	
 	while( 1 ){
 		gtk_combo_box_set_active( combobox, 0 );
-		if( gtk_combo_box_get_active_text( combobox ) == CNMSNULL ){
+		if( gtk_combo_box_text_get_active_text( GTK_COMBO_BOX_TEXT (combobox ) ) == CNMSNULL ){
 			break;
 		}
 		gtk_combo_box_remove_text( combobox, 0 );

@@ -747,7 +747,7 @@ CNMSInt32 W1_ChangeCombo(
 		DBGMSG( "[W1_ChangeCombo]Status is error.\n" );
 		goto	EXIT_ERR;
 	}
-	else if( ( str = (CNMSLPSTR)gtk_combo_box_get_active_text( combobox ) ) == CNMSNULL ){
+	else if( ( str = (CNMSLPSTR)gtk_combo_box_text_get_active_text( GTK_COMBO_BOX_TEXT( combobox ) ) ) == CNMSNULL ){
 		DBGMSG( "[W1_ChangeCombo]Can't get activetext from combobox.\n" );
 		goto	EXIT_ERR;
 	}

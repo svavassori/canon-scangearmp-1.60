@@ -707,7 +707,7 @@ CNMSInt32 CnmsColAdjGetColorGroupNum(
 		DBGMSG( "[CnmsColAdjGetColorGroupNum] Pointer[ComboBox] is NULL.\n" );
 		goto	EXIT;
 	}
-	if( ( str = gtk_combo_box_get_active_text( GTK_COMBO_BOX( ComboBox ) ) ) == CNMSNULL ){
+	if( ( str = gtk_combo_box_text_get_active_text( GTK_COMBO_BOX_TEXT( ComboBox ) ) ) == CNMSNULL ){
 		DBGMSG( "[CnmsColAdjGetColorGroupNum] Pointer[str] is NULL.\n" );
 		goto	EXIT;
 	}
@@ -1532,7 +1532,7 @@ CNMSInt32 CnmsColAdjGetChannelIDFromCombobox(
 	}
 
 	/* Get Current Channel as String */
-	if( ( channel = gtk_combo_box_get_active_text( combobox ) ) == CNMSNULL ){
+	if( ( channel = gtk_combo_box_text_get_active_text( GTK_COMBO_BOX_TEXT( combobox ) ) ) == CNMSNULL ){
 		DBGMSG( "[CnmsTCChannelComboBoxChanged] Pointer[channel] is NULL.\n" );
 		goto EXIT;
 	}
