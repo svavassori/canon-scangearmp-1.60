@@ -1352,7 +1352,7 @@ create_select_model_dialog (void)
   gtk_window_set_destroy_with_parent (GTK_WINDOW (select_model_dialog), TRUE);
   gtk_window_set_type_hint (GTK_WINDOW (select_model_dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox20 = GTK_DIALOG (select_model_dialog)->vbox;
+  vbox20 = gtk_dialog_get_content_area (GTK_DIALOG (select_model_dialog));
   gtk_widget_show (vbox20);
 
   select_model_combo = gtk_combo_box_text_new ();
@@ -1446,7 +1446,7 @@ create_save_main_dialog (void)
   gtk_window_set_modal (GTK_WINDOW (save_main_dialog), TRUE);
   gtk_window_set_type_hint (GTK_WINDOW (save_main_dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox22 = GTK_DIALOG (save_main_dialog)->vbox;
+  vbox22 = gtk_dialog_get_content_area (GTK_DIALOG (save_main_dialog));
   gtk_widget_show (vbox22);
 
   hbox34 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -1529,7 +1529,7 @@ create_save_overwrite_dialog (void)
   gtk_window_set_resizable (GTK_WINDOW (save_overwrite_dialog), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (save_overwrite_dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox23 = GTK_DIALOG (save_overwrite_dialog)->vbox;
+  vbox23 = gtk_dialog_get_content_area (GTK_DIALOG (save_overwrite_dialog));
   gtk_widget_show (vbox23);
 
   hbox36 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -1599,7 +1599,7 @@ create_save_error_dialog (void)
   gtk_window_set_resizable (GTK_WINDOW (save_error_dialog), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (save_error_dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox26 = GTK_DIALOG (save_error_dialog)->vbox;
+  vbox26 = gtk_dialog_get_content_area (GTK_DIALOG (save_error_dialog));
   gtk_widget_show (vbox26);
 
   hbox38 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -1686,7 +1686,7 @@ create_dialog_bright_contrast (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_bright_contrast), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_bright_contrast), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox35 = GTK_DIALOG (dialog_bright_contrast)->vbox;
+  vbox35 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_bright_contrast));
   gtk_widget_show (vbox35);
 
   hbox67 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -1994,7 +1994,7 @@ create_dialog_histogram (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_histogram), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_histogram), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox40 = GTK_DIALOG (dialog_histogram)->vbox;
+  vbox40 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_histogram));
   gtk_widget_show (vbox40);
 
   hbox75 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -2391,7 +2391,7 @@ create_dialog_tonecurve (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_tonecurve), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_tonecurve), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox44 = GTK_DIALOG (dialog_tonecurve)->vbox;
+  vbox44 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_tonecurve));
   gtk_widget_show (vbox44);
 
   hbox88 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -2572,7 +2572,7 @@ create_dialog_final_review (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_final_review), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_final_review), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox48 = GTK_DIALOG (dialog_final_review)->vbox;
+  vbox48 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_final_review));
   gtk_widget_show (vbox48);
 
   hbox92 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -2833,7 +2833,7 @@ create_dialog_monochrome (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_monochrome), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_monochrome), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox53 = GTK_DIALOG (dialog_monochrome)->vbox;
+  vbox53 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_monochrome));
   gtk_widget_show (vbox53);
 
   label198 = gtk_label_new ("");
@@ -3029,7 +3029,7 @@ create_dialog_calibration (void)
   gtk_window_set_type_hint (GTK_WINDOW (dialog_calibration), GDK_WINDOW_TYPE_HINT_DIALOG);
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog_calibration), FALSE);
 
-  dialog_vbox1 = GTK_DIALOG (dialog_calibration)->vbox;
+  dialog_vbox1 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_calibration));
   gtk_widget_show (dialog_vbox1);
 
   label110 = gtk_label_new ("");
@@ -3092,7 +3092,7 @@ create_error_dialog (void)
   gtk_window_set_resizable (GTK_WINDOW (error_dialog), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (error_dialog), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox2 = GTK_DIALOG (error_dialog)->vbox;
+  dialog_vbox2 = gtk_dialog_get_content_area (GTK_DIALOG (error_dialog));
   gtk_widget_show (dialog_vbox2);
 
   hbox106 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -3155,7 +3155,7 @@ create_dialog_about (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_about), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_about), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox3 = GTK_DIALOG (dialog_about)->vbox;
+  dialog_vbox3 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_about));
   gtk_widget_show (dialog_vbox3);
 
   vbox62 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
@@ -3238,7 +3238,7 @@ create_dialog_clear_preview (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_clear_preview), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_clear_preview), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  dialog_vbox4 = GTK_DIALOG (dialog_clear_preview)->vbox;
+  dialog_vbox4 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_clear_preview));
   gtk_widget_show (dialog_vbox4);
 
   vbox63 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -3317,7 +3317,7 @@ create_dialog_progress_bar (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_progress_bar), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_progress_bar), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox64 = GTK_DIALOG (dialog_progress_bar)->vbox;
+  vbox64 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_progress_bar));
   gtk_widget_show (vbox64);
 
   vbox65 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -3402,7 +3402,7 @@ create_dialog_child_with_checkBox (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_child_with_checkBox), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_child_with_checkBox), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox66 = GTK_DIALOG (dialog_child_with_checkBox)->vbox;
+  vbox66 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_child_with_checkBox));
   gtk_widget_show (vbox66);
 
   label205 = gtk_label_new ("");
@@ -3483,7 +3483,7 @@ create_dialog_child_with_ok (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_child_with_ok), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_child_with_ok), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox67 = GTK_DIALOG (dialog_child_with_ok)->vbox;
+  vbox67 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_child_with_ok));
   gtk_widget_show (vbox67);
 
   label209 = gtk_label_new ("");
@@ -3547,7 +3547,7 @@ create_dialog_child_with_okcancel (void)
   gtk_window_set_resizable (GTK_WINDOW (dialog_child_with_okcancel), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (dialog_child_with_okcancel), GDK_WINDOW_TYPE_HINT_DIALOG);
 
-  vbox68 = GTK_DIALOG (dialog_child_with_okcancel)->vbox;
+  vbox68 = gtk_dialog_get_content_area (GTK_DIALOG (dialog_child_with_okcancel));
   gtk_widget_show (vbox68);
 
   hbox110 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
