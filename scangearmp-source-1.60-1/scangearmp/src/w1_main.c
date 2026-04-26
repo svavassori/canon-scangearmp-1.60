@@ -41,7 +41,6 @@
 #include <fcntl.h>
 
 #include <gtk/gtk.h>
-#include <gtk/gtkpreview.h>
 
 #include "interface.h"
 #include "support.h"

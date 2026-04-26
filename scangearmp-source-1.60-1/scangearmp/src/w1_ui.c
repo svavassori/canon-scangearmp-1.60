@@ -36,7 +36,6 @@
 #include <fcntl.h>
 
 #include <gtk/gtk.h>
-#include <gtk/gtkpreview.h>
 
 #include "callbacks.h"
 #include "interface.h"
