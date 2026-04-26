@@ -770,7 +770,7 @@ static CNMSInt32 ShowScale(
 	gtk_adjustment_set_upper(adjust_ment, (gdouble)( lpScale[ 1 ] ));
 	gtk_adjustment_set_value(adjust_ment, (gdouble)( lpW1Comp->scale / ( CNMS_SCALE_100_PERCENT / 100 ) ));
 	gtk_spin_button_set_adjustment( spin_button, adjust_ment );
-	gtk_spin_button_set_value( spin_button, adjust_ment->value );
+	gtk_spin_button_set_value( spin_button, gtk_adjustment_get_value(adjust_ment) );
 EXIT_NO_ERR:
 	ret = CNMS_NO_ERR;
 EXIT:
@@ -816,9 +816,9 @@ static CNMSInt32 ShowInSize(
 		gtk_adjustment_set_value(adjust_ment, ( gval < gtk_adjustment_get_lower(adjust_ment) ) ? gtk_adjustment_get_lower(adjust_ment) : ( ( gtk_adjustment_get_upper(adjust_ment) < gval ) ? gtk_adjustment_get_upper(adjust_ment) : gval ));
 		gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 		gtk_spin_button_set_digits( spin_button, decFig );
-		gtk_spin_button_set_value( spin_button, adjust_ment->value );
+		gtk_spin_button_set_value( spin_button, gtk_adjustment_get_value(adjust_ment) );
 #ifdef	__CNMS_DEBUG_UI__
-	DBGMSG( "\t[ShowInSize(%d)]lower:%f, upper:%f, value:%f.\n", i, gtk_adjustment_get_lower(adjust_ment), gtk_adjustment_get_upper(adjust_ment), adjust_ment->value );
+	DBGMSG( "\t[ShowInSize(%d)]lower:%f, upper:%f, value:%f.\n", i, gtk_adjustment_get_lower(adjust_ment), gtk_adjustment_get_upper(adjust_ment), gtk_adjustment_get_value(adjust_ment) );
 #endif
 	}
 EXIT_NO_ERR:
@@ -915,7 +915,7 @@ static CNMSInt32 ShowOutSize(
 			/* set value */
 			gtk_adjustment_set_value(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( lpW1Comp->outSize[ i ] ), CNMS_A_UNIT_PIXEL, CNMS_A_UNIT_PIXEL, lpW1Comp->base_res, lpW1Comp->size_res ));
 			if( unit != CNMS_A_UNIT_PIXEL ){
-				gtk_adjustment_set_value(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( adjust_ment->value ), CNMS_A_UNIT_PIXEL, unit, outRes, outRes ));
+				gtk_adjustment_set_value(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( gtk_adjustment_get_value(adjust_ment) ), CNMS_A_UNIT_PIXEL, unit, outRes, outRes ));
 			}
 		}
 		else{
@@ -932,9 +932,9 @@ static CNMSInt32 ShowOutSize(
 		adjust_ment->page_increment = (gdouble)step * W1UI_PAGE_MUL;
 		gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 		gtk_spin_button_set_digits( spin_button, decFig );
-		gtk_spin_button_set_value( spin_button, adjust_ment->value );
+		gtk_spin_button_set_value( spin_button, gtk_adjustment_get_value(adjust_ment) );
 #ifdef	__CNMS_DEBUG_UI__
-	DBGMSG( "\t[ShowOutSize(%d)]lower:%f, upper:%f, value:%f.\n", i, gtk_adjustment_get_lower(adjust_ment), gtk_adjustment_get_upper(adjust_ment), adjust_ment->value );
+	DBGMSG( "\t[ShowOutSize(%d)]lower:%f, upper:%f, value:%f.\n", i, gtk_adjustment_get_lower(adjust_ment), gtk_adjustment_get_upper(adjust_ment), gtk_adjustment_get_value(adjust_ment) );
 #endif
 	}
 	ret = CNMS_NO_ERR;
@@ -1346,7 +1346,7 @@ static CNMSVoid DebugAdjustment(
 {
 	DBGMSG( "[DebugAdjustment(%s)]lower         :%f\n", lpStr, gtk_adjustment_get_lower(adjust_ment) );
 	DBGMSG( "[DebugAdjustment(%s)]upper         :%f\n", lpStr, gtk_adjustment_get_upper(adjust_ment) );
-	DBGMSG( "[DebugAdjustment(%s)]value         :%f\n", lpStr, adjust_ment->value );
+	DBGMSG( "[DebugAdjustment(%s)]value         :%f\n", lpStr, gtk_adjustment_get_value(adjust_ment) );
 	DBGMSG( "[DebugAdjustment(%s)]step_increment:%f\n", lpStr, adjust_ment->step_increment );
 	DBGMSG( "[DebugAdjustment(%s)]page_increment:%f\n\n", lpStr, adjust_ment->page_increment );
 
