@@ -810,7 +810,7 @@ static CNMSInt32 ShowInSize(
 			goto	EXIT;
 		}
 		/* set value */
-		adjust_ment->step_increment = (gdouble)step;
+		gtk_adjustment_set_step_increment(adjust_ment, (gdouble)step);
 		adjust_ment->page_increment = (gdouble)step * W1UI_PAGE_MUL;
 		gval = (gdouble)CnmsConvUnit( (CNMSDec32)( lpW1Comp->inSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes );
 		gtk_adjustment_set_value(adjust_ment, ( gval < gtk_adjustment_get_lower(adjust_ment) ) ? gtk_adjustment_get_lower(adjust_ment) : ( ( gtk_adjustment_get_upper(adjust_ment) < gval ) ? gtk_adjustment_get_upper(adjust_ment) : gval ));
@@ -928,7 +928,7 @@ static CNMSInt32 ShowOutSize(
 			/* set value */
 			gtk_adjustment_set_value(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( lpW1Comp->outSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes ));
 		}
-		adjust_ment->step_increment = (gdouble)step;
+		gtk_adjustment_set_step_increment(adjust_ment, (gdouble)step);
 		adjust_ment->page_increment = (gdouble)step * W1UI_PAGE_MUL;
 		gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 		gtk_spin_button_set_digits( spin_button, decFig );
