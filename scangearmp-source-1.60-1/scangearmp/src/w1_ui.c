@@ -767,7 +767,7 @@ static CNMSInt32 ShowScale(
 	}
 
 	gtk_adjustment_set_lower(adjust_ment, (gdouble)( lpScale[ 0 ] ));
-	adjust_ment->upper = (gdouble)( lpScale[ 1 ] );
+	gtk_adjustment_set_upper(adjust_ment, (gdouble)( lpScale[ 1 ] ));
 	adjust_ment->value = (gdouble)( lpW1Comp->scale / ( CNMS_SCALE_100_PERCENT / 100 ) );
 	gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 	gtk_spin_button_set_value( spin_button, adjust_ment->value );
@@ -878,7 +878,7 @@ static CNMSInt32 SubSetInSizeLowerUpper(
 		}
 		/* set value */
 		gtk_adjustment_set_lower(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( minSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes ));
-		adjust_ment->upper = (gdouble)CnmsConvUnit( (CNMSDec32)( maxSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes );
+		gtk_adjustment_set_upper(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( maxSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes ));
 		gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 	}
 EXIT_NO_ERR:
@@ -924,7 +924,7 @@ static CNMSInt32 ShowOutSize(
 			gtk_adjustment_set_lower(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)ldata, CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes ));
 			/* upper */
 			ldata = (CNMSInt32)( (CNMSDec32)( lpW1Comp->inSize[ i ] ) * (CNMSDec32)( lpScale[ 1 ] ) / 100 );
-			adjust_ment->upper = (gdouble)CnmsConvUnit( (CNMSDec32)ldata, CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes );
+			gtk_adjustment_set_upper(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)ldata, CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes ));
 			/* set value */
 			adjust_ment->value = (gdouble)CnmsConvUnit( (CNMSDec32)( lpW1Comp->outSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes );
 		}

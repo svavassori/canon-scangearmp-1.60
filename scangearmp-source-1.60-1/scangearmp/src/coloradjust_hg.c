@@ -857,10 +857,10 @@ static CNMSVoid CnmsHGCalcurateParameter(
 				}
 				
 				/* Set Max/Min Value	*/
-				hg_adjust_shadow->upper = highlight->disp - 10;
+				gtk_adjustment_set_upper(hg_adjust_shadow, highlight->disp - 10);
 				shadow->upper = ( CNMSInt32 )highlight->disp - 10;
 
-				hg_adjust_mid->upper = highlight->disp - 5;
+				gtk_adjustment_set_upper(hg_adjust_mid, highlight->disp - 5);
 				mid->upper = ( CNMSInt32 )highlight->disp - 5;
 				
 				break;
@@ -890,11 +890,11 @@ static CNMSVoid CnmsHGDispSpinButtonValue(
 
 	/* First, Set Limit Value			*/
 	gtk_adjustment_set_lower(hg_adjust_shadow, hg[hg_dlg.channel].shadow.lower);
-	hg_adjust_shadow->upper = hg[hg_dlg.channel].shadow.upper;
+	gtk_adjustment_set_upper(hg_adjust_shadow, hg[hg_dlg.channel].shadow.upper);
 	gtk_adjustment_set_lower(hg_adjust_mid, hg[hg_dlg.channel].mid.lower);
-	hg_adjust_mid->upper = hg[hg_dlg.channel].mid.upper;
+	gtk_adjustment_set_upper(hg_adjust_mid, hg[hg_dlg.channel].mid.upper);
 	gtk_adjustment_set_lower(hg_adjust_highlight, hg[hg_dlg.channel].highlight.lower);
-	hg_adjust_highlight->upper = hg[hg_dlg.channel].highlight.upper;
+	gtk_adjustment_set_upper(hg_adjust_highlight, hg[hg_dlg.channel].highlight.upper);
 
 	/* Next, Set Value to SpinButton	*/
 	gtk_spin_button_set_value( GTK_SPIN_BUTTON( hg_entry_shadow ), hg[hg_dlg.channel].shadow.disp );

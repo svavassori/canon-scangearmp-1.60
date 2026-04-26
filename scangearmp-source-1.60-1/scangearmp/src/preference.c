@@ -182,7 +182,7 @@ CNMSInt32 Preference_Open( CNMSVoid )
 		goto	EXIT;
 	}
 	gtk_adjustment_set_lower(adjust_ment, 0.1);
-	adjust_ment->upper = 10.0;
+	gtk_adjustment_set_upper(adjust_ment, 10.0);
 	gtk_spin_button_set_adjustment( GTK_SPIN_BUTTON( obj->widget ), adjust_ment );
 
 	/* Quiet Mode */
