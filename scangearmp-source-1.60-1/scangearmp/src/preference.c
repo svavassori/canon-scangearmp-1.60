@@ -181,7 +181,7 @@ CNMSInt32 Preference_Open( CNMSVoid )
 		DBGMSG( "[Preference_Open]Can't get adjustment of spin button at scale.\n" );
 		goto	EXIT;
 	}
-	adjust_ment->lower = 0.1;
+	gtk_adjustment_set_lower(adjust_ment, 0.1);
 	adjust_ment->upper = 10.0;
 	gtk_spin_button_set_adjustment( GTK_SPIN_BUTTON( obj->widget ), adjust_ment );
 
