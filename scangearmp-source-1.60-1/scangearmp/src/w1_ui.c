@@ -1348,7 +1348,7 @@ static CNMSVoid DebugAdjustment(
 	DBGMSG( "[DebugAdjustment(%s)]upper         :%f\n", lpStr, gtk_adjustment_get_upper(adjust_ment) );
 	DBGMSG( "[DebugAdjustment(%s)]value         :%f\n", lpStr, gtk_adjustment_get_value(adjust_ment) );
 	DBGMSG( "[DebugAdjustment(%s)]step_increment:%f\n", lpStr, gtk_adjustment_get_step_increment(adjust_ment) );
-	DBGMSG( "[DebugAdjustment(%s)]page_increment:%f\n\n", lpStr, adjust_ment->page_increment );
+	DBGMSG( "[DebugAdjustment(%s)]page_increment:%f\n\n", lpStr, gtk_adjustment_get_page_increment(adjust_ment) );
 
 	return;
 }
