@@ -813,12 +813,12 @@ static CNMSInt32 ShowInSize(
 		adjust_ment->step_increment = (gdouble)step;
 		adjust_ment->page_increment = (gdouble)step * W1UI_PAGE_MUL;
 		gval = (gdouble)CnmsConvUnit( (CNMSDec32)( lpW1Comp->inSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes );
-		adjust_ment->value = ( gval < adjust_ment->lower ) ? adjust_ment->lower : ( ( adjust_ment->upper < gval ) ? adjust_ment->upper : gval );
+		adjust_ment->value = ( gval < gtk_adjustment_get_lower(adjust_ment) ) ? gtk_adjustment_get_lower(adjust_ment) : ( ( adjust_ment->upper < gval ) ? adjust_ment->upper : gval );
 		gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 		gtk_spin_button_set_digits( spin_button, decFig );
 		gtk_spin_button_set_value( spin_button, adjust_ment->value );
 #ifdef	__CNMS_DEBUG_UI__
-	DBGMSG( "\t[ShowInSize(%d)]lower:%f, upper:%f, value:%f.\n", i, adjust_ment->lower, adjust_ment->upper, adjust_ment->value );
+	DBGMSG( "\t[ShowInSize(%d)]lower:%f, upper:%f, value:%f.\n", i, gtk_adjustment_get_lower(adjust_ment), adjust_ment->upper, adjust_ment->value );
 #endif
 	}
 EXIT_NO_ERR:
@@ -934,7 +934,7 @@ static CNMSInt32 ShowOutSize(
 		gtk_spin_button_set_digits( spin_button, decFig );
 		gtk_spin_button_set_value( spin_button, adjust_ment->value );
 #ifdef	__CNMS_DEBUG_UI__
-	DBGMSG( "\t[ShowOutSize(%d)]lower:%f, upper:%f, value:%f.\n", i, adjust_ment->lower, adjust_ment->upper, adjust_ment->value );
+	DBGMSG( "\t[ShowOutSize(%d)]lower:%f, upper:%f, value:%f.\n", i, gtk_adjustment_get_lower(adjust_ment), adjust_ment->upper, adjust_ment->value );
 #endif
 	}
 	ret = CNMS_NO_ERR;
@@ -1344,7 +1344,7 @@ static CNMSVoid DebugAdjustment(
 		CNMSLPSTR		lpStr,
 		GtkAdjustment	*adjust_ment )
 {
-	DBGMSG( "[DebugAdjustment(%s)]lower         :%f\n", lpStr, adjust_ment->lower );
+	DBGMSG( "[DebugAdjustment(%s)]lower         :%f\n", lpStr, gtk_adjustment_get_lower(adjust_ment) );
 	DBGMSG( "[DebugAdjustment(%s)]upper         :%f\n", lpStr, adjust_ment->upper );
 	DBGMSG( "[DebugAdjustment(%s)]value         :%f\n", lpStr, adjust_ment->value );
 	DBGMSG( "[DebugAdjustment(%s)]step_increment:%f\n", lpStr, adjust_ment->step_increment );
