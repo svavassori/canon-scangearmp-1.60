@@ -146,7 +146,7 @@ static CNMSVoid ClipSize( CNMSInt32 *lpScale );
 static CNMSInt32 ShowScale( CNMSInt32 *lpScale );
 static CNMSInt32 ShowInSize( CNMSInt32 unit, CNMSInt32 outRes, CNMSInt32 decFig, CNMSDec32 step );
 static CNMSInt32 SubSetInSizeLowerUpper( CNMSInt32 unit, CNMSInt32 outRes, CNMSInt32 decFig );
-static CNMSVoid BlockInSizeChanged( GtkSpinButton *spinButton, CNMSInt32 dim, CNMSBool block );
+static CNMSVoid BlockSizeChanged( GtkSpinButton *spinButton, CNMSInt32 object, CNMSBool block );
 
 static CNMSInt32 ShowOutSize( CNMSInt32 unit, CNMSInt32 outRes, CNMSInt32 *lpScale, CNMSInt32 decFig, CNMSDec32 step );
 static CNMSInt32 ShowDataSize( CNMSVoid );
@@ -160,14 +160,32 @@ static CNMSVoid DebugAdjustment( CNMSLPSTR lpStr, GtkAdjustment *adjust_ment );
 static CNMSInt32	inObjArray[ CNMS_DIM_MAX ] = { CNMS_OBJ_A_INPUT_WIDTH, CNMS_OBJ_A_INPUT_HEIGHT };
 static CNMSInt32	outObjArray[ CNMS_DIM_MAX ] = { CNMS_OBJ_A_OUTPUT_WIDTH, CNMS_OBJ_A_OUTPUT_HEIGHT };
 
-static CNMSVoid BlockInSizeChanged(
+static CNMSVoid BlockSizeChanged(
 		GtkSpinButton	*spinButton,
-		CNMSInt32		dim,
+		CNMSInt32		object,
 		CNMSBool		block )
 {
-	GCallback callback = ( dim == CNMS_DIM_H )
-		? G_CALLBACK( on_advance_input_width_spin_value_changed )
-		: G_CALLBACK( on_advance_input_height_spin_value_changed );
+	GCallback callback;
+
+	switch( object ){
+		case CNMS_OBJ_A_INPUT_WIDTH:
+			callback = G_CALLBACK( on_advance_input_width_spin_value_changed );
+			break;
+		case CNMS_OBJ_A_INPUT_HEIGHT:
+			callback = G_CALLBACK( on_advance_input_height_spin_value_changed );
+			break;
+		case CNMS_OBJ_A_OUTPUT_WIDTH:
+			callback = G_CALLBACK( on_advance_output_width_spin_value_changed );
+			break;
+		case CNMS_OBJ_A_OUTPUT_HEIGHT:
+			callback = G_CALLBACK( on_advance_output_height_spin_value_changed );
+			break;
+		case CNMS_OBJ_A_SCALE:
+			callback = G_CALLBACK( on_advance_scale_spin_value_changed );
+			break;
+		default:
+			return;
+	}
 
 	if( block == CNMS_TRUE ){
 		g_signal_handlers_block_by_func( spinButton, callback, CNMSNULL );
@@ -783,11 +801,13 @@ static CNMSInt32 ShowScale(
 		goto	EXIT;
 	}
 
+	BlockSizeChanged( spin_button, CNMS_OBJ_A_SCALE, CNMS_TRUE );
 	gtk_adjustment_set_lower(adjust_ment, (gdouble)( lpScale[ 0 ] ));
 	gtk_adjustment_set_upper(adjust_ment, (gdouble)( lpScale[ 1 ] ));
 	gtk_adjustment_set_value(adjust_ment, (gdouble)( lpW1Comp->scale / ( CNMS_SCALE_100_PERCENT / 100 ) ));
 	gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 	gtk_spin_button_set_value( spin_button, gtk_adjustment_get_value(adjust_ment) );
+	BlockSizeChanged( spin_button, CNMS_OBJ_A_SCALE, CNMS_FALSE );
 EXIT_NO_ERR:
 	ret = CNMS_NO_ERR;
 EXIT:
@@ -827,7 +847,7 @@ static CNMSInt32 ShowInSize(
 			goto	EXIT;
 		}
 		/* set value */
-		BlockInSizeChanged( spin_button, i, CNMS_TRUE );
+		BlockSizeChanged( spin_button, inObjArray[ i ], CNMS_TRUE );
 		gtk_adjustment_set_step_increment(adjust_ment, (gdouble)step);
 		gtk_adjustment_set_page_increment(adjust_ment, (gdouble)step * W1UI_PAGE_MUL);
 		gval = (gdouble)CnmsConvUnit( (CNMSDec32)( lpW1Comp->inSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes );
@@ -835,7 +855,7 @@ static CNMSInt32 ShowInSize(
 		gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 		gtk_spin_button_set_digits( spin_button, decFig );
 		gtk_spin_button_set_value( spin_button, gtk_adjustment_get_value(adjust_ment) );
-		BlockInSizeChanged( spin_button, i, CNMS_FALSE );
+		BlockSizeChanged( spin_button, inObjArray[ i ], CNMS_FALSE );
 #ifdef	__CNMS_DEBUG_UI__
 	DBGMSG( "\t[ShowInSize(%d)]lower:%f, upper:%f, value:%f.\n", i, gtk_adjustment_get_lower(adjust_ment), gtk_adjustment_get_upper(adjust_ment), gtk_adjustment_get_value(adjust_ment) );
 #endif
@@ -896,11 +916,11 @@ static CNMSInt32 SubSetInSizeLowerUpper(
 			goto	EXIT;
 		}
 		/* set value */
-		BlockInSizeChanged( spin_button, i, CNMS_TRUE );
+		BlockSizeChanged( spin_button, inObjArray[ i ], CNMS_TRUE );
 		gtk_adjustment_set_lower(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( minSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes ));
 		gtk_adjustment_set_upper(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( maxSize[ i ] ), CNMS_A_UNIT_PIXEL, unit, lpW1Comp->base_res, outRes ));
 		gtk_spin_button_set_adjustment( spin_button, adjust_ment );
-		BlockInSizeChanged( spin_button, i, CNMS_FALSE );
+		BlockSizeChanged( spin_button, inObjArray[ i ], CNMS_FALSE );
 	}
 EXIT_NO_ERR:
 	ret = CNMS_NO_ERR;
@@ -932,6 +952,7 @@ static CNMSInt32 ShowOutSize(
 			DBGMSG( "[ShowOutSize]Can't get adjustment from spinbutton of outputSize(%d).\n", i );
 			goto	EXIT;
 		}
+		BlockSizeChanged( spin_button, outObjArray[ i ], CNMS_TRUE );
 		if( lpW1Comp->group == CNMSUI_SIZE_GROUP_DISPLAY ){
 			/* set value */
 			gtk_adjustment_set_value(adjust_ment, (gdouble)CnmsConvUnit( (CNMSDec32)( lpW1Comp->outSize[ i ] ), CNMS_A_UNIT_PIXEL, CNMS_A_UNIT_PIXEL, lpW1Comp->base_res, lpW1Comp->size_res ));
@@ -954,6 +975,7 @@ static CNMSInt32 ShowOutSize(
 		gtk_spin_button_set_adjustment( spin_button, adjust_ment );
 		gtk_spin_button_set_digits( spin_button, decFig );
 		gtk_spin_button_set_value( spin_button, gtk_adjustment_get_value(adjust_ment) );
+		BlockSizeChanged( spin_button, outObjArray[ i ], CNMS_FALSE );
 #ifdef	__CNMS_DEBUG_UI__
 	DBGMSG( "\t[ShowOutSize(%d)]lower:%f, upper:%f, value:%f.\n", i, gtk_adjustment_get_lower(adjust_ment), gtk_adjustment_get_upper(adjust_ment), gtk_adjustment_get_value(adjust_ment) );
 #endif
