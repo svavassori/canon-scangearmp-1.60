@@ -95,6 +95,7 @@ typedef struct{
 }PREVIEWCOMP, *LPPREVIEWCOMP;
 
 static LPPREVIEWCOMP	lpPrevComp = CNMSNULL;
+static guint	previewChangeStatusSourceId = 0;
 
 static CNMSInt32 DrawRectInvert( cairo_t *cr );
 static CNMSInt32 SubPrevResize( CNMSBool prevFlag );
@@ -157,6 +158,10 @@ EXIT:
 
 CNMSVoid Preview_Close( CNMSVoid )
 {
+	if( previewChangeStatusSourceId != 0 ){
+		g_source_remove( previewChangeStatusSourceId );
+		previewChangeStatusSourceId = 0;
+	}
 	if( lpPrevComp == CNMSNULL ){
 		goto	EXIT;
 	}
@@ -357,6 +362,8 @@ gboolean Preview_ChangeStatus_Exec(gpointer data)
 	CNMSFd			tmpFd = CNMS_FILE_ERR;
 	CNMSUIReturn	uiRtn;
 
+	previewChangeStatusSourceId = 0;
+
 	if( lpPrevComp == CNMSNULL ){
 		DBGMSG( "[Preview_ChangeStatus_Exec]Status is error!\n" );
 		goto	EXIT;
@@ -421,19 +428,21 @@ EXIT:
 CNMSInt32 Preview_ChangeStatus(
 		CNMSInt32		Actionmode )
 {
-	static	CNMSInt32	time_current	= CNMS_ERR;
-	static	CNMSInt32 	time_before		= CNMS_ERR;
-
 	mode_Preview_ChangeStatus_Exec = Actionmode;
 	ret_Preview_ChangeStatus_Exec = CNMS_NO_ERR;
 	
 	if ( Actionmode == CNMSSCPROC_ACTION_PREV_CLEAR || Actionmode < CNMSSCPROC_ACTION_PARAM ) {
+		if( previewChangeStatusSourceId != 0 ){
+			g_source_remove( previewChangeStatusSourceId );
+			previewChangeStatusSourceId = 0;
+		}
 		Preview_ChangeStatus_Exec(CNMSNULL);
 	}
 	else {
-		time_current = g_timeout_add( CNMS_RELOAD_TIME, ( GSourceFunc )Preview_ChangeStatus_Exec, CNMSNULL );
-		g_source_remove( (guint) time_before );
-		time_before = time_current;
+		if( previewChangeStatusSourceId != 0 ){
+			g_source_remove( previewChangeStatusSourceId );
+		}
+		previewChangeStatusSourceId = g_timeout_add( CNMS_RELOAD_TIME, ( GSourceFunc )Preview_ChangeStatus_Exec, CNMSNULL );
 	}
 
 #ifdef	__CNMS_DEBUG_PREVIEW__
@@ -690,7 +699,7 @@ CNMSInt32 Preview_RectSet(
 		goto	EXIT;
 	}
 	lpSub = &( lpPrevComp->subComp );
-	if( ( ldata = PrevSub_RectSet( lpOffset, lpInSize, &( lpPrevComp->subComp ) ) ) != CNMS_NO_ERR ){
+	if( ( ldata = PrevSub_RectSet( lpOffset, lpInSize, lpSub ) ) != CNMS_NO_ERR ){
 		DBGMSG( "[Preview_RectSet]Error is occured in PrevSub_RectSet!\n" );
 		goto	EXIT;
 	}
@@ -1038,4 +1047,3 @@ EXIT:
 #endif	/* __CNMS_DEBUG__ */
 
 #endif	/* _PREV_MAIN_C_ */
-
