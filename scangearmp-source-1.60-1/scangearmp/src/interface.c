@@ -544,7 +544,9 @@ create_main_window (void)
   advance_input_width_spin = gtk_spin_button_new (GTK_ADJUSTMENT (advance_input_width_spin_adj), 1, 0);
   gtk_widget_show (advance_input_width_spin);
   gtk_box_pack_start (GTK_BOX (hbox42), advance_input_width_spin, TRUE, TRUE, 0);
-  gtk_widget_set_size_request (advance_input_width_spin, 80, -1);
+  gtk_widget_set_size_request (advance_input_width_spin, 130, -1);
+  gtk_entry_set_width_chars (GTK_ENTRY (advance_input_width_spin), 6);
+  gtk_entry_set_max_width_chars (GTK_ENTRY (advance_input_width_spin), 6);
   gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (advance_input_width_spin), TRUE);
   gtk_spin_button_set_update_policy (GTK_SPIN_BUTTON (advance_input_width_spin), GTK_UPDATE_IF_VALID);
 
@@ -572,7 +574,9 @@ create_main_window (void)
   advance_input_height_spin = gtk_spin_button_new (GTK_ADJUSTMENT (advance_input_height_spin_adj), 1, 0);
   gtk_widget_show (advance_input_height_spin);
   gtk_box_pack_start (GTK_BOX (hbox41), advance_input_height_spin, TRUE, TRUE, 0);
-  gtk_widget_set_size_request (advance_input_height_spin, 80, -1);
+  gtk_widget_set_size_request (advance_input_height_spin, 130, -1);
+  gtk_entry_set_width_chars (GTK_ENTRY (advance_input_height_spin), 6);
+  gtk_entry_set_max_width_chars (GTK_ENTRY (advance_input_height_spin), 6);
   gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (advance_input_height_spin), TRUE);
   gtk_spin_button_set_update_policy (GTK_SPIN_BUTTON (advance_input_height_spin), GTK_UPDATE_IF_VALID);
 
@@ -650,7 +654,9 @@ create_main_window (void)
   advance_output_width_spin = gtk_spin_button_new (GTK_ADJUSTMENT (advance_output_width_spin_adj), 1, 0);
   gtk_widget_show (advance_output_width_spin);
   gtk_box_pack_start (GTK_BOX (hbox44), advance_output_width_spin, TRUE, TRUE, 0);
-  gtk_widget_set_size_request (advance_output_width_spin, 80, -1);
+  gtk_widget_set_size_request (advance_output_width_spin, 130, -1);
+  gtk_entry_set_width_chars (GTK_ENTRY (advance_output_width_spin), 6);
+  gtk_entry_set_max_width_chars (GTK_ENTRY (advance_output_width_spin), 6);
   gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (advance_output_width_spin), TRUE);
   gtk_spin_button_set_update_policy (GTK_SPIN_BUTTON (advance_output_width_spin), GTK_UPDATE_IF_VALID);
 
@@ -674,7 +680,9 @@ create_main_window (void)
   advance_output_height_spin = gtk_spin_button_new (GTK_ADJUSTMENT (advance_output_height_spin_adj), 1, 0);
   gtk_widget_show (advance_output_height_spin);
   gtk_box_pack_start (GTK_BOX (hbox45), advance_output_height_spin, TRUE, TRUE, 0);
-  gtk_widget_set_size_request (advance_output_height_spin, 80, -1);
+  gtk_widget_set_size_request (advance_output_height_spin, 130, -1);
+  gtk_entry_set_width_chars (GTK_ENTRY (advance_output_height_spin), 6);
+  gtk_entry_set_max_width_chars (GTK_ENTRY (advance_output_height_spin), 6);
   gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (advance_output_height_spin), TRUE);
   gtk_spin_button_set_update_policy (GTK_SPIN_BUTTON (advance_output_height_spin), GTK_UPDATE_IF_VALID);
 
@@ -687,6 +695,8 @@ create_main_window (void)
   gtk_widget_show (advance_scale_spin);
   gtk_box_pack_start (GTK_BOX (hbox45), advance_scale_spin, TRUE, TRUE, 0);
   gtk_widget_set_size_request (advance_scale_spin, 90, -1);
+  gtk_entry_set_width_chars (GTK_ENTRY (advance_scale_spin), 1);
+  gtk_entry_set_max_width_chars (GTK_ENTRY (advance_scale_spin), 4);
   gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (advance_scale_spin), TRUE);
   gtk_spin_button_set_update_policy (GTK_SPIN_BUTTON (advance_scale_spin), GTK_UPDATE_IF_VALID);
 
@@ -3604,4 +3614,3 @@ create_dialog_child_with_okcancel (void)
   gtk_widget_grab_default (dialog_child_with_okcancel_button_cancel);
   return dialog_child_with_okcancel;
 }
-
