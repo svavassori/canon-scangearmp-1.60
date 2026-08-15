@@ -256,10 +256,16 @@ static CNMSVoid ChangeInputSize(
 			*lpOut1 = (CNMSInt32)( ( ( ( (CNMSDec32)tmpVal * (CNMSDec32)newVal ) / (CNMSDec32)lastVal ) * (CNMSDec32)( lpW1Comp->scale ) ) / CNMS_SCALE_100_PERCENT );
 			break;
 		case	CNMS_ASPECT_STANDERD:	/* fixed both aspect and size */
-			/* change input height( or width ) not change output size */
 			tmpVal = *lpIn1;	/* last input height */
 			*lpIn1 = (CNMSInt32)( (CNMSDec32)tmpVal * (CNMSDec32)newVal / (CNMSDec32)lastVal );	/* new input height */
-			lpW1Comp->scale = (CNMSInt32)( ( (CNMSDec32)( *lpOut0 ) * CNMS_SCALE_100_PERCENT ) / (CNMSDec32)newVal );
+			if( lpW1Comp->group == CNMSUI_SIZE_GROUP_FREE ){
+				*lpOut0 = (CNMSInt32)( ( (CNMSDec32)newVal * (CNMSDec32)( lpW1Comp->scale ) ) / CNMS_SCALE_100_PERCENT );
+				*lpOut1 = (CNMSInt32)( ( (CNMSDec32)( *lpIn1 ) * (CNMSDec32)( lpW1Comp->scale ) ) / CNMS_SCALE_100_PERCENT );
+			}
+			else{
+				/* change input height( or width ) not change output size */
+				lpW1Comp->scale = (CNMSInt32)( ( (CNMSDec32)( *lpOut0 ) * CNMS_SCALE_100_PERCENT ) / (CNMSDec32)newVal );
+			}
 			break;
 	}
 	/* Clop */
@@ -312,6 +318,13 @@ CNMSInt32 W1Size_ChangeRectAreaAfter(
 			break;
 
 		case	CNMS_ASPECT_STANDERD:	/* fixed both aspect and size */
+			if( lpW1Comp->group == CNMSUI_SIZE_GROUP_FREE ){
+				for( i = 0 ; i < CNMS_DIM_MAX ; i ++ ){
+					lpW1Comp->outSize[ i ] = (CNMSInt32)( ( (CNMSDec32)lpSize[ i ] * (CNMSDec32)( lpW1Comp->scale ) ) / CNMS_SCALE_100_PERCENT );
+					lpW1Comp->inSize[ i ] = lpSize[ i ];
+				}
+				break;
+			}
 			/* change input size and scale, keep output size */
 			for( i = 0 ; i < CNMS_DIM_MAX ; i ++ ){
 				scale[ i ] = (CNMSInt32)( ( (CNMSDec32)( lpW1Comp->outSize[ i ] ) * CNMS_SCALE_100_PERCENT ) / (CNMSDec32)( lpSize[ i ] ) );
@@ -337,4 +350,3 @@ EXIT:
 }
 
 #endif	/* _W1_SIZE_C_ */
-
