@@ -30,19 +30,20 @@ SHA512: 759dfab54989a80922f058dba31bf924af4ec71d5c0dba93eb879d0f87f9dfeae89324dd
 docker build -t canon-build-env:1 .
 docker run --rm --ulimit "nofile=1024:1048576" -v $(pwd):/build -it -u $(id -u):$(id -g) canon-build-env:1
 cd /build/scangearmp-source-1.60-1
-dpkg-buildpackage
+dpkg-buildpackage --build=binary --unsigned-changes --unsigned-source
 ```
 
 ## Run from a docker container
 
 ```bash
-xauth list (to show magic cookie)
+# to show magic cookie
+xauth list
 docker run --rm -it --privileged -v $(pwd):/debs -v /dev/bus/usb:/dev/bus/usb -v /tmp/.X11-unix/:/tmp.X11-unix -e DISPLAY=$DISPLAY --net=host debian:13.6 bash
 apt-get update
-apt-get install xauth
+apt-get install --yes xauth
 xauth add <magic-cookie>
 cd /debs
-apt-get install ./*.deb
+apt-get install ./scangearmp-common_1.60-2_amd64.deb ./scangearmp-mp280series_1.60-2_amd64.deb
 scangearmp
 ```
 
