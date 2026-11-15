@@ -61,3 +61,7 @@ QUILT_REFRESH_ARGS="--no-timestamps --no-index -pab"
 QUILT_PATCH_OPTS="--reject-format=unified"
 EOF
 ```
+
+## Migration to GTK3
+
+[gtk3-migration](gtk3-migration.md)
